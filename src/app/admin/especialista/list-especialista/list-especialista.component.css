@@ -1,0 +1,7 @@
+img {
+  max-width: 120px;
+  min-width: 80px;
+  min-height: 70px;
+  max-height: 100px;
+  width: auto;
+}

@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-12" *ngIf="botones">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Elegir
+        </h4>
+      </div>
+      <div class="card-body">
+        <button (click)="igual()" type="button" class="btn btn-pill btn-block btn-warning">
+          Mismos Horarios
+        </button>
+        <button (click)="locambio()" type="button" class="btn btn-pill btn-block btn-info">
+          Cambiar a otro horario
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="lomismo">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="text-center">
+          Usted solo cambio la fecha
+        </h4>
+      </div>
+      <div class="card-body">
+        <button *ngIf="conflicto" (click)="locambio()" type="button" class="btn btn-pill btn-block btn-info">
+          Por favor elija otros horarios
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-8" *ngIf="cambiar">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Horario Disponible
+        </h4>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of horariofiltrado">
+              <td>{{obj.hora.Horainicio}}</td>
+              <td>{{obj.hora.Horafin}}</td>
+              <td>
+                elegir
+                <!-- <button (click)="seleccionar(obj.id)" type="button" class="btn btn-pill btn-block btn-info">
+                  Elejir
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-12 col-lg-4" *ngIf="cambiar">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="text-center">
+          Horario Elegidos
+        </h4>
+      </div>
+      <div class="card-body">
+        <h6>Total: s/.  {{sepago}}.00</h6>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of seleccionados">
+              <td>{{obj.hora.Horainicio}}</td>
+              <td>{{obj.hora.Horafin}}</td>
+              <td>
+                <button (click)="borrar(obj)" type="button" class="btn btn-pill btn-block btn-danger">
+                  Borrar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-transparent border-success">
+        <button *ngIf="check && !reservado" (click)="postergar()" type="button" class="btn btn-pill btn-block btn-success">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div> -->
+</div>

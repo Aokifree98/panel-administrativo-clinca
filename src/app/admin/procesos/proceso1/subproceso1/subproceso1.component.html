@@ -1,0 +1,306 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Fecha de Reserva de Cita
+        </h4>
+      </div>
+      <div class="card-body">
+        <form class="was-validated">
+          <div class="form-group">
+            <label class="form-col-form-label" for="fecha">
+                Fecha de Reserva
+            </label>
+            <input type="date" class="form-control" id="fecha" name="fecha" [min]="fechaActual" [(ngModel)]="fecha" required>
+            <div class="valid-feedback">
+              Campo rellenado.
+            </div>
+            <div class="invalid-feedback">
+              Por favor rellene el campo.
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          CLiente
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row" *ngIf="botones">
+          <div class="col-lg-6 campo p-1">
+            <button (click)="buscarcliente()" type="button" class="btn btn-info btn-lg btn-block btn-pill">
+              Buscar
+            </button>
+          </div>
+          <div class="col-lg-6 campo p-1">
+            <button (click)="crearcliente()" type="button" class="btn btn-info btn-lg btn-block btn-pill">
+              Crear
+            </button>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="buscar">
+          <form id="formSearchCliente" class="was-validated" name="formSearchCliente">
+            <div class="form-group">
+              <label class="form-col-form-label" for="dato">
+                  Poner el numero de documento o correo
+              </label>
+              <input type="text" class="form-control" id="Fullname" name="dato" [(ngModel)]="dato" required>
+              <div class="valid-feedback">
+                Campo rellenado.
+              </div>
+              <div class="invalid-feedback">
+                Por favor rellene el campo.
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-12 campo">
+                <button type="submit"  (click)="searchEmailCliente()"
+                  class="btn btn-success btn-lg btn-block btn-pill"
+                  [disabled]="(dato === '')? true:false">
+                  Por Correo
+                </button>
+              </div>
+              <div class="col-lg-6 col-12 campo">
+                <button type="submit"  (click)="searchDocCliente()"
+                  class="btn btn-success btn-lg btn-block btn-pill"
+                  [disabled]="(dato === '')? true:false">
+                  Documento
+                </button>
+              </div>
+            </div>
+            <br>
+          </form>
+        </div>
+        <div class="col-12" *ngIf="crear">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Nombres
+                  </label>
+                  <input name="cliente.Name"
+                  [(ngModel)]="cliente.Name"
+                  required minlength="3"
+                  autofocus tabindex="1"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Apellidos
+                  </label>
+                  <input name="cliente.LastName"
+                  [(ngModel)]="cliente.LastName"
+                  required minlength="5" tabindex="2"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Direccion
+                  </label>
+                  <input name="cliente.Direction"
+                  [(ngModel)]="cliente.Direction"
+                  required minlength="7" tabindex="3"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Profesion u Ocupacion
+                  </label>
+                  <input name="cliente.Job"
+                  [(ngModel)]="cliente.Job"
+                  required minlength="5" tabindex="4"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Celular
+                  </label>
+                  <input name="cliente.Phone"
+                  [(ngModel)]="cliente.Phone"
+                  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                  required minlength="9" tabindex="5"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Fecha Nacimiento
+                  </label>
+                  <input type="date"
+                    class="form-control"
+                    max="<?= date('Y-m-d'); ?>"
+                    required tabindex="6"
+                    name="cliente.BirthDate"
+                    [(ngModel)]="cliente.BirthDate"
+                    placeholder="a partir de 25 anios antes">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Correo
+                  </label>
+                  <input name="cliente.Email"
+                  [(ngModel)]="cliente.Email"
+                  pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                  required minlength="5" tabindex="7"
+                  placeholder="........."
+                  type="email" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Num. Documento
+                  </label>
+                  <input name="cliente.DocumentNumber"
+                  [(ngModel)]="cliente.DocumentNumber"
+                  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                  required minlength="8" tabindex="8"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Genero
+                  </label>
+                  <br>
+                  <select (change)='onOptionsSelected($event)'
+                    id="select-type-basic"
+                    class="form-control"
+                    [(ngModel)]="cliente.Gender"
+                    name="cliente.Gender"
+                    required tabindex="9">
+                    <option selected>
+                      Seleccione su Genero
+                    </option>
+                    <option [value]="obj.name" *ngFor="let obj of genero">
+                    {{obj.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Estado Civil
+                  </label>
+                  <br>
+                  <select (change)='onOptionsSelectedStatus($event)'
+                    id="select-type-basic" class="form-control"
+                    [(ngModel)]="cliente.CivilStatus"
+                    name="cliente.CivilStatus"
+                    required tabindex="10">
+                    <option selected>
+                      Seleccione su Estado Civil
+                    </option>
+                    <option [value]="obj.name" *ngFor="let obj of estadocivil">
+                    {{obj.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button (click)="saveCliente()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(cliente.Name === '' ||  cliente.LastName === '' ||  cliente.Direction === '' ||  cliente.Job === '' ||  cliente.Phone === '' ||  cliente.Gender === '' ||  cliente.CivilStatus === '' ||  cliente.DocumentNumber === '' ||  cliente.Email === '')? true:false">
+              Crear
+            </button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+        <div class="col-12" *ngIf="datoscliente">
+          <div>
+            <h4 class="text-center">
+              Datos:
+            </h4>
+          </div>
+          <div class="text-center">
+            <h3>
+              Apellidos y Nombres:
+            </h3>
+            <h3>
+              {{cliente1.Name + ' ' + cliente1.LastName}}
+            </h3>
+            <h3>
+              Correo:
+            </h3>
+            <h3>
+              {{cliente1.Email}}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Especialidades
+        </h4>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Nombre
+              </th>
+              <th>
+                Doctor
+              </th>
+              <th>
+                Precio
+              </th>
+              <th>
+                ....
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of especialistas">
+              <td>
+                {{obj.especialidad.Name}}
+              </td>
+              <td>
+                {{obj.doctor.Name + ' ' + obj.doctor.LastName}}
+              </td>>
+              <td>
+                s/.{{obj.especialidad.Price}}.00
+              </td>
+              <td>
+                <button (click)="reservar(obj.id,fecha)" type="button" class="btn btn-pill btn-block btn-primary"
+                [disabled]="(fecha === fechaActual)? true:false">
+                  Reservar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

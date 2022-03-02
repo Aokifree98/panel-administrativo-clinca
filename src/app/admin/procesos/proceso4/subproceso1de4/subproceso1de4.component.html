@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          La Reserva
+        </h4>
+      </div>
+      <div class="card-body">
+        <form id="formSearch" class="was-validated" name="formSearch">
+          <div class="form-group">
+            <label class="form-col-form-label" for="dato">
+                Codigo
+            </label>
+            <input type="text" class="form-control" id="dato" name="dato" [(ngModel)]="dato" required>
+            <div class="valid-feedback">
+              Campo rellenado.
+            </div>
+            <div class="invalid-feedback">
+              Por favor rellene el campo.
+            </div>
+          </div>
+          <div>
+            <button type="submit" (click)="buscar(dato)"
+              class="btn btn-outline-success btn-lg btn-block btn-pill"
+              [disabled]="(dato === '')? true:false">
+              buscar
+            </button>
+          </div>
+        </form>
+        <br>
+        <br>
+        <div *ngIf="sebusco" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
+          <div class="col-12 contenido oscuro">
+            <div class="col-12">
+              <div class="col-12 col-lg-3 casillero">
+                  Codigo: {{ticket.id}}
+              </div>
+              <div class="col-12 col-lg-9 casillero">
+                <!-- Fecha Reserva: {{ticket.Appointment | date: 'dd-MM-yyyy'}} -->
+                Fecha Reserva: {{ticket.Appointment}}
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+              <div class="col-6">
+                Cliente: {{ticket.cliente.Name + '' + ticket.cliente.LastName}}
+              </div>
+              <div class="col-6">
+                Pago: S/. {{ticket.Pay}}.00
+              </div>
+            </div>
+            <br>
+            <button (click)="completado()" type="button"
+              class="btn btn-pill btn-block btn-success">
+              Atender
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

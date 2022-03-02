@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar Antecedentes del Cliente
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6 p-1">
+            <div class="row">
+              <div class="col-12 p-1">
+                <h5 class="title">
+                  {{ladata.Name + ' ' + ladata.LastName}}
+                </h5>
+                <div ngIf="antecedentescliente.length !== 0" class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Antecedente
+                      </th>
+                      <th>
+                        Tipo
+                      </th>
+                      <th>
+                        ...
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of antecedentescliente">
+                        <td>
+                          {{item.antecedente.Name}}
+                        </td>
+                        <td>
+                          {{item.antecedente.tipo.Name}}
+                        </td>
+                        <td class="text-primary">
+                          <button (click)="deleteHistorial(item.id)"
+                            type="button" class="btn btn-info">
+                            <span class="material-icons">
+                              delete
+                              </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 p-1">
+            <div ngIf="antecedentescliente.length !== 0" class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Antecedente
+                  </th>
+                  <th>
+                    Tipo
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of antecedentesfiltrado">
+                    <td>
+                      {{item.Name}}
+                    </td>
+                    <td>
+                      {{item.tipo.Name}}
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="createHistorial(item.id)" type="button" class="btn btn-info">
+                        <span class="material-icons">
+                          check
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div ngIf="antecedentescliente.length !== 0" class="col-12 p-1">
+            <button (click)="finish()" type="submit"
+              class="btn btn-primary pull-right">
+              Finalizar
+            </button>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

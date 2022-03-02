@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-12">
+    <button (click)="crear()" type="button" class="btn btn-primary">
+      Crear Nuevo Horario
+    </button>
+  </div>
+  <br>
+  <div class="col-12 col-md-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Elegir Especialista
+        </h4>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Doctor
+              </th>
+              <th>
+                Especialidad
+              </th>
+              <th>
+                ...
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of especialistas">
+              <td>
+                {{obj.doctor.Name + ' ' + obj.doctor.LastName}}
+              </td>
+              <td>
+                {{obj.especialidad.Name}}
+              </td>
+              <td>
+                <button (click)="elejir(obj.id)" type="button" class="btn btn-info btn-lg btn-block btn-pill">
+                  Elejir
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Elegir dia de atencio
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-6 col-md-4 col-lg-3 p-1" *ngFor="let obj of dias">
+              <button type="submit"
+                class="btn btn-warning btn-lg btn-block btn-pill"
+                (click)="diaelegido(obj.name)">
+                {{obj.name}}
+              </button>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="col-12">
+          <button type="submit"
+            class="btn btn-primary btn-lg btn-block btn-pill"
+            (click)="viewhorario()">
+            Ver Horario
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Horario de: {{datos.nombre}}
+          <br>
+          Doctor: {{datos.doctor}}
+          <br>
+            del dia {{datos.dia}}
+        </h4>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Intervalo
+              </th>
+              <th>
+                Empieza
+              </th>
+              <th>
+                Finaliza
+              </th>
+              <!-- <th>Cambiar</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of horarios">
+              <td>
+                {{obj.hora.Interval}}
+              </td>
+              <td>
+                {{obj.hora.Start}}
+              </td>
+              <td>
+                {{obj.hora.End}}
+              </td>
+              <!-- <td>
+                <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="editar(obj.id)">
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

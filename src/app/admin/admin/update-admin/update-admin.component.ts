@@ -1,5 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from 'src/app/models/admin';
+import { Genero } from 'src/app/models/genero.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
@@ -14,6 +15,18 @@ export class UpdateAdminComponent implements OnInit {
   @ViewChild('file1') fileimagen;
   laurlimagen;
   datosimagen: any = [];
+  usuario: Admin = {
+    id: 0,
+    Name: '',
+    LastName: '',
+    Phone: '',
+    Email: '',
+    Password: '',
+    Condition: '',
+    ConditionMin: '',
+    Photo: '',
+    Code: ''
+  };
   admin: Admin = {
     id: 0,
     Name: '',
@@ -26,6 +39,16 @@ export class UpdateAdminComponent implements OnInit {
     Photo: '',
     Code: ''
   };
+  estado: Genero [] = [
+    {
+      id: 1,
+      name: 'admin'
+    },
+    {
+      id: 2,
+      name: 'secretaria'
+    }
+  ];
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -33,6 +56,11 @@ export class UpdateAdminComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private photoService: ProfileUploadService,
   ) { }
+  onOptionsSelected(event) {
+    const value = event.target.value;
+    this.admin.Condition = value;
+    console.log(value);
+  }
   // tslint:disable-next-line: typedef
   changeImg() {
     this.fileimagen.nativeElement.click();
@@ -76,6 +104,8 @@ export class UpdateAdminComponent implements OnInit {
       );
   }
   ngOnInit(): void {
+    this.usuario = JSON.parse(localStorage.getItem('admin'));
+    console.log(this.usuario);
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
       this.adminService.getAdmin(params.id).subscribe(

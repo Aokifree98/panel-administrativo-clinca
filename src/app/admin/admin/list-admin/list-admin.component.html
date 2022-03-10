@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">
-          Lista de Admins
+          Lista de Usuarios
         </h4>
       </div>
       <div class="card-body">
@@ -33,22 +33,25 @@
               <th>
                 ...
               </th>
+              <th>
+                ...
+              </th>
             </thead>
             <tbody>
-              <tr *ngFor="let item of admins">
-                <td>
-                  {{item.Name + '' + item.LastName}}
+              <tr *ngFor="let item of admins" >
+                <td *ngIf="item.id !== 1">
+                  {{item.Name + ' '  + item.LastName}}
                 </td>
-                <td>
+                <td *ngIf="item.id !== 1">
                   {{item.Email}}
                 </td>
-                <td>
+                <td *ngIf="item.id !== 1">
                   {{item.Phone}}
                 </td>
-                <td>
+                <td *ngIf="item.id !== 1">
                   {{item.Condition}}
                 </td>
-                <td>
+                <td *ngIf="item.id !== 1">
                   <img *ngIf="item.Photo !== 'imagen'"
                     class="rounded-circle"
                     [src]="item.Photo" alt="foto">
@@ -57,10 +60,17 @@
                     src="../../../../assets/img/faces/avatar.jpg"
                     alt="foto">
                 </td>
-                <td class="text-primary">
-                  <button (click)="editar(item.id)" type="button" class="btn btn-info">
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-primary">
                     <span class="material-icons">
                       edit
+                      </span>
+                  </button>
+                </td>
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button *ngIf="item.Condition !== 'admin'" (click)="eliminar(item.id)" type="button" class="btn btn-danger">
+                    <span class="material-icons">
+                      delete
                       </span>
                   </button>
                 </td>

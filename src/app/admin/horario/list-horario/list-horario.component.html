@@ -63,7 +63,6 @@
             </div>
           </div>
         </div>
-        <br>
         <div class="col-12">
           <button type="submit"
             class="btn btn-primary btn-lg btn-block btn-pill"
@@ -74,6 +73,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-12 col-md-6">
     <div class="card">
       <div class="card-header card-header-primary">
@@ -86,40 +86,73 @@
         </h4>
       </div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>
-                Intervalo
-              </th>
-              <th>
-                Empieza
-              </th>
-              <th>
-                Finaliza
-              </th>
-              <!-- <th>Cambiar</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let obj of horarios">
-              <td>
-                {{obj.hora.Interval}}
-              </td>
-              <td>
-                {{obj.hora.Start}}
-              </td>
-              <td>
-                {{obj.hora.End}}
-              </td>
-              <!-- <td>
-                <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="editar(obj.id)">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-              </td> -->
-            </tr>
-          </tbody>
-        </table>
+        <!-- <div class="row">
+          <div class="col-12 p-1">
+
+          </div>
+          <div class="col-12 p-1"></div>
+        </div> -->
+        <div *ngIf="banderadia" class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Cupo
+                </th>
+                <th>
+                  Turno
+                </th>
+                <th>
+                  Lapzo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let obj of filtro1horario">
+                <td>
+                  {{obj.Cupo}}
+                </td>
+                <td>
+                  {{obj.hora.Turn}}
+                </td>
+                <td>
+                  {{obj.hora.Start}} - {{obj.hora.End}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <div *ngIf="banderatarde" class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Cupo
+                </th>
+                <th>
+                  Turno
+                </th>
+                <th>
+                  Lapzo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let obj of filtro2horario">
+                <td>
+                  {{obj.Cupo}}
+                </td>
+                <td>
+                  {{obj.hora.Turn}}
+                </td>
+                <td>
+                  {{obj.hora.Start}} - {{obj.hora.End}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

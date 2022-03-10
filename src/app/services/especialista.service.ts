@@ -22,6 +22,10 @@ export class EspecialistaService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
+  getEspecialistaFilterDoctor(doctor: string | number) {
+    return this.http.get(`${this.apiUrl}/filtro3/${doctor}`);
+  }
+
   deleteEspecialista(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

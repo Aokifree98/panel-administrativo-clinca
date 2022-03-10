@@ -3,9 +3,12 @@ import { Admin } from 'src/app/models/admin';
 import { Component, OnInit } from '@angular/core';
 import { ListCita } from 'src/app/models/listcita';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Especialidad } from 'src/app/models/especialidad';
+import { Especialista } from 'src/app/models/especialista';
 import { CitaService } from 'src/app/services/cita.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { HorarioService } from 'src/app/services/horario.service';
+import { EspecialistaService } from 'src/app/services/especialista.service';
 
 @Component({
   selector: 'app-subproceso2',
@@ -26,17 +29,22 @@ export class Subproceso2Component implements OnInit {
     Pay: '',
     Type: 'normal',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -47,17 +55,22 @@ export class Subproceso2Component implements OnInit {
     Pay: '',
     Type: '',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -79,6 +92,27 @@ export class Subproceso2Component implements OnInit {
     Photo: '',
     Code: ''
   };
+  especialistadetalle: Especialista = {
+    id: 0,
+    Turn: '',
+    EspecialidadId: 0,
+    DoctorId: 0,
+    especialidad: {
+      id: 0,
+      Name: '',
+      Image: '',
+      Price: 0
+    },
+    doctor: {
+      id: 0,
+      Name: '',
+      LastName: '',
+      MedicalSchoolNumber: '',
+      Email: '',
+      Photo: ''
+    }
+  };
+  detailespecialista: any = this.especialistadetalle;
   codigoadmin;
   lasreservas: any = [];
   seleccionados: any = [];
@@ -94,6 +128,7 @@ export class Subproceso2Component implements OnInit {
     private reservaService: CitaService,
     private horarioService: HorarioService,
     private activatedRoute: ActivatedRoute,
+    private especialistaService: EspecialistaService,
   ) { }
 
   ngOnInit(): void {
@@ -109,6 +144,14 @@ export class Subproceso2Component implements OnInit {
     // tslint:disable-next-line: radix
     const codigoespecialista = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.codigoespecialista = codigoespecialista.toString();
+    this.especialistaService.getEspecialista(this.codigoespecialista).subscribe(
+      res => {
+        this.detailespecialista = res;
+        this.pago = this.detailespecialista.especialidad.Price;
+      }, err => {
+        this.toastr.error('Eoor de Api');
+      }
+    );
     // tslint:disable-next-line: radix
     const cliente = parseInt(this.activatedRoute.snapshot.paramMap.get('cliente'));
     // tslint:disable-next-line: radix
@@ -182,6 +225,7 @@ export class Subproceso2Component implements OnInit {
   }
   // tslint:disable-next-line: typedef
   reservar(codigo) {
+    // tslint:disable-next-line: radix
     const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
     delete this.reserva.id;
     this.reserva.Pay = this.pago.toString();
@@ -203,6 +247,7 @@ export class Subproceso2Component implements OnInit {
     );
   }
   porpagar(codigo) {
+    // tslint:disable-next-line: radix
     const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
     delete this.reserva.id;
     this.reserva.Pay = this.pago.toString();

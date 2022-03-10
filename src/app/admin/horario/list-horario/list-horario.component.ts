@@ -14,6 +14,10 @@ import { EspecialistaService } from 'src/app/services/especialista.service';
 export class ListHorarioComponent implements OnInit {
   especialistas: any = [];
   horarios: any = [];
+  filtro1horario: any = [];
+  filtro2horario: any = [];
+  banderadia = false;
+  banderatarde = false;
   dias = [
     { id: 1, name: 'lunes'},
     { id: 2, name: 'martes'},
@@ -32,7 +36,7 @@ export class ListHorarioComponent implements OnInit {
     Turn: '',
     EspecialidadId: 0,
     DoctorId: 0,
-  }
+  };
   especialistadetalle: Especialista = {
     id: 0,
     Turn: '',
@@ -52,7 +56,7 @@ export class ListHorarioComponent implements OnInit {
       Email: '',
       Photo: ''
     }
-  }
+  };
   detailespecialista: any = this.especialistadetalle;
   datos = {
     nombre: '',
@@ -101,6 +105,7 @@ export class ListHorarioComponent implements OnInit {
   }
   diaelegido(name) {
     this.data.dia = name;
+    this.datos.dia = name;
   }
   viewhorario() {
     console.log(this.data);
@@ -109,6 +114,27 @@ export class ListHorarioComponent implements OnInit {
     this.horarioService.getHorarioEspecialidaddDia(dia, codigo).subscribe(
       res => {
         this.horarios = res;
+        const array = this.horarios;
+        const filtro1: any = [];
+        const filtro2: any = [];
+        const parametro1 = 'mañana';
+        const parametro2 = 'tarde';
+        for (const obj of array) {
+          const par = obj.hora.Turn;
+          if (par === parametro1) {
+            filtro1.push(obj);
+            this.filtro1horario = filtro1;
+          } else if (par === parametro2) {
+            filtro2.push(obj);
+            this.filtro2horario = filtro2;
+          }
+        }
+        if (Object.entries(this.filtro1horario).length > 0) {
+          this.banderadia = true;
+        }
+        if (Object.entries(this.filtro2horario).length > 0) {
+          this.banderatarde = true;
+        }
         this.toastr.info('Horario del especialista Elegido');
       }
     );

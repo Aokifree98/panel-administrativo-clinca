@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -156,6 +156,12 @@ import { Subproceso1de5Component } from './procesos/proceso5/subproceso1de5/subp
 import { Subproceso2de5Component } from './procesos/proceso5/subproceso2de5/subproceso2de5.component';
 // confirmacion pago
 import { Subproceso1de6Component } from './procesos/proceso6/subproceso1de6/subproceso1de6.component';
+import { AddEspecialistaComponent } from './especialista/add-especialista/add-especialista.component';
+import { EditDoctorEspecialistaComponent } from './especialista/edit-doctor-especialista/edit-doctor-especialista.component';
+import { Subproceso1de7Component } from './procesos/proceso7/subproceso1de7/subproceso1de7.component';
+import { Subproceso2de7Component } from './procesos/proceso7/subproceso2de7/subproceso2de7.component';
+import { Subproceso3de7Component } from './procesos/proceso7/subproceso3de7/subproceso3de7.component';
+import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subproceso4de7.component';
 
 
 @NgModule(
@@ -251,6 +257,12 @@ import { Subproceso1de6Component } from './procesos/proceso6/subproceso1de6/subp
       Subproceso1de5Component,
       Subproceso2de5Component,
       Subproceso1de6Component,
+      AddEspecialistaComponent,
+      EditDoctorEspecialistaComponent,
+      Subproceso1de7Component,
+      Subproceso2de7Component,
+      Subproceso3de7Component,
+      Subproceso4de7Component,
     ],
     imports: [
       CommonModule,
@@ -271,6 +283,9 @@ import { Subproceso1de6Component } from './procesos/proceso6/subproceso1de6/subp
       // ChartsModule,
       // PerfectScrollbarModule,
       ToastrModule.forRoot(),
+    ],
+    providers: [
+      DatePipe
     ]
   }
 )

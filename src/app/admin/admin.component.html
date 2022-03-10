@@ -42,7 +42,7 @@
             </p>
           </a>
         </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/doctor/list']">
             <i class="material-icons">
               person
@@ -51,8 +51,8 @@
               Doctor
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/servicio/list']">
             <i class="material-icons">
               person
@@ -61,8 +61,8 @@
               Servicio
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/especialidad/list']">
             <i class="material-icons">
               person
@@ -71,8 +71,8 @@
               Especialidad
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/empresa/view']">
             <i class="material-icons">
               business
@@ -81,7 +81,7 @@
               Empresa
             </p>
           </a>
-        </li>
+        </li> -->
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/especialista/list']">
             <i class="material-icons">
@@ -92,7 +92,7 @@
             </p>
           </a>
         </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <li *ngIf="admin.Condition !== 'secretaria'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/horario/list']">
             <i class="material-icons">
               access_time
@@ -102,7 +102,7 @@
             </p>
           </a>
         </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/antecedente/list']">
             <i class="material-icons">
               history
@@ -111,8 +111,8 @@
               Antecedente
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/episodio/list']">
             <i class="material-icons">
               sentiment_neutral
@@ -121,7 +121,7 @@
               Episodio
             </p>
           </a>
-        </li>
+        </li> -->
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/laboratorio/list']">
             <i class="material-icons">
@@ -132,7 +132,7 @@
             </p>
           </a>
         </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/contacto']">
             <i class="material-icons">
               contact_mail
@@ -141,8 +141,8 @@
               Contacto
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/banner/list']">
             <i class="material-icons">
               forum
@@ -211,8 +211,18 @@
               Chat
             </p>
           </a>
-        </li>
+        </li> -->
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+          <a class="nav-link" [routerLink]="['/admin/procesos/proceso7/subproceso1']">
+            <i class="material-icons">
+              today
+            </i>
+            <p>
+              Disponibilidad
+            </p>
+          </a>
+        </li>
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/procesos/proceso1/subproceso1']">
             <i class="material-icons">
               event
@@ -221,7 +231,17 @@
               Reservar Cita
             </p>
           </a>
-        </li>
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+          <a class="nav-link" [routerLink]="['/admin/procesos/proceso3/subproceso1']">
+            <i class="material-icons">
+              today
+            </i>
+            <p>
+              Atencion hoy
+            </p>
+          </a>
+        </li> -->
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/procesos/proceso2/subproceso1']">
             <i class="material-icons">
@@ -229,16 +249,6 @@
             </i>
             <p>
               Postergar Cita
-            </p>
-          </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
-          <a class="nav-link" [routerLink]="['/admin/procesos/proceso3/subproceso1']">
-            <i class="material-icons">
-              today
-            </i>
-            <p>
-              Atencion hoy
             </p>
           </a>
         </li>
@@ -262,7 +272,7 @@
             </p>
           </a>
         </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/procesos/proceso6/subproceso1']">
             <i class="material-icons">
               credit_card
@@ -271,8 +281,8 @@
               Confirmacion de Pago
             </p>
           </a>
-        </li>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        </li> -->
+        <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/reportes/list']">
             <i class="material-icons">
               view_list
@@ -281,7 +291,7 @@
               Reporte
             </p>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

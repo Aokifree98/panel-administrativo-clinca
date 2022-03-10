@@ -2,7 +2,7 @@
   <div class="col-12 col-lg-6 p-1">
     <h2>Total a Pagar:
       <br>
-      s/. {{pago}}.00
+      s/. {{pago}}
     </h2>
   </div>
   <div class="col-12 col-lg-6 p-1">
@@ -28,10 +28,10 @@
           <tbody>
             <tr *ngFor="let obj of horariofiltrado">
               <td>
-                {{obj.hora.Horainicio}}
+                {{obj.hora.Start}}
               </td>
               <td>
-                {{obj.hora.Horafin}}
+                {{obj.hora.End}}
               </td>
               <td>
                 <button (click)="reservar(obj.id)" type="button" class="btn btn-pill btn-block btn-info">

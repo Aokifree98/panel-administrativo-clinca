@@ -17,8 +17,8 @@ export class HoraService {
     return this.http.get(`${this.apiUrl}`);
   }
 
-  getHoraFilter(parametro: string) {
-    return this.http.get(`${this.apiUrl}/interval/${parametro}`);
+  getHoraFilter(intervalo: string | number, turno: string | number) {
+    return this.http.get(`${this.apiUrl}/interval/${intervalo}/${turno}`);
   }
 
   getHora(id: string) {

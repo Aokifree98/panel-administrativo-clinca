@@ -19,21 +19,26 @@ export class Subproceso2de5Component implements OnInit {
     Pay: '',
     Type: '',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0,
-    admin:{
+    admin: {
       id: 0,
       Name: '',
       LastName: '',
@@ -41,7 +46,7 @@ export class Subproceso2de5Component implements OnInit {
       Email: '',
       Photo: ''
     },
-    cliente:{
+    cliente: {
       id: 0,
       Name: '',
       LastName: '',
@@ -55,12 +60,13 @@ export class Subproceso2de5Component implements OnInit {
       Email: '',
       Photo: ''
     },
-    horario:{
+    horario: {
       id: 0,
       Day: '',
+      Cupo: 0,
       EspecialistaId: 0,
       HoraId: 0,
-      especialista:{
+      especialista: {
         id: 0,
         Turn: '',
         EspecialidadId: 0,
@@ -77,8 +83,9 @@ export class Subproceso2de5Component implements OnInit {
           Email: '',
         },
       },
-      hora:{
+      hora: {
         id: 0,
+        Turn: '',
         Interval: '',
         Start: '',
         End: ''
@@ -92,21 +99,26 @@ export class Subproceso2de5Component implements OnInit {
     Pay: '',
     Type: 'normal',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
-  }
+  };
   fechaActual: any;
   mensaje;
   mensaje1;

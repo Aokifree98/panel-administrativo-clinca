@@ -76,14 +76,16 @@
                 <label class="bmd-label-floating">
                   Fecha Nacimiento
                 </label>
+                <!-- [ngModel]="lafecha | date:'dd/MM/aaaa'" -->
                 <input type="date"
+                  [min]="stringmin"
+                  [max]="stringmax"
                   class="form-control"
-                  max="<?= date('Y-m-d'); ?>"
-                  required tabindex="6"
+                  tabindex="6"
                   name="cliente.BirthDate"
-                  [ngModel]="cliente.BirthDate | date:'yyyy-MM-dd'"
-                  [(ngModel)]="cliente.BirthDate"
-                  placeholder="a partir de 25 anios antes">
+                  [ngModel]="stringfecha | date : 'yyyy-MM-dd'"
+                  [(ngModel)]="nuevafecha"
+                  (change)="cambio(nuevafecha)">
               </div>
             </div>
             <div class="col-md-6 col-lg-4">

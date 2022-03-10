@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 import { Cliente } from 'src/app/models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { Genero } from 'src/app/models/genero.model';
@@ -71,7 +72,12 @@ export class CreateClienteComponent implements OnInit {
   ];
   hombre = 'https://fieldsports.herokuapp.com/stylesheets/usuarios/man.png';
   mujer = 'https://fieldsports.herokuapp.com/stylesheets/usuarios/women.png';
+  fechamin: Date;
+  fechamax: Date;
+  stringmax;
+  stringmin;
   constructor(
+    private pd: DatePipe,
     private router: Router,
     private toastr: ToastrService,
     private clienteService: ClienteService
@@ -117,6 +123,10 @@ export class CreateClienteComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.fechamin = new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate());
+    this.fechamax = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1);
+    this.stringmin = this.pd.transform(this.fechamin, 'yyyy-MM-dd');
+    this.stringmax = this.pd.transform(this.fechamax, 'yyyy-MM-dd');
   }
 
 

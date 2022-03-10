@@ -10,7 +10,40 @@
         <div class="row">
           <div class="col-12 col-lg-6 p-1">
             <div class="row">
-              <div *ngIf="!doctorcreate" class="col-12 p-1">
+              <div *ngIf="resultadodoctor" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Doctor
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col-md-4 p-1">
+                        <img [src]="doctor1.Photo" class="w-100" alt="foto doctor">
+                      </div>
+                      <div class="col-12 col-md-8 p-1">
+                        <div class="row">
+                          <div class="col-12 p-1 text-center">
+                            Nombres y Apellidos:
+                            <br>
+                            {{doctor1.Name + ' ' + doctor1.LastName}}
+                          </div>
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Colegiatura:
+                            {{doctor1.MedicalSchoolNumber}}
+                          </div>
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Correo:
+                            {{doctor1.Email}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="doctorbuscar" class="col-12 p-1">
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title">
@@ -140,7 +173,7 @@
                         </div>
                       </div>
                       <button (click)="saveDoctor()" type="submit" class="btn btn-primary pull-right"
-                        [disabled]="(doctor.Name === '' ||  doctor.LastName === '' ||  doctor.Photo === '' ||  doctor.Email === '')? true:false">
+                        [disabled]="(doctor.Name === '' ||  doctor.LastName === '' ||  doctor.Email === '')? true:false">
                         Crear
                       </button>
                       <div class="clearfix"></div>
@@ -152,7 +185,36 @@
           </div>
           <div class="col-12 col-lg-6 p-1">
             <div class="row">
-              <div *ngIf="!especialidadcreate" class="col-12 p-1">
+              <div *ngIf="resultadoespecialidad" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col-md-4 p-1">
+                        <img [src]="especialidad1.Image" class="w-100" alt="foto doctor">
+                      </div>
+                      <div class="col-12 col-md-8 p-1">
+                        <div class="row">
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Nombre:
+                            <br>
+                            {{especialidad1.Name}}
+                          </div>
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Precio:
+                            {{especialidad1.Price}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="especialidadbuscar" class="col-12 p-1">
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title">
@@ -295,7 +357,7 @@
                         </div>
                       </div>
                       <button (click)="saveEspecialidad()" type="submit" class="btn btn-primary pull-right"
-                        [disabled]="(especialidad.Name === '' ||  especialidad.Resume === '' ||  especialidad.Price === 0 ||  especialidad.Image === '' ||  especialidad.Icon === '')? true:false">
+                        [disabled]="(especialidad.Name === '' ||  especialidad.Resume === '' ||  especialidad.Price === 0)? true:false">
                         Crear
                       </button>
                       <div class="clearfix"></div>
@@ -310,7 +372,7 @@
           <div class="col-12 p-1">
             <form>
               <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-8">
                   <div class="form-group">
                     <label class="bmd-label-floating">
                       Turno
@@ -322,7 +384,7 @@
                       tabindex="1" placeholder=".........">
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-4">
                   <button (click)="saveEspecialista()" type="submit" class="btn btn-primary"
                     [disabled]="(codigodoctor === 0 || codigoespecialidad === 0 ||  especialista.Turn === '')? true:false">
                     Crear Especialista

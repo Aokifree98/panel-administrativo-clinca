@@ -21,8 +21,8 @@ export class CreateAdminComponent implements OnInit {
     LastName: '',
     Phone: '',
     Email: '',
-    Password: '',
-    Condition: 'trabajador',
+    Password: '123',
+    Condition: 'secretaria',
     ConditionMin: 'desactivado',
     Photo: 'https://st.depositphotos.com/2704315/3185/v/600/depositphotos_31854223-stock-illustration-vector-user-profile-avatar-man.jpg',
     Code: '9999999'
@@ -60,6 +60,7 @@ export class CreateAdminComponent implements OnInit {
   saveAdmin() {
     delete this.admin.id;
     console.log(this.admin);
+    // this.admin.Password = this.admin.Phone;
     // llamando a servicio de creacion que esta enlazada con el api
     this.adminService.saveAdmin(this.admin).subscribe(
       res => {

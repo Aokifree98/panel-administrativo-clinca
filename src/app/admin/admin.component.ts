@@ -1,4 +1,5 @@
 import { navItems } from './_nav';
+import { Admin } from '../models/admin';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../services/admin.service';
@@ -11,8 +12,20 @@ import { AdminService } from '../services/admin.service';
 export class AdminComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
-  public sidebarColor: string = "red";
+  public sidebarColor = 'red';
   client;
+  admin: Admin = {
+    id: 0,
+    Name: '',
+    LastName: '',
+    Phone: '',
+    Email: '',
+    Password: '',
+    Condition: '',
+    ConditionMin: '',
+    Photo: '',
+    Code: ''
+  };
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -60,12 +73,13 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     if (this.adminService.isLoggedIn()) {
       this.client = JSON.parse(localStorage.getItem('admin'));
-      this.router.navigate(
-        [
-          'admin',
-          'home'
-        ]
-      );
+      this.admin = JSON.parse(localStorage.getItem('admin'));
+      // this.router.navigate(
+      //   [
+      //     'admin',
+      //     'home'
+      //   ]
+      // );
     } else {
       this.router.navigate(
         [

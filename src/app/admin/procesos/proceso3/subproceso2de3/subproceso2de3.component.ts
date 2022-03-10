@@ -32,17 +32,22 @@ export class Subproceso2de3Component implements OnInit {
     Pay: '',
     Type: 'normal',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -53,17 +58,22 @@ export class Subproceso2de3Component implements OnInit {
     Pay: '',
     Type: 'normal',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -127,7 +137,7 @@ export class Subproceso2de3Component implements OnInit {
       Email: '',
       Photo: ''
     }
-  }
+  };
   detailespecialista: any = this.especialistadetalle;
   admin: Admin = {
     id: 0,
@@ -270,61 +280,6 @@ export class Subproceso2de3Component implements OnInit {
       }
     );
   }
-  // tslint:disable-next-line: typedef
-  // seleccionar(codigo) {
-  //   const parametro = +codigo;
-  //   const array = this.horariofiltrado;
-  //   const lista = this.seleccionados;
-  //   for (const objeto of array) {
-  //     const indice = array.indexOf(objeto);
-  //     const turnito = objeto.hora.Turno;
-  //     const precio1 = +objeto.especialista.Precio1;
-  //     const precio2 = +objeto.especialista.Precio2;
-  //     if (objeto.id === parametro) {
-  //       if (turnito === 'dia') {
-  //         this.pago = this.pago + precio2;
-  //       } else if (turnito === 'noche') {
-  //         this.pago = this.pago + precio1;
-  //       }
-  //       lista.push(objeto);
-  //       this.indices.push(indice);
-  //       this.seleccionados = lista;
-  //       array.splice(indice, 1);
-  //       this.horariofiltrado = array;
-  //     }
-  //   }
-  //   if (Object.entries(this.seleccionados).length > 0) {
-  //     this.check = true;
-  //   } else if (Object.entries(this.seleccionados).length === 0) {
-  //     this.check = false;
-  //   }
-  // }
-  // // tslint:disable-next-line: typedef
-  // borrar(objeto) {
-  //   const losindices = this.indices;
-  //   const turnito = objeto.hora.Turno;
-  //   const precio1 = +objeto.especialista.Precio1;
-  //   const precio2 = +objeto.especialista.Precio2;
-  //   if (turnito === 'dia') {
-  //     this.pago = this.pago - precio2;
-  //   } else if (turnito === 'noche') {
-  //     this.pago = this.pago - precio1;
-  //   }
-  //   const array = this.seleccionados;
-  //   const indice = array.indexOf(objeto);
-  //   const elindice = losindices[indice];
-  //   this.horariofiltrado.splice(elindice, 0, objeto);
-  //   losindices.splice(indice, 1);
-  //   this.indices = losindices;
-  //   array.splice(indice, 1);
-  //   this.seleccionados = array;
-  //   if (Object.entries(this.seleccionados).length > 0) {
-  //     this.check = true;
-  //   } else if (Object.entries(this.seleccionados).length === 0) {
-  //     this.check = false;
-  //   }
-  // }
-  // tslint:disable-next-line: typedef
   reservar() {
     delete this.reserva.id;
     this.reserva.Pay = this.pago.toString();

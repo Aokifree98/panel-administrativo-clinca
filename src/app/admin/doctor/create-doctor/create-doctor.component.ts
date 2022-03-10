@@ -67,6 +67,7 @@ export class CreateDoctorComponent implements OnInit {
   // tslint:disable-next-line: typedef
   saveDoctor() {
     delete this.doctor.id;
+    this.doctor.Password = this.doctor.MedicalSchoolNumber;
     console.log(this.doctor);
     // llamando a servicio de creacion que esta enlazada con el api
     this.doctorService.saveDoctor(this.doctor).subscribe(

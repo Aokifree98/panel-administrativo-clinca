@@ -4,10 +4,24 @@
       <div class="card" *ngIf="bandera === 'proceso1'">
         <div class="card-header card-header-primary">
           <h4 class="text-center">
-            Elegir Intervalo
+            Elegir Intervalo y Turno
           </h4>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-6 p-1">
+              <button (click)="selectturno('mañana')" type="button" class="btn btn-pill btn-block btn-info">
+                Turno Mañana
+              </button>
+            </div>
+            <div class="col-6 p-1">
+              <button (click)="selectturno('tarde')" type="button" class="btn btn-pill btn-block btn-info">
+                Turno Tarde
+              </button>
+            </div>
+          </div>
+          <br>
+          <br>
           <div class="row">
             <div class="col-4 p-1">
               <button (click)="intervalo(0)" type="button" class="btn btn-pill btn-block btn-info">
@@ -44,11 +58,11 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <div *ngFor="let obj of especialistas"
-                      class="col-4 col-md-3 col-lg-2 p-1">
+                    <div *ngFor="let obj of horas"
+                      class="col-6 col-md-4 col-lg-3 p-1">
                       <button (click)="inicio(obj.id)" type="button"
                         class="btn btn-pill btn-block btn-info">
-                        30 min
+                        {{obj.Start}}
                       </button>
                     </div>
                   </div>
@@ -63,12 +77,15 @@
                   </h4>
                 </div>
                 <div class="card-body">
-                  <div *ngFor="let obj of especialistas"
-                    class="col-4 col-md-3 col-lg-2 p-1">
-                    <button (click)="final(obj.id)" type="button"
-                      class="btn btn-pill btn-block btn-info">
-                      30 min
-                    </button>
+                  <div class="row">
+                    <div *ngFor="let obj of horas"
+                      class="col-6 col-md-4 col-lg-3 p-1">
+                      <button (click)="final(obj.id)" type="button"
+                        class="btn btn-pill btn-block btn-info"
+                        [disabled]="(data.inicio === 0)? true:false">
+                        {{obj.End}}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

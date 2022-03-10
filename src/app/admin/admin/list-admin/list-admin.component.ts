@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class ListAdminComponent implements OnInit {
   admins: any = [];
+  mensaje;
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -52,6 +53,20 @@ export class ListAdminComponent implements OnInit {
         'update',
         codigoaeditar
       ]
+    );
+  }
+  eliminar(codigo) {
+    this.adminService.deleteAdmin(codigo).subscribe(
+      res => {
+        this.mensaje = res;
+        this.router.navigate(
+          [
+            'admin',
+            'admin',
+            'list'
+          ]
+        );
+      }
     );
   }
 

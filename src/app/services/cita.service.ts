@@ -43,7 +43,7 @@ export class CitaService {
   }
 
   getCitasFiltro(dia: string, especialista: string) {
-    return this.http.get(`${this.apiUrlcita}/filtro/${dia}/${especialista}`);
+    return this.http.get(`${this.apiUrlcita}/filtrohorario/${dia}/${especialista}`);
   }
 
   getCitaestado() {

@@ -26,7 +26,7 @@ export class UpdateEspecialidadComponent implements OnInit {
     Image: '',
     Icon: '',
     Price: 0
-  }
+  };
   constructor(
     private router: Router,
     private toastr: ToastrService,

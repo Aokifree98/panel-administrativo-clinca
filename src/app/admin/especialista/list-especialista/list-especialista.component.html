@@ -22,6 +22,73 @@
                 Nombres y Apellidos
               </th>
               <th>
+                Colegiatura
+              </th>
+              <th>
+                Especialidades
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of doctores">
+                <td>
+                  <img *ngIf="item.Photo !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="item.Photo" alt="foto">
+                  <img *ngIf="item.Photo === 'imagen'"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td>
+                  {{item.Name + '' + item.LastName}}
+                </td>
+                <td>
+                  {{item.MedicalSchoolNumber}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="ver(item.id)"  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      visibility
+                    </span>
+                  </button>
+                </td>
+                <td class="text-primary">
+                  <button (click)="editardoctor(item.id)" type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      edit
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Especialidades
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
                 Especialidad
               </th>
               <th>
@@ -31,31 +98,27 @@
             <tbody>
               <tr *ngFor="let item of especialistas">
                 <td>
-                  <img *ngIf="item.doctor.Photo !== 'imagen'"
-                    class="rounded-circle"
-                    [src]="item.doctor.Photo" alt="foto">
-                  <img *ngIf="item.doctor.Photo === 'imagen'"
-                    class="rounded-circle"
-                    src="../../../../assets/img/faces/avatar.jpg"
-                    alt="foto">
-                </td>
-                <td>
-                  {{item.doctor.Name + '' + item.doctor.LastName}}
-                </td>
-                <td>
                   {{item.especialidad.Name}}
                 </td>
                 <td class="text-primary">
                   <button (click)="editar(item.id)" type="button" class="btn btn-info">
                     <span class="material-icons">
                       edit
-                      </span>
+                    </span>
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-warning" (click)="add(codigodoctor)" data-dismiss="modal">
+          Agregar
+        </button>
       </div>
     </div>
   </div>

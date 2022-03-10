@@ -106,8 +106,7 @@ export class Subproceso1de5Component implements OnInit {
         'subproceso2',
         codigo,
       ]
-    )
-
+    );
   }
   ngOnInit(): void {
   }

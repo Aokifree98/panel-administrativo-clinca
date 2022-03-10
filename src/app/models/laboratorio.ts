@@ -4,5 +4,10 @@ export interface Laboratorio {
   id?: number,
   Name?: string,
   Detail?: string,
-  Price?: number
+  Price?: number,
+  TipoId?: number,
+  tipo: {
+    id?: number,
+    Name?: string,
+  },
 }

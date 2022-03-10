@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 export interface Horario {
   id?: number,
   Day?: string,
+  Cupo?: number,
   EspecialistaId?: number,
   HoraId?: number,
   especialista:{
@@ -24,9 +25,10 @@ export interface Horario {
       Email?: string,
       Photo?: string
     },
-  }
+  },
   hora:{
     id?: number,
+    Turn?: string,
     Interval?: string,
     Start?: string,
     End?: string

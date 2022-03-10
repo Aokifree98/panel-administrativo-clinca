@@ -14,8 +14,8 @@ import { EspecialistaService } from 'src/app/services/especialista.service';
 export class CreateHorarioComponent implements OnInit {
   dia: '';
   data = {
-    inicio: 1,
-    fin: 15,
+    inicio: 0,
+    fin: 0,
     dia: '',
     especialista: 0
   };
@@ -67,7 +67,9 @@ export class CreateHorarioComponent implements OnInit {
       name: 'domingo'
     },
   ];
-  intervalos: any = [15,20,30];
+  intervalos: any = [15, 20, 30];
+  turnos: any = ['', ''];
+  turnoelegido;
   bandera = 'proceso1';
   miniproceso = 'nada';
   mostrartabla = false;
@@ -75,17 +77,21 @@ export class CreateHorarioComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private horaService: HoraService,
-    private especialistaService: EspecialistaService,
     private horarioService: HorarioService,
+    private especialistaService: EspecialistaService,
   ) { }
+  selectturno(valor) {
+    this.turnoelegido = valor;
+  }
   intervalo(valor) {
     const parametro = this.intervalos[valor].toString();
-    this.horaService.getHoraFilter(parametro).subscribe(
+    const parametro2 = this.turnoelegido;
+    this.horaService.getHoraFilter(parametro, parametro2).subscribe(
       res => {
         this.horas = res;
-        this.toastr.success('Horas en el invervalo elegido');
         this.bandera = 'proceso2';
         this.miniproceso = 'inicio';
+        this.toastr.success('Horas en el invervalo elegido');
       },
       err => {
         console.error(err);
@@ -107,7 +113,9 @@ export class CreateHorarioComponent implements OnInit {
       res => {
         this.especialistas = res;
       },
-      err => console.error(err)
+      err => {
+        console.error(err);
+      }
     );
   }
   rango() {
@@ -128,7 +136,9 @@ export class CreateHorarioComponent implements OnInit {
     this.horario.EspecialistaId = codigo;
   }
   diaelegido(name) {
+    this.rango();
     const wasa = {
+      Cupo: 0,
       Day: '',
       EspecialistaId: 0,
       HoraId: 0,
@@ -140,19 +150,19 @@ export class CreateHorarioComponent implements OnInit {
     wasa.EspecialistaId = this.data.especialista;
     console.log(this.numeros);
     const array = this.numeros;
-    const vista: any = [];
     for (const obj of array) {
       // console.log(obj);
+      const cupito = +array.indexOf(obj) + 1;
+      wasa.Cupo = cupito;
       wasa.HoraId = obj;
       console.log(wasa);
       this.horarioService.saveHorario(wasa).subscribe(
         res => {
           console.log(res);
-          // vista.push(res);
-          // this.previo = vista;
         },
         err => {
-          console.log(err);
+          this.toastr.error('Error Api');
+          // console.log(err);
         }
       );
     }
@@ -184,7 +194,6 @@ export class CreateHorarioComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getEspecialistas();
-    this.rango();
   }
 
 }

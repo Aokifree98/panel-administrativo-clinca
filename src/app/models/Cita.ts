@@ -6,21 +6,26 @@ export interface Cita {
   Pay?: string,
   Type?: string,
   Condition?: string,
-  Cardiacpressure?: string,
-  Oxygenation?: string,
-  Temperature?: string,
-  Weight?: string,
-  Size?: string,
+  Referred?: string,
   Companion?: string,
   Relationship?: string,
-  Currentepisode?: string,
-  Beginningprinciples?: string,
-  Problem?: string,
-  Examination?: string,
+  BloodPressure?: string,
+  HeartRate?: string,
+  BreathingFrequency?: string,
+  Temperature?: string,
+  Saturation?: string,
+  SignsandSymptoms?: string,
+  DescriptionProblem?: string,
+  SurgicalHistory?: string,
+  MedicalHistory?: string,
+  AllergicHistory?: string,
+  PhysicalExam?: string,
+  Diagnosis?: string,
+  LaboratoryExam?: string,
   AdminId?: number,
   ClienteId?: number,
   HorarioId?: number,
-  admin:{
+  admin: {
     id?: number,
     Name?: string,
     LastName?: string,
@@ -28,7 +33,7 @@ export interface Cita {
     Email?: string,
     Photo?: string
   },
-  cliente:{
+  cliente: {
     id?: number,
     Name?: string,
     LastName?: string,
@@ -42,12 +47,13 @@ export interface Cita {
     Email?: string,
     Photo?: string
   },
-  horario:{
+  horario: {
     id?: number,
     Day?: string,
+    Cupo?: number,
     EspecialistaId?: number,
     HoraId?: number,
-    especialista:{
+    especialista: {
       id?: number,
       Turn?: string,
       EspecialidadId?: number,
@@ -64,8 +70,9 @@ export interface Cita {
         Email?: string,
       },
     },
-    hora:{
+    hora: {
       id?: number,
+      Turn?: string,
       Interval?: string,
       Start?: string,
       End?: string

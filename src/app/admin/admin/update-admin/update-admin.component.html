@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">
-          Actualizar Admin
+          Actualizar Usuario
         </h4>
       </div>
       <div class="card-body">
@@ -58,6 +58,26 @@
                 required minlength="5" tabindex="4"
                 type="email" class="form-control"
                 placeholder=".........">
+              </div>
+            </div>
+            <div *ngIf="usuario.Condition === 'admin'" class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating" for="Name">
+                  Rol
+                </label>
+                <select (change)='onOptionsSelected($event)'
+                  id="select-type-basic"
+                  class="form-control"
+                  [(ngModel)]="admin.Condition"
+                  name="admin.Condition"
+                  required tabindex="5">
+                  <option selected>
+                    Seleccione su Rol
+                  </option>
+                  <option [value]="obj.name" *ngFor="let obj of estado">
+                  {{obj.name}}
+                  </option>
+                </select>
               </div>
             </div>
           </div>

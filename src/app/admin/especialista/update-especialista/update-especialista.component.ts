@@ -251,18 +251,6 @@ export class UpdateEspecialistaComponent implements OnInit {
       }
     );
   }
-  // // tslint:disable-next-line: typedef
-  // onOptionsSelectedEspecialidad(event) {
-  //   const value = event.target.value;
-  //   this.codigoespecialidad = value;
-  //   console.log(value);
-  // }
-  // // tslint:disable-next-line: typedef
-  // onOptionsSelecteDoctor(event) {
-  //   const value = event.target.value;
-  //   this.codigodoctor = value;
-  //   console.log(value);
-  // }
   updateEspecialista() {
     const params = this.activatedRoute.snapshot.params;
     this.especialista.EspecialidadId = this.codigoespecialidad;

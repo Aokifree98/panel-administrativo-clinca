@@ -1,0 +1,11 @@
+#logo{
+	width: 200px;
+	height: 200px;
+	margin-left: auto;
+  margin-right: auto;
+  display:block;
+}
+.colorcito {
+  background-color: #913f9e;
+  color: aliceblue;
+}

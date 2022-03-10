@@ -78,7 +78,8 @@
                 </label>
                 <input type="date"
                   class="form-control"
-                  max="<?= date('Y-m-d'); ?>"
+                  [min]="stringmin"
+                  [max]="stringmax"
                   required tabindex="6"
                   name="cliente.BirthDate"
                   [(ngModel)]="cliente.BirthDate"

@@ -66,9 +66,11 @@ import { ListEspecialidadComponent } from './especialidad/list-especialidad/list
 import { UpdateEspecialidadComponent } from './especialidad/update-especialidad/update-especialidad.component';
 import { CreateEspecialidadComponent } from './especialidad/create-especialidad/create-especialidad.component';
 // especialista
+import { AddEspecialistaComponent } from './especialista/add-especialista/add-especialista.component';
 import { ListEspecialistaComponent } from './especialista/list-especialista/list-especialista.component';
 import { UpdateEspecialistaComponent } from './especialista/update-especialista/update-especialista.component';
 import { CreateEspecialistaComponent } from './especialista/create-especialista/create-especialista.component';
+import { EditDoctorEspecialistaComponent } from './especialista/edit-doctor-especialista/edit-doctor-especialista.component';
 // horario
 import { ListHorarioComponent } from './horario/list-horario/list-horario.component';
 import { CreateHorarioComponent } from './horario/create-horario/create-horario.component';
@@ -123,6 +125,11 @@ import { Subproceso1de5Component } from './procesos/proceso5/subproceso1de5/subp
 import { Subproceso2de5Component } from './procesos/proceso5/subproceso2de5/subproceso2de5.component';
 // confirmacion pago
 import { Subproceso1de6Component } from './procesos/proceso6/subproceso1de6/subproceso1de6.component';
+// disponibilidad y reserva rapida
+import { Subproceso1de7Component } from './procesos/proceso7/subproceso1de7/subproceso1de7.component';
+import { Subproceso2de7Component } from './procesos/proceso7/subproceso2de7/subproceso2de7.component';
+import { Subproceso3de7Component } from './procesos/proceso7/subproceso3de7/subproceso3de7.component';
+import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subproceso4de7.component';
 
 
 const routes: Routes = [
@@ -229,6 +236,14 @@ const routes: Routes = [
           {
             path: 'update/:id',
             component: UpdateEspecialistaComponent
+          },
+          {
+            path: 'doctor-edit/:id',
+            component: EditDoctorEspecialistaComponent
+          },
+          {
+            path: 'add/:id',
+            component: AddEspecialistaComponent
           }
         ]
       },
@@ -249,91 +264,91 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'antecedente',
-        children: [
-          {
-            path: 'list',
-            component: ListAntecedenteComponent
-          },
-          {
-            path: 'create',
-            component: CreateAntecedenteComponent
-          },
-          {
-            path: 'update/:id',
-            component: UpdateAntecedenteComponent
-          }
-        ]
-      },
-      {
-        path: 'diagnostico',
-        children: [
-          {
-            path: 'list',
-            component: ListDiagnosticoComponent
-          },
-          {
-            path: 'create',
-            component: CreateDiagnosticoComponent
-          },
-          {
-            path: 'update/:id',
-            component: UpdateDiagnosticoComponent
-          }
-        ]
-      },
-      {
-        path: 'tratamiento',
-        children: [
-          {
-            path: 'list',
-            component: ListTratamientoComponent
-          },
-          {
-            path: 'create',
-            component: CreateTratamientoComponent
-          },
-          {
-            path: 'update/:id',
-            component: UpdateTratamientoComponent
-          }
-        ]
-      },
-      {
-        path: 'historial',
-        children: [
-          {
-            path: 'list',
-            component: ListHistorialComponent
-          },
-          {
-            path: 'create',
-            component: CreateHistorialComponent
-          },
-          {
-            path: 'update/:id',
-            component: UpdateHistorialComponent
-          }
-        ]
-      },
-      {
-        path: 'episodio',
-        children: [
-          {
-            path: 'list',
-            component: ListEpisodioComponent
-          },
-          {
-            path: 'create',
-            component: CreateEpisodioComponent
-          },
-          {
-            path: 'update/:id',
-            component: UpdateEpisodioComponent
-          }
-        ]
-      },
+      // {
+      //   path: 'antecedente',
+      //   children: [
+      //     {
+      //       path: 'list',
+      //       component: ListAntecedenteComponent
+      //     },
+      //     {
+      //       path: 'create',
+      //       component: CreateAntecedenteComponent
+      //     },
+      //     {
+      //       path: 'update/:id',
+      //       component: UpdateAntecedenteComponent
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'diagnostico',
+      //   children: [
+      //     {
+      //       path: 'list',
+      //       component: ListDiagnosticoComponent
+      //     },
+      //     {
+      //       path: 'create',
+      //       component: CreateDiagnosticoComponent
+      //     },
+      //     {
+      //       path: 'update/:id',
+      //       component: UpdateDiagnosticoComponent
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'tratamiento',
+      //   children: [
+      //     {
+      //       path: 'list',
+      //       component: ListTratamientoComponent
+      //     },
+      //     {
+      //       path: 'create',
+      //       component: CreateTratamientoComponent
+      //     },
+      //     {
+      //       path: 'update/:id',
+      //       component: UpdateTratamientoComponent
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'historial',
+      //   children: [
+      //     {
+      //       path: 'list',
+      //       component: ListHistorialComponent
+      //     },
+      //     {
+      //       path: 'create',
+      //       component: CreateHistorialComponent
+      //     },
+      //     {
+      //       path: 'update/:id',
+      //       component: UpdateHistorialComponent
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'episodio',
+      //   children: [
+      //     {
+      //       path: 'list',
+      //       component: ListEpisodioComponent
+      //     },
+      //     {
+      //       path: 'create',
+      //       component: CreateEpisodioComponent
+      //     },
+      //     {
+      //       path: 'update/:id',
+      //       component: UpdateEpisodioComponent
+      //     }
+      //   ]
+      // },
       {
         path: 'laboratorio',
         children: [
@@ -650,6 +665,32 @@ const routes: Routes = [
                 component: Subproceso1de6Component
               }
             ]
+          },
+          {
+            path: 'proceso7',
+            children: [
+              {
+                path: 'subproceso1',
+                component: Subproceso1de7Component
+              },
+              {
+                path: 'subproceso2/:horario/:fecha',
+                component: Subproceso2de7Component
+              },
+              {
+                path: 'subproceso3/:id',
+                component: Subproceso3de7Component
+              },
+              {
+                path: 'subproceso4/:id',
+                component: Subproceso4de7Component
+              },
+            ]
+          },
+          {
+            path: '**',
+            redirectTo: 'home',
+            pathMatch: 'prefix'
           },
         ]
       }

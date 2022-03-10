@@ -24,17 +24,22 @@ export class Subproceso1de6Component implements OnInit {
     Pay: '',
     Type: 'normal',
     Condition: '',
-    Cardiacpressure: '',
-    Oxygenation: '',
-    Temperature: '',
-    Weight: '',
-    Size: '',
+    Referred: '',
     Companion: '',
     Relationship: '',
-    Currentepisode: '',
-    Beginningprinciples: '',
-    Problem: '',
-    Examination: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -165,7 +170,7 @@ export class Subproceso1de6Component implements OnInit {
   getreservas() {
     const hoynumber = new Date().getTime();
     let a = 0;
-    const limite = 10*60;
+    const limite = 10 * 60;
     this.reservaService.gettopayCita().subscribe(
       res => {
         console.log(res);
@@ -176,7 +181,7 @@ export class Subproceso1de6Component implements OnInit {
           for (const obj of this.lasreservas) {
             const parametro = new Date(obj.createdAt).getTime();
             const resta = hoynumber - parametro;
-            const division = resta/6000;
+            const division = resta / 6000;
             diferencia = limite - division;
             console.log(parametro);
             if (diferencia > 0) {
@@ -229,13 +234,12 @@ export class Subproceso1de6Component implements OnInit {
             err => {
               this.toastr.error('Error en el Api');
             }
-          )
+          );
         }
       },
       err => {
         this.toastr.error('Error de Api');
       }
-
     );
   }
   seleccionar(par) {

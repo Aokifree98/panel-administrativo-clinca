@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule, DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // para los avisos al cliente
 import { ToastrModule } from 'ngx-toastr';
@@ -285,7 +285,11 @@ import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subp
       ToastrModule.forRoot(),
     ],
     providers: [
-      DatePipe
+      DatePipe,
+      {
+        provide: LocationStrategy,
+        useClass: HashLocationStrategy
+      }
     ]
   }
 )

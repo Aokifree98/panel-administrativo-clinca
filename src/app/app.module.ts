@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 // para el servidor apirest
 import { HttpClientModule } from '@angular/common/http';
+// problema del refresheo
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

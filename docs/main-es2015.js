@@ -1528,10 +1528,10 @@ AdminComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCom
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminModule", function() { return AdminModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin.component */ "./src/app/admin/admin.component.ts");
-/* harmony import */ var _admin_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin-routing.module */ "./src/app/admin/admin-routing.module.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin.component */ "./src/app/admin/admin.component.ts");
+/* harmony import */ var _admin_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-routing.module */ "./src/app/admin/admin-routing.module.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var primeng_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! primeng/chart */ "./node_modules/primeng/fesm2015/primeng-chart.js");
@@ -1794,11 +1794,15 @@ class AdminModule {
 }
 AdminModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: AdminModule });
 AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AdminModule_Factory(t) { return new (t || AdminModule)(); }, providers: [
-        _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"]
+        _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
+        {
+            provide: _angular_common__WEBPACK_IMPORTED_MODULE_4__["LocationStrategy"],
+            useClass: _angular_common__WEBPACK_IMPORTED_MODULE_4__["HashLocationStrategy"]
+        }
     ], imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-            _admin_routing_module__WEBPACK_IMPORTED_MODULE_3__["AdminRoutingModule"],
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
+            _admin_routing_module__WEBPACK_IMPORTED_MODULE_2__["AdminRoutingModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
             // primeng
             primeng_accordion__WEBPACK_IMPORTED_MODULE_8__["AccordionModule"],
@@ -1815,7 +1819,7 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
             // PerfectScrollbarModule,
             ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrModule"].forRoot(),
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AdminModule, { declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_2__["AdminComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AdminModule, { declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_1__["AdminComponent"],
         _cliente_create_cliente_create_cliente_component__WEBPACK_IMPORTED_MODULE_10__["CreateClienteComponent"],
         _cliente_update_cliente_update_cliente_component__WEBPACK_IMPORTED_MODULE_11__["UpdateClienteComponent"],
         _cliente_list_cliente_list_cliente_component__WEBPACK_IMPORTED_MODULE_9__["ListClienteComponent"],
@@ -1910,9 +1914,9 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
         _procesos_proceso7_subproceso1de7_subproceso1de7_component__WEBPACK_IMPORTED_MODULE_100__["Subproceso1de7Component"],
         _procesos_proceso7_subproceso2de7_subproceso2de7_component__WEBPACK_IMPORTED_MODULE_101__["Subproceso2de7Component"],
         _procesos_proceso7_subproceso3de7_subproceso3de7_component__WEBPACK_IMPORTED_MODULE_102__["Subproceso3de7Component"],
-        _procesos_proceso7_subproceso4de7_subproceso4de7_component__WEBPACK_IMPORTED_MODULE_103__["Subproceso4de7Component"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-        _admin_routing_module__WEBPACK_IMPORTED_MODULE_3__["AdminRoutingModule"],
-        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
+        _procesos_proceso7_subproceso4de7_subproceso4de7_component__WEBPACK_IMPORTED_MODULE_103__["Subproceso4de7Component"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
+        _admin_routing_module__WEBPACK_IMPORTED_MODULE_2__["AdminRoutingModule"],
+        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
         // primeng
         primeng_accordion__WEBPACK_IMPORTED_MODULE_8__["AccordionModule"],
@@ -1922,7 +1926,7 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
                 declarations: [
-                    _admin_component__WEBPACK_IMPORTED_MODULE_2__["AdminComponent"],
+                    _admin_component__WEBPACK_IMPORTED_MODULE_1__["AdminComponent"],
                     _cliente_create_cliente_create_cliente_component__WEBPACK_IMPORTED_MODULE_10__["CreateClienteComponent"],
                     _cliente_update_cliente_update_cliente_component__WEBPACK_IMPORTED_MODULE_11__["UpdateClienteComponent"],
                     _cliente_list_cliente_list_cliente_component__WEBPACK_IMPORTED_MODULE_9__["ListClienteComponent"],
@@ -2020,9 +2024,9 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
                     _procesos_proceso7_subproceso4de7_subproceso4de7_component__WEBPACK_IMPORTED_MODULE_103__["Subproceso4de7Component"],
                 ],
                 imports: [
-                    _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                    _admin_routing_module__WEBPACK_IMPORTED_MODULE_3__["AdminRoutingModule"],
-                    _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
+                    _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
+                    _admin_routing_module__WEBPACK_IMPORTED_MODULE_2__["AdminRoutingModule"],
+                    _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
                     _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
                     // primeng
                     primeng_accordion__WEBPACK_IMPORTED_MODULE_8__["AccordionModule"],
@@ -2040,7 +2044,11 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
                     ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrModule"].forRoot(),
                 ],
                 providers: [
-                    _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"]
+                    _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
+                    {
+                        provide: _angular_common__WEBPACK_IMPORTED_MODULE_4__["LocationStrategy"],
+                        useClass: _angular_common__WEBPACK_IMPORTED_MODULE_4__["HashLocationStrategy"]
+                    }
                 ]
             }]
     }], null, null); })();
@@ -26495,13 +26503,13 @@ const routes = [
 class AppRoutingModule {
 }
 AppRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
-AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AppRoutingModule_Factory(t) { return new (t || AppRoutingModule)(); }, imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
+AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AppRoutingModule_Factory(t) { return new (t || AppRoutingModule)(); }, imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, { useHash: true })],
         _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppRoutingModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
-                imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
+                imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, { useHash: true })],
                 exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
             }]
     }], null, null); })();
@@ -26562,6 +26570,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_auth_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth/auth.module */ "./src/app/auth/auth.module.ts");
 /* harmony import */ var _admin_admin_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/admin.module */ "./src/app/admin/admin.module.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 
 
 
@@ -26571,11 +26580,13 @@ __webpack_require__.r(__webpack_exports__);
 
 // para el servidor apirest
 
+// problema del refresheo
+
 
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [], imports: [[
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [{ provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"] }], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["BrowserModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
             _admin_admin_module__WEBPACK_IMPORTED_MODULE_5__["AdminModule"],
@@ -26600,7 +26611,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
                     _auth_auth_module__WEBPACK_IMPORTED_MODULE_4__["AuthModule"],
                     _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                 ],
-                providers: [],
+                providers: [{ provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"] }],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"]]
             }]
     }], null, null); })();

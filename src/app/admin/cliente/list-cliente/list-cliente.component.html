@@ -120,6 +120,9 @@
                   <th>
                     ...
                   </th>
+                  <th>
+                    ...
+                  </th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of clientes">
@@ -150,7 +153,14 @@
                         type="button" class="btn btn-info">
                         <span class="material-icons">
                           edit
-                          </span>
+                        </span>
+                      </button>
+                    </td>
+                    <td class="text-primary">
+                      <button *ngIf="item.Condition !== 'admin'" (click)="eliminar(item.id)" type="button" class="btn btn-danger">
+                        <span class="material-icons">
+                          delete
+                        </span>
                       </button>
                     </td>
                   </tr>

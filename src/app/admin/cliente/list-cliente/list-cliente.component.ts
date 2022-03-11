@@ -35,6 +35,7 @@ export class ListClienteComponent implements OnInit {
   };
   dato;
   codigocliente;
+  mensaje;
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -147,5 +148,20 @@ export class ListClienteComponent implements OnInit {
       ]
     );
   }
-
+  eliminar(codigo) {
+    this.clienteService.deleteCliente(codigo).subscribe(
+      res => {
+        this.mensaje = res;
+        console.log(res);
+        window.location.reload();
+        // this.router.navigate(
+        //   [
+        //     'admin',
+        //     'cliente',
+        //     'list'
+        //   ]
+        // );
+      }
+    );
+  }
 }

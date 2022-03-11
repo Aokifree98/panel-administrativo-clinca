@@ -103,31 +103,35 @@ export class ListLaboratorioComponent implements OnInit {
     this.tipoService.deleteTipo(codigo).subscribe(
       res => {
         this.mensaje = res;
-        this.router.navigate(
-          [
-            'admin',
-            'laboratorio',
-            'list'
-          ]
-        );
+        console.log(res);
+        window.location.reload();
+        // this.router.navigate(
+        //   [
+        //     'admin',
+        //     'laboratorio',
+        //     'list'
+        //   ]
+        // );
       }
     );
-    window.location.reload();
+    // window.location.reload();
   }
   deletelab(codigo) {
     this.laboratorioService.deleteLaboratorio(codigo).subscribe(
       res => {
         this.mensaje = res;
-        this.router.navigate(
-          [
-            'admin',
-            'laboratorio',
-            'list'
-          ]
-        );
+        console.log(res);
+        window.location.reload();
+        // this.router.navigate(
+        //   [
+        //     'admin',
+        //     'laboratorio',
+        //     'list'
+        //   ]
+        // );
       }
     );
-    window.location.reload();
+
   }
 
 }

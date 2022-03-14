@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Cita } from 'src/app/models/Cita';
-import { Doctor } from 'src/app/models/doctor';
 import { Component, OnInit } from '@angular/core';
 import { ListCita } from 'src/app/models/listcita';
 import { CitaService } from 'src/app/services/cita.service';
@@ -14,7 +13,6 @@ import { CitaService } from 'src/app/services/cita.service';
 })
 export class HomeComponent implements OnInit {
   reservas: any = [];
-  reservasfiltradas: any = [];
   bandera = false;
   banderita = false;
   filtro = false;
@@ -125,7 +123,6 @@ export class HomeComponent implements OnInit {
   };
   ticket: any = this.reservadetail;
   mensaje1;
-  mensaje2;
   codigoreserva;
   fecha: Date;
   fechamin: Date;
@@ -246,22 +243,4 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  // details(code) {
-  //   this.seleccionado = code;
-  //   console.log(code);
-  //   this.reservaService.getCita(code).subscribe(
-  //     res => {
-  //       if (res) {
-  //         console.log(res);
-  //         this.ticket = res;
-  //         this.reserva = res;
-  //         this.toast.info('horario de la reserva elegida');
-  //       } else {
-  //         this.toast.error('no se encontro nada');
-  //       }
-  //     }
-  //   );
-  // }
-
-
 }

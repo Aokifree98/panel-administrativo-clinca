@@ -24,5 +24,5 @@ export interface ListCita {
   LaboratoryExam?: string,
   AdminId?: number,
   ClienteId?: number,
-  HorarioId?: number,
+  HorarioId?: number
 }

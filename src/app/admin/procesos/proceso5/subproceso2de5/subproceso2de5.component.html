@@ -4,94 +4,101 @@
       <div class="card-header card-header-primary">
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="descargar()">
+            <button type="submit" class="btn btn-primary btn-lg btn-block btn-pill" (click)="descargar()">
               Descargar Boleta
             </button>
           </div>
           <br>
-          <br>
-          <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
-            <div class="row">
-              <div class="col-12 col-md-3 col-lg-4">
-                <img id="logo" src="../../../../../assets/img/logo/logo.png">
-              </div>
-              <div class="col-12 col-md-9 col-lg-8 text-center">
-                <h1>
-                  Millan Gutierrez Servicios Generales E.I.R.L
-                </h1>
-                <p>
-                  De: Millan Camposano, Hector Vicehich
-                </p>
-                <p>
-                  Jr. Abancay #515 - Huancayo
-                </p>
-                <p>
-                  Celular: 951514883
-                </p>
-              </div>
-              <br>
-              <br>
-              <div class="col-12 col-md-4 col-lg-6">
-                <table class="table table-bordered table-light border-dark">
-                  <tr>
-                    <th>
-                      RUC : 20606975946
-                    </th>
-                  </tr>
-                  <tr class="table-success">
-                    <th>
-                      BOLETA DE VENTA
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>
-                      N° {{elcodigo}}
-                    </th>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-12 col-md-8 col-lg-6">
-                <p>
-                  Cliente : {{ticket.cliente.Name + '' + ticket.cliente.LastName}}
-                </p>
-                <p>
-                  Correo Cliente: {{ticket.cliente.Email}}
-                </p>
-                <p>
-                  Fecha : {{ticket.Appointment}}
-                </p>
-              </div>
-              <br>
-              <br>
-            </div>
-            <p class="text-right">
-              Total:  S/. {{ticket.Pay}}.00
-            </p>
-          </div>
-          <div class="col-lg-6 col-12">
-            <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="enableatender()">
-              Atender
-            </button>
-          </div>
-          <div class="col-lg-6 col-12">
-            <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="enablepostergar()">
-              Postergar
-            </button>
-          </div>
         </div>
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-6" *ngIf="atencion">
+          <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
+            <div class="col-12 fondo p-4">
+              <section class="container">
+                <div class="row">
+                  <article class="carta">
+                    <section class="date">
+                      <time datetime="23th feb">
+                        <h6>
+                          Codigo: {{ticket.id}}
+                        </h6>
+                        <span>
+                          Fecha: {{lafecha}}
+                        </span>
+                        Dia:  {{ticket.horario.Day + ' - ' + ticket.horario.hora.Turn}}  <br>  Cupo: {{ticket.horario.Cupo}}
+                        <br> Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                      </time>
+                    </section>
+                    <section class="carta-cont">
+                      <h1>
+                        Codigo: {{ticket.id}}
+                      </h1>
+                      <h3>
+                        Nombres y Apellidos:
+                        <!-- <br> -->
+                        {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                      </h3>
+                      <h3>
+                        {{ticket.Condition}}
+                      </h3>
+                      <div class="even-date">
+                        <time>
+                          <i class="fa fa-calendar"></i>
+                          <span>
+                            {{lafecha}}
+                          </span>
+                        </time>
+                      </div>
+                      <div class="even-info">
+                        <h4>
+                          Especialidad: {{ticket.horario.especialista.especialidad.Name}}
+                        </h4>
+                        <h5>
+                          Doctor: {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+                        </h5>
+                        <h6>
+                          Dia:  {{ticket.horario.Day + ' -- ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                        </h6>
+                      </div>
+                      <br>
+
+                    </section>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <button type="submit"
+              (click)="enableatender()"
+              data-toggle="modal"
+              data-target="#ModalSigVital"
+              class="btn btn-primary btn-pill">
+              Signos Vitales
+            </button>
+            <!-- <button type="submit"
+              class="btn btn-outline-success btn-lg btn-block btn-pill"
+              (click)="enableatender()"
+              data-toggle="modal"
+              data-target="#ModalSigVital">
+              Atender
+            </button> -->
+          </div>
+          <!-- <div class="col-12 col-lg-6" *ngIf="atencion">
             <div class="card">
               <div class="card-header">
-                <button (click)="completado()" type="button" class="btn btn-pill btn-block btn-info">
+                <button type="button"
+                  (click)="completado()"
+                  class="btn btn-pill btn-block btn-info"
+                  data-toggle="modal"
+                  data-target="#ModalSigVital">
                   Atender
                 </button>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-6" *ngIf="postergacion">
+          </div> -->
+          <!-- <div class="col-12 col-lg-6" *ngIf="postergacion">
             <div class="card">
               <div class="card-header card-header-primary">
                 <h3 class="text-center">
@@ -123,8 +130,101 @@
                 </form>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalSigVital" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Signos Vitales
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="atencion">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Precion arterial:
+              </label>
+              <input
+                name="reservita.BloodPressure"
+                [(ngModel)]="reservita.BloodPressure"
+                required minlength="3"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="HeartRate" class="col-md-6 col-form-label">
+                Frecuencia de Cardiaca:
+              </label>
+              <input name="reservita.HeartRate"
+                [(ngModel)]="reservita.HeartRate"
+                required minlength="5" tabindex="2"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BreathingFrequency" class="col-md-6 col-form-label">
+                Frecuencia de respiración:
+              </label>
+              <input name="reservita.BreathingFrequency"
+                [(ngModel)]="reservita.BreathingFrequency"
+                required minlength="5" tabindex="2"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Temperature" class="col-md-6 col-form-label">
+                Temperatura(C°):
+              </label>
+              <input name="reservita.Temperature"
+                [(ngModel)]="reservita.Temperature"
+                required minlength="5" tabindex="2"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Saturation" class="col-md-6 col-form-label">
+                Oxigenación(SpO2%):
+              </label>
+              <input name="reservita.Saturation"
+                [(ngModel)]="reservita.Saturation"
+                required minlength="5" tabindex="2"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" *ngIf="atencion">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+          Guardar
+        </button>
       </div>
     </div>
   </div>

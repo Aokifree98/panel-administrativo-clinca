@@ -123,12 +123,16 @@ export class Subproceso1de4Component implements OnInit {
   sebusco = false;
   dato = '';
   codigoreserva;
+  dia;
+  mes;
+  anio;
+  stringdia;
+  stringmes;
+  lafecha;
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private reservaService: CitaService,
-    // private itemService: ItemService,
-    private activatedRoute: ActivatedRoute,
   ) { }
   // tslint:disable-next-line: typedef
   buscar(codigito) {
@@ -138,7 +142,24 @@ export class Subproceso1de4Component implements OnInit {
         this.reservita = res;
         const codigo = this.ticket.id;
         this.codigoreserva = codigo;
-        this.toastr.success('su boleta');
+        this.toastr.success('su ticket');
+        this.sebusco = true;
+        const fecha: Date = new Date(this.ticket.Appointment);
+        this.dia = new Date(fecha).getDate() + 1;
+        this.mes = new Date(fecha).getMonth() + 1;
+        this.anio = new Date(fecha).getFullYear().toString();
+        if (this.dia < 10) {
+          this.stringdia = '0' + this.dia.toString();
+        } else {
+          this.stringdia = this.dia.toString();
+        }
+        if (this.mes < 10) {
+          this.stringmes = '0' + this.mes.toString();
+        } else {
+          this.stringmes = this.mes.toString();
+        }
+        const fechastring = this.stringdia + '/' + this.stringmes + '/' + this.anio;
+        this.lafecha = fechastring;
       },
       err => {
         console.log(err);
@@ -153,6 +174,12 @@ export class Subproceso1de4Component implements OnInit {
       resupdatereserva => {
         if (resupdatereserva !== []) {
           this.mensaje1 = resupdatereserva;
+          this.router.navigate(
+            [
+              'admin',
+              'home'
+            ]
+          );
         }
       },
       err => {

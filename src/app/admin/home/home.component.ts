@@ -1,12 +1,11 @@
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Cita } from 'src/app/models/Cita';
 import { Doctor } from 'src/app/models/doctor';
 import { Component, OnInit } from '@angular/core';
 import { ListCita } from 'src/app/models/listcita';
 import { CitaService } from 'src/app/services/cita.service';
-import { EspecialistaService } from 'src/app/services/especialista.service';
-import { Especialista } from 'src/app/models/especialista';
 
 @Component({
   selector: 'app-home',
@@ -14,29 +13,12 @@ import { Especialista } from 'src/app/models/especialista';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  hoy = new Date();
-  numerodia;
-  especialistas: any = [];
-  especialistasfiltrados;
   reservas: any = [];
   reservasfiltradas: any = [];
-  atendido: any = [];
-  controlador: any = [];
   bandera = false;
-  interruptor = false;
-  seleccionado;
-  doctor: Doctor = {
-    id: 0,
-    Name: '',
-    LastName: '',
-    MedicalSchoolNumber: '',
-    Email: '',
-    Password: '',
-    Photo: '',
-    Code: '',
-    Condition: ''
-  };
-  reserva: ListCita = {
+  banderita = false;
+  filtro = false;
+  reservita: ListCita = {
     id: 0,
     Appointment: new Date(),
     Pay: '',
@@ -141,126 +123,129 @@ export class HomeComponent implements OnInit {
       }
     }
   };
-  ticket: any = this.reserva;
-  especialistadetalle: Especialista = {
-    id: 0,
-    Turn: '',
-    EspecialidadId: 0,
-    DoctorId: 0,
-    especialidad: {
-      id: 0,
-      Name: '',
-      Image: '',
-      Price: 0
-    },
-    doctor: {
-      id: 0,
-      Name: '',
-      LastName: '',
-      MedicalSchoolNumber: '',
-      Email: '',
-      Photo: ''
-    }
-  };
-  detailespecialista: any = this.especialistadetalle;
+  ticket: any = this.reservadetail;
   mensaje1;
   mensaje2;
+  codigoreserva;
+  fecha: Date;
+  fechamin: Date;
+  fechamax: Date;
+  stringmax;
+  stringmin;
+  fechastringvalue;
+  hoystring;
   constructor(
+    private pd: DatePipe,
     private router: Router,
     private toast: ToastrService,
-    private reservaService: CitaService,
-    private especialistaService: EspecialistaService,
+    private reservaService: CitaService
   ) { }
-  // tslint:disable-next-line: typedef
-  fechadeldia() {
-    const d = this.hoy.getDate();
-    const m = this.hoy.getMonth() + 1;
-    const yyyy = this.hoy.getFullYear();
-    let dd: any;
-    let mm: any;
-    if (d < 10) {
-      dd = '0' + d;
-    } else {
-      dd = d;
-    }
-    if (m < 10) {
-      mm = '0' + m;
-    } else {
-      mm = m;
-    }
-    // const cadena = yyyy + '-' + mm + '-' + dd;
-    const cadena =  '2022-02-25';
-    console.log(cadena);
-    console.log(cadena);
-    const a2 = new Date(cadena).getTime();
-    console.log(a2);
-    this.numerodia = a2;
-  }
-  ngOnInit(): void {
-    this.fechadeldia();
-    this.especialistaService.getEspecialistas().subscribe(
-      res => {
-        this.especialistas = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
 
+  ngOnInit(): void {
+    this.fechamin = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1);
+    this.fechamax = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+    this.stringmin = this.pd.transform(this.fechamin, 'yyyy-MM-dd');
+    this.stringmax = this.pd.transform(this.fechamax, 'yyyy-MM-dd');
   }
-  // // tslint:disable-next-line: typedef
-  especialistsselected(codigo) {
-    const especialista = codigo;
-    this.especialistaService.getEspecialista(especialista).subscribe(
-      res => {
-        this.detailespecialista = res;
-        this.toast.success('Citas del Especialista');
-      },
-      err => {
-        console.log('Error en la Api');
-      }
-    );
-    this.reservaService.getCitasfiltradas(especialista).subscribe(
-      res => {
-        this.reservas = res;
-        const array = this.reservas;
-        const parametrito = this.numerodia;
-        const filtro: any = [];
-        console.log(parametrito);
-        console.log(array);
-        for (const item of array) {
-          const fecha = item.Appointment;
-          const numerofecha = new Date(fecha).getTime();
-          console.log(numerofecha);
-          if (numerofecha === parametrito) {
-            console.log('se encontro igualdad');
-            filtro.push(item);
-            this.reservasfiltradas = filtro;
-          }
+
+  filtrohoy() {
+    const fechita = new Date();
+    const dia = fechita.getDate() + 1;
+    const mes = fechita.getMonth() + 1;
+    const anio = fechita.getFullYear().toString();
+    let diatring: string;
+    let mestring: string;
+    if (dia < 10) {
+      diatring = '0' + dia.toString();
+    } else {
+      diatring = dia.toString();
+    }
+    if (mes < 10) {
+      mestring = '0' + mes.toString();
+    } else {
+      mestring = mes.toString();
+    }
+    const fechastring = anio + '-' + mestring + '-' + diatring;
+    this.hoystring = fechastring;
+  }
+  getreservas() {
+    const fechita = new Date(this.fecha);
+    const dia = fechita.getDate() + 1;
+    const mes = fechita.getMonth() + 1;
+    const anio = fechita.getFullYear().toString();
+    let diatring: string;
+    let mestring: string;
+    if (dia < 10) {
+      diatring = '0' + dia.toString();
+    } else {
+      diatring = dia.toString();
+    }
+    if (mes < 10) {
+      mestring = '0' + mes.toString();
+    } else {
+      mestring = mes.toString();
+    }
+    const fechastring = anio + '-' + mestring + '-' + diatring;
+    this.fechastringvalue = fechastring;
+    console.log(fechastring);
+    if (this.fechastringvalue === this.hoystring) {
+      this.filtro = true;
+    } else {
+      this.filtro = false;
+    }
+    this.reservaService.getHome(fechastring).subscribe(
+      rescitas => {
+        console.log(rescitas);
+        if (Object.entries(rescitas).length > 0) {
+          this.toast.info('Citas de la fecha elegida');
+          this.reservas = rescitas;
+          this.bandera = true;
+        } else {
+          this.bandera = false;
         }
-        console.log(this.reservasfiltradas);
-        this.interruptor = true;
-      },
-      err => {
-        console.log(err);
+      }, err => {
+        this.toast.error('Error Api Citas Home');
       }
     );
   }
 
   detail(codigo) {
-    const parametro = codigo;
-    this.reservaService.getCita(parametro).subscribe(
-      res => {
-        this.reserva = res;
-        this.ticket = res;
-        this.toast.success('Detalles de la Cita');
-      },
-      err => {
-        this.toast.error('Error en el Api');
+    this.reservaService.getCita(codigo).subscribe(
+      rescita => {
+        if (rescita !== null) {
+          this.reservita = rescita;
+          this.ticket = rescita;
+          this.banderita = true;
+          this.codigoreserva = this.reservita.id;
+          this.toast.success('Procedamos a atender');
+        } else {
+          this.banderita = false;
+          this.toast.error('datos no obtenidos de la reserva');
+        }
       }
     );
   }
-
+  completado() {
+    const elcodigo = this.codigoreserva;
+    // decidir estado
+    this.reservita.Condition = 'por atender';
+    this.reservaService.updateCita(elcodigo, this.reservita).subscribe(
+      resupdatereserva => {
+        if (resupdatereserva) {
+          this.mensaje1 = resupdatereserva;
+          this.router.navigate(
+            [
+              'admin',
+              'home'
+            ]
+          );
+        }
+      },
+      err => {
+        console.log('error al actualizar');
+      }
+    );
+  }
   // details(code) {
   //   this.seleccionado = code;
   //   console.log(code);
@@ -278,36 +263,5 @@ export class HomeComponent implements OnInit {
   //   );
   // }
 
-  atender(codigo) {
-    this.seleccionado = codigo;
-    this.reservaService.getCita(this.seleccionado).subscribe(
-      rescita => {
-        if (rescita) {
-          this.reserva = rescita;
-          this.reserva.Condition = 'por atender';
-          this.reservaService.updateCita(this.seleccionado, this.reserva).subscribe(
-            resupdate => {
-              if (resupdate) {
-                this.mensaje2 = resupdate;
-                this.router.navigate(
-                  [
-                    'admin',
-                    'procesos',
-                    'proceso1',
-                    'subproceso2',
-                    this.seleccionado
-                  ]
-                );
-                this.toast.success('Procedamos a atender');
-              } else {
-                this.toast.error('error al actualizar la reserva');
-              }
-            }
-          );
-        } else {
-          this.toast.error('datos no obtenidos de la reserva');
-        }
-      }
-    );
-  }
+
 }

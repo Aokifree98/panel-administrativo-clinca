@@ -652,7 +652,7 @@ const routes: Routes = [
                 component: Subproceso1de5Component
               },
               {
-                path: 'subproceso2',
+                path: 'subproceso2/:id',
                 component: Subproceso2de5Component
               }
             ]

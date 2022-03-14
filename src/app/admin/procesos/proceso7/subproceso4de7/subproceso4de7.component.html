@@ -11,121 +11,65 @@
       </div>
       <div class="card-body">
         <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
-          <div class="row">
-            <div class="col-12 col-md-3 col-lg-4">
-              <img id="logo" src="../../../../../assets/img/logo.png">
-            </div>
-            <div class="col-12 col-md-9 col-lg-8 text-center">
-              <h3>
-                Millan Gutierrez Servicios Generales E.I.R.L
-              </h3>
-              <p>
-                De: Millan Camposano, Hector Vicehich
-              </p>
-              <p>
-                Jr. Abancay #515 - Huancayo
-              </p>
-              <p>
-                Celular: 951514883
-              </p>
-            </div>
-            <br>
-            <br>
-            <div class="col-12 col-md-4 col-lg-6">
-              <table class="table table-bordered table-light border-dark text-center">
-                <tr>
-                  <th>
-                    RUC : 20606975946
-                  </th>
-                </tr>
-                <tr class="colorcito">
-                  <th>
-                    BOLETA DE VENTA
-                  </th>
-                </tr>
-                <tr>
-                  <th>
-                    N° {{elcodigo}}
-                  </th>
-                </tr>
-              </table>
-            </div>
-            <div class="col-12 col-md-8 col-lg-6">
-              <p>
-                Cliente : {{ticket.cliente.Name + '' + ticket.cliente.LastName}}
-              </p>
-              <p>
-                Correo Cliente: {{ticket.cliente.Email}}
-              </p>
-              <p>
-                Fecha : {{lafecha}}
-              </p>
-            </div>
-            <br>
-            <div *ngIf="ticket.Condition === 'por pagar'" class="col-12 text-center">
-              <h2 class="text-danger">
-                El plazo para pagar es de 10 horas una vez realizada la reserva.
-                <br>
-                De lo contrario se eliminara la reserva.
-              </h2>
-              <h1>
-                Cuenta Interbancaria:  04-074-025574
-              </h1>
-            </div>
-            <div class="col-12 p-1">
-              <div class="table-responsive">
-                <table class="table table-bordered border-primary">
-                  <thead class="colorcito">
-                    <tr class="text-center">
-                      <th>
-                        Servicio
-                      </th>
-                      <th>
-                        Detalle
-                      </th>
-                      <th>
-                        Precio
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="text-center">
-                      <td>
-                        <h6 *ngIf="ticket.Condition !== 'por pagar'" class="text-center">
-                          {{ticket.Condition}}
-                        </h6>
-                        <h6 *ngIf="ticket.Condition === 'por pagar'" class="text-center">
-                          Reserva por Pagar
-                        </h6>
-                      </td>
-                      <td>
+          <div  class="col-12 fondo p-4">
+            <section class="container">
+              <div class="row">
+                <article class="carta">
+                  <section class="date">
+                    <time datetime="23th feb">
+                      <h6>
+                        Codigo: {{ticket.id}}
+                      </h6>
+                      <span>
+                        Fecha: {{lafecha}}
+                      </span>
+                      Dia:  {{ticket.horario.Day + ' - ' + ticket.horario.hora.Turn}}  <br>  Cupo: {{ticket.horario.Cupo}}
+                      <br> Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                    </time>
+                  </section>
+                  <section class="carta-cont">
+                    <h1>
+                      Codigo: {{ticket.id}}
+                    </h1>
+                    <h3>
+                      Nombres y Apellidos:
+                      <!-- <br> -->
+                      {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                    </h3>
+                    <h3>
+                      {{ticket.Condition}}
+                    </h3>
+                    <div class="even-date">
+                      <time>
+                        <i class="fa fa-calendar"></i>
+                        <span>
+                          {{lafecha}}
+                        </span>
+                      </time>
+                    </div>
+                    <div class="even-info">
+                      <h4>
                         Especialidad: {{ticket.horario.especialista.especialidad.Name}}
-                        <br>
+                      </h4>
+                      <h5>
                         Doctor: {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
-                        <br>
-                        Dia:  {{ticket.horario.Day + ' --> ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
-                      </td>
-                      <td >
-                        <p *ngIf="ticket.Condition !== 'por pagar'">
-                          s/. {{ticket.Pay}}
-                        </p>
-                        <p *ngIf="ticket.Condition === 'por pagar'">
-                          s/. {{ticket.horario.especialista.especialidad.Price}}
-                        </p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </h5>
+                      <h6>
+                        Dia:  {{ticket.horario.Day + ' -- ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                      </h6>
+                    </div>
+                    <br>
+                    <button type="submit"
+                      data-toggle="modal"
+                      data-target="#ModalSigVital"
+                      class="btn btn-primary btn-pill">
+                      Signos Vitales
+                    </button>
+                  </section>
+                </article>
               </div>
-            </div>
-            <br>
+            </section>
           </div>
-          <p *ngIf="ticket.Condition !== 'por pagar'" class="text-right">
-            Total:  S/. {{ticket.Pay}}.00
-          </p>
-          <p *ngIf="ticket.Condition === 'por pagar'" class="text-right">
-            Por Cancelar:  S/. {{ticket.horario.especialista.especialidad.Price}}
-          </p>
         </div>
       </div>
     </div>

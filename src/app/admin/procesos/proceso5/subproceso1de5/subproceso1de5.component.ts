@@ -33,6 +33,7 @@ export class Subproceso1de5Component implements OnInit {
     Condition: '',
     Code: ''
   };
+  sinrespuesta = false;
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -58,6 +59,7 @@ export class Subproceso1de5Component implements OnInit {
               console.log(resreservas);
             } else {
               this.toastr.info('no tiene reservas');
+              this.sinrespuesta = true;
             }
           }
         );
@@ -79,13 +81,14 @@ export class Subproceso1de5Component implements OnInit {
         this.reservaService.getClientBooking(codigo).subscribe(
           // tslint:disable-next-line: no-shadowed-variable
           resreservas => {
-            if (resreservas) {
+            if (resreservas !== []) {
               this.clientbooking = resreservas;
               this.toastr.success('sus reservas :)');
               this.respuesta = true;
               console.log(resreservas);
             } else {
               this.toastr.info('no tiene reservas');
+              this.sinrespuesta = true;
             }
           }
         );
@@ -104,7 +107,7 @@ export class Subproceso1de5Component implements OnInit {
         'procesos',
         'proceso5',
         'subproceso2',
-        codigo,
+        codigo
       ]
     );
   }

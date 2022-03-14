@@ -131,6 +131,12 @@ export class Subproceso2de5Component implements OnInit {
   datito = new Date();
   elcodigo;
   cantidad = 0;
+  dia;
+  mes;
+  anio;
+  stringdia;
+  stringmes;
+  lafecha;
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -186,19 +192,36 @@ export class Subproceso2de5Component implements OnInit {
           this.ticket = res;
           this.reservita = res;
           const codigo = this.ticket.id;
-          if (codigo < 10) {
-            this.elcodigo = '00000' + codigo.toString();
-          } else if (codigo < 100) {
-            this.elcodigo = '0000' + codigo.toString();
-          } else if (codigo < 1000) {
-            this.elcodigo = '000' + codigo.toString();
-          } else if (codigo < 10000) {
-            this.elcodigo = '00' + codigo.toString();
-          } else if (codigo < 100000) {
-            this.elcodigo = '0' + codigo.toString();
+          const fecha: Date = new Date(this.ticket.Appointment);
+          this.dia = new Date(fecha).getDate() + 1;
+          this.mes = new Date(fecha).getMonth() + 1;
+          this.anio = new Date(fecha).getFullYear().toString();
+          if (this.dia < 10) {
+            this.stringdia = '0' + this.dia.toString();
           } else {
-            this.elcodigo = codigo.toString();
+            this.stringdia = this.dia.toString();
           }
+          if (this.mes < 10) {
+            this.stringmes = '0' + this.mes.toString();
+          } else {
+            this.stringmes = this.mes.toString();
+          }
+          const fechastring = this.stringdia + '/' + this.stringmes + '/' + this.anio;
+          this.lafecha = fechastring;
+          this.toastr.success('su ticket');
+          // if (codigo < 10) {
+          //   this.elcodigo = '00000' + codigo.toString();
+          // } else if (codigo < 100) {
+          //   this.elcodigo = '0000' + codigo.toString();
+          // } else if (codigo < 1000) {
+          //   this.elcodigo = '000' + codigo.toString();
+          // } else if (codigo < 10000) {
+          //   this.elcodigo = '00' + codigo.toString();
+          // } else if (codigo < 100000) {
+          //   this.elcodigo = '0' + codigo.toString();
+          // } else {
+          //   this.elcodigo = codigo.toString();
+          // }
           this.codigoreserva = codigo;
           this.toastr.success('su boleta');
         },
@@ -213,6 +236,12 @@ export class Subproceso2de5Component implements OnInit {
       resupdatereserva => {
         if (resupdatereserva !== []) {
           this.mensaje1 = resupdatereserva;
+          this.router.navigate(
+            [
+              'admin',
+              'home'
+            ]
+          );
         }
       },
       err => {

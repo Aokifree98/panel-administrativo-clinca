@@ -82,6 +82,16 @@ export class Subproceso2de7Component implements OnInit {
       name: 'Femenino'
     }
   ];
+  tipo: Genero [] = [
+    {
+      id: 1,
+      name: 'normal'
+    },
+    {
+      id: 2,
+      name: 'medicina del dolor'
+    }
+  ];
   estado: Genero [] = [
     {
       id: 1,
@@ -230,6 +240,11 @@ export class Subproceso2de7Component implements OnInit {
   onOptionsSelected(event) {
     const value = event.target.value;
     this.cliente.Gender = value;
+    console.log(value);
+  }
+  onOptionsSelectedType(event) {
+    const value = event.target.value;
+    this.reserva.Type = value;
     console.log(value);
   }
   onOptionsSelectedStatus(event) {

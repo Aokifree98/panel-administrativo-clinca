@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
     BreathingFrequency: '',
     Temperature: '',
     Saturation: '',
+    SickTime: '',
+    CurrentEpisode: '',
+    StartWay: '',
     SignsandSymptoms: '',
     DescriptionProblem: '',
     SurgicalHistory: '',
@@ -56,6 +59,9 @@ export class HomeComponent implements OnInit {
     BreathingFrequency: '',
     Temperature: '',
     Saturation: '',
+    SickTime: '',
+    CurrentEpisode: '',
+    StartWay: '',
     SignsandSymptoms: '',
     DescriptionProblem: '',
     SurgicalHistory: '',
@@ -143,6 +149,7 @@ export class HomeComponent implements OnInit {
     this.fechamax = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
     this.stringmin = this.pd.transform(this.fechamin, 'yyyy-MM-dd');
     this.stringmax = this.pd.transform(this.fechamax, 'yyyy-MM-dd');
+    this.filtrohoy();
   }
 
   filtrohoy() {

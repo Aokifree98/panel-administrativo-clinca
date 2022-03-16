@@ -169,7 +169,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          Signos Vitales
+          Signos Vitales y Mas
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -179,6 +179,51 @@
         <form class="p-4">
           <div class="form-group">
             <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Referencia:
+              </label>
+              <input
+                name="reservita.Referred"
+                [(ngModel)]="reservita.Referred"
+                required minlength="3"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Acompaniante:
+              </label>
+              <input
+                name="reservita.Companion"
+                [(ngModel)]="reservita.Companion"
+                required minlength="3"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Parentesco:
+              </label>
+              <input
+                name="reservita.Relationship"
+                [(ngModel)]="reservita.Relationship"
+                required minlength="3"
+                tabindex="3"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-6 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
               <label for="BloodPressure" class="col-md-6 col-form-label">
                 Precion arterial:
               </label>
@@ -186,7 +231,7 @@
                 name="reservita.BloodPressure"
                 [(ngModel)]="reservita.BloodPressure"
                 required minlength="3"
-                autofocus tabindex="1"
+                tabindex="4"
                 placeholder="........."
                 type="text"
                 class="form-control col-md-4 text-center">
@@ -199,7 +244,7 @@
               </label>
               <input name="reservita.HeartRate"
                 [(ngModel)]="reservita.HeartRate"
-                required minlength="5" tabindex="2"
+                required minlength="5" tabindex="5"
                 placeholder="........."
                 type="text" class="form-control col-md-4 text-center">
             </div>
@@ -211,7 +256,7 @@
               </label>
               <input name="reservita.BreathingFrequency"
                 [(ngModel)]="reservita.BreathingFrequency"
-                required minlength="5" tabindex="2"
+                required minlength="5" tabindex="6"
                 placeholder="........."
                 type="text" class="form-control col-md-4 text-center">
             </div>
@@ -223,7 +268,7 @@
               </label>
               <input name="reservita.Temperature"
                 [(ngModel)]="reservita.Temperature"
-                required minlength="5" tabindex="2"
+                required minlength="5" tabindex="7"
                 placeholder="........."
                 type="text" class="form-control col-md-4 text-center">
             </div>
@@ -235,7 +280,7 @@
               </label>
               <input name="reservita.Saturation"
                 [(ngModel)]="reservita.Saturation"
-                required minlength="5" tabindex="2"
+                required minlength="5" tabindex="8"
                 placeholder="........."
                 type="text" class="form-control col-md-4 text-center">
             </div>
@@ -243,10 +288,10 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button type="button" tabindex="10" class="btn btn-secondary" data-dismiss="modal">
           Cancelar
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+        <button type="button" tabindex="9" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
           Guardar
         </button>
       </div>

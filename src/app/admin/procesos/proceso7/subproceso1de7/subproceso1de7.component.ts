@@ -72,25 +72,7 @@ export class Subproceso1de7Component implements OnInit {
   select(codigo) {
     const fechita = new Date(this.fecha);
     const diasemanal = fechita.getDay();
-    const dia = fechita.getDate() + 1;
-    const mes = fechita.getMonth() + 1;
-    const anio = fechita.getFullYear().toString();
-    let diatring: string;
-    let mestring: string;
-    if (dia < 10) {
-      diatring = '0' + dia.toString();
-    } else {
-      diatring = dia.toString();
-    }
-    if (mes < 10) {
-      mestring = '0' + mes.toString();
-    } else {
-      mestring = mes.toString();
-    }
-    const fechastring = anio + '-' + mestring + '-' + diatring;
-    this.fechastringvalue = fechastring;
-    console.log(fechastring);
-    console.log(diasemanal);
+    this.fechastringvalue = fechita.toISOString().split('T')[0];
     const dias =
     [
       'lunes',
@@ -103,7 +85,9 @@ export class Subproceso1de7Component implements OnInit {
     ];
     const namedia = dias[diasemanal];
     const parametro = codigo;
-    this.reservaService.getCitasFiltro(namedia, parametro).subscribe(
+    const lafechita = this.fechastringvalue;
+    console.log(namedia);
+    this.reservaService.getDisponibilidad(lafechita, parametro).subscribe(
       reservas1 => {
         this.reservasdia = reservas1;
         console.log(this.reservasdia);

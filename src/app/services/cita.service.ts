@@ -33,6 +33,10 @@ export class CitaService {
     return this.http.get(`${this.apiUrlcita}/search/topay`);
   }
 
+  getDisponibilidad(lafecha: string, especialista: string | number) {
+    return this.http.get(`${this.apiUrlcita}/disponibilidad/${lafecha}/${especialista}`);
+  }
+
   getHome(lafecha: string) {
     return this.http.get(`${this.apiUrlcita}/home/${lafecha}`);
   }

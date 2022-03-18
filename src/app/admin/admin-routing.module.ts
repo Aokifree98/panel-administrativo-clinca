@@ -609,11 +609,11 @@ const routes: Routes = [
                 component: Subproceso1de2Component
               },
               {
-                path: 'subproceso2',
+                path: 'subproceso2/:id/:fecha',
                 component: Subproceso2de2Component
               },
               {
-                path: 'subproceso3',
+                path: 'subproceso3/:id',
                 component: Subproceso3de2Component
               },
             ]
@@ -686,14 +686,14 @@ const routes: Routes = [
                 component: Subproceso4de7Component
               },
             ]
-          },
-          {
-            path: '**',
-            redirectTo: 'home',
-            pathMatch: 'prefix'
-          },
+          }
         ]
-      }
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'prefix'
+      },
     ],
   },
 ];

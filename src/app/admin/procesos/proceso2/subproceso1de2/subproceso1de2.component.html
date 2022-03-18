@@ -22,7 +22,7 @@
           </div>
           <div>
             <button type="submit"  (click)="buscar(dato)"
-              class="btn btn-outline-success btn-lg btn-block btn-pill"
+              class="btn btn-primary btn-lg btn-block btn-pill"
               [disabled]="(dato === '')? true:false">
               buscar
             </button>
@@ -33,15 +33,75 @@
         <div class="col-12" *ngIf="boleta">
           <div class="container">
             <div class="row">
-              <div class="col-12">
+              <!-- <div class="col-12">
                 <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="descargar()">
                   Descargar Boleta
                 </button>
+              </div> -->
+              <br>
+              <br>
+              <div *ngIf="sebusco" class="col-12 fondo p-4">
+                <section class="container">
+                  <div class="row">
+                    <article class="carta">
+                      <section class="date">
+                        <time datetime="23th feb">
+                          <h6>
+                            Codigo: {{ticket.id}}
+                          </h6>
+                          <span>
+                            Fecha: {{lafecha}}
+                          </span>
+                          Dia:  {{ticket.horario.Day + ' - ' + ticket.horario.hora.Turn}}  <br>  Cupo: {{ticket.horario.Cupo}}
+                          <br> Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                        </time>
+                      </section>
+                      <section class="carta-cont">
+                        <h1>
+                          Codigo: {{ticket.id}}
+                        </h1>
+                        <h3>
+                          Nombres y Apellidos:
+                          <!-- <br> -->
+                          {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                        </h3>
+                        <h3>
+                          {{ticket.Condition}}
+                        </h3>
+                        <div class="even-date">
+                          <time>
+                            <i class="fa fa-calendar"></i>
+                            <span>
+                              {{lafecha}}
+                            </span>
+                          </time>
+                        </div>
+                        <div class="even-info">
+                          <h4>
+                            Especialidad: {{ticket.horario.especialista.especialidad.Name}}
+                          </h4>
+                          <h5>
+                            Doctor: {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+                          </h5>
+                          <h6>
+                            Dia:  {{ticket.horario.Day + ' -- ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                          </h6>
+                        </div>
+                        <br>
+                        <!-- <button type="submit"
+                          data-toggle="modal"
+                          data-target="#ModalSigVital"
+                          class="btn btn-primary btn-pill">
+                          Signos Vitales
+                        </button> -->
+                      </section>
+                    </article>
+                  </div>
+                </section>
               </div>
-              <br>
-              <br>
-              <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
-                <div class="row">
+              <!-- <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
+              </div> -->
+                <!-- <div class="row">
                   <div class="col-12 col-md-3 col-lg-4">
                     <img id="logo" src="../../../../../assets/img/logo/logo.png">
                   </div>
@@ -94,8 +154,8 @@
                   <br>
                   <br>
                 </div>
-                <p class="text-right">Total:  S/. {{ticket.Pago}}.00</p>
-              </div>
+                <p class="text-right">Total:  S/. {{ticket.Pago}}.00</p> -->
+
             </div>
           </div>
           <div class="container">
@@ -105,7 +165,7 @@
                   <label class="form-col-form-label" for="datito">
                       Fecha de Postergacion
                   </label>
-                  <input type="date" class="form-control" id="datito" name="datito" [min]="fechaActual" [(ngModel)]="datito" required>
+                  <input type="date" class="form-control" id="datito" name="datito" [min]="stringmin" [max]="stringmax" [(ngModel)]="datito" required>
                   <div class="valid-feedback">
                     Campo rellenado.
                   </div>
@@ -114,7 +174,7 @@
                   </div>
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-pill" (click)="postergar(datito)"
+                  <button type="submit" class="btn btn-primary btn-lg btn-block btn-pill" (click)="postergar(datito)"
                     [disabled]="(datito === fechaActual)? true:false">
                     Postergar
                   </button>

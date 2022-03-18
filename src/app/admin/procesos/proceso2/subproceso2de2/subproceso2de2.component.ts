@@ -1,3 +1,4 @@
+import { Cita } from 'src/app/models/Cita';
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from 'src/app/models/admin';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CitaService } from 'src/app/services/cita.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { HorarioService } from 'src/app/services/horario.service';
-import { EspecialistaService } from 'src/app/services/especialista.service';
 
 @Component({
   selector: 'app-subproceso2de2',
@@ -14,14 +14,7 @@ import { EspecialistaService } from 'src/app/services/especialista.service';
   styleUrls: ['./subproceso2de2.component.css']
 })
 export class Subproceso2de2Component implements OnInit {
-  horario: any = [];
-  horariofiltrado: any = [];
-  reservas: any = [];
-  reservasdia: any = [];
-  filtrada: any = [];
-  numerofecha = new Date().getTime();
-  dia;
-  reserva: ListCita = {
+    reserva: ListCita = {
     id: 0,
     Appointment: new Date(),
     Pay: '',
@@ -79,11 +72,89 @@ export class Subproceso2de2Component implements OnInit {
     ClienteId: 0,
     HorarioId: 0
   };
-  numerocliente;
-  codigoespecialista;
-  codigoreserva;
-  mensaje: any = [];
-  mensajito;
+  detailreserva: Cita = {
+    id: 0,
+    Appointment: new Date(),
+    Pay: '',
+    Type: '',
+    Condition: '',
+    Referred: '',
+    Companion: '',
+    Relationship: '',
+    BloodPressure: '',
+    HeartRate: '',
+    BreathingFrequency: '',
+    Temperature: '',
+    Saturation: '',
+    SickTime: '',
+    CurrentEpisode: '',
+    StartWay: '',
+    SignsandSymptoms: '',
+    DescriptionProblem: '',
+    SurgicalHistory: '',
+    MedicalHistory: '',
+    AllergicHistory: '',
+    PhysicalExam: '',
+    Diagnosis: '',
+    LaboratoryExam: '',
+    AdminId: 0,
+    ClienteId: 0,
+    HorarioId: 0,
+    admin: {
+      id: 0,
+      Name: '',
+      LastName: '',
+      Phone: '',
+      Email: '',
+      Photo: ''
+    },
+    cliente: {
+      id: 0,
+      Name: '',
+      LastName: '',
+      BirthDate: new Date(),
+      Job: '',
+      Direction: '',
+      Phone: '',
+      Gender: '',
+      CivilStatus: '',
+      DocumentNumber: '',
+      Email: '',
+      Photo: ''
+    },
+    horario: {
+      id: 0,
+      Day: '',
+      Cupo: 0,
+      EspecialistaId: 0,
+      HoraId: 0,
+      especialista: {
+        id: 0,
+        Turn: '',
+        EspecialidadId: 0,
+        DoctorId: 0,
+        especialidad: {
+          id: 0,
+          Name: '',
+          Price: 0
+        },
+        doctor: {
+          id: 0,
+          Name: '',
+          LastName: '',
+          Email: '',
+        },
+      },
+      hora: {
+        id: 0,
+        Turn: '',
+        Interval: '',
+        Start: '',
+        End: ''
+      }
+    }
+  };
+  ticket: any = this.detailreserva;
   admin: Admin = {
     id: 0,
     Name: '',
@@ -97,6 +168,20 @@ export class Subproceso2de2Component implements OnInit {
     Code: ''
   };
   codigoadmin;
+  horario: any = [];
+  horariofiltrado: any = [];
+  reservas: any = [];
+  reservasdia: any = [];
+  filtrada: any = [];
+  filtro1horario: any = [];
+  filtro2horario: any = [];
+  numerofecha = new Date().getTime();
+  dia;
+  numerocliente;
+  codigoespecialista;
+  codigoreserva;
+  mensaje: any = [];
+  mensajito;
   lasreservas: any = [];
   seleccionados: any = [];
   pago = 0;
@@ -107,6 +192,9 @@ export class Subproceso2de2Component implements OnInit {
   lomismo = false;
   cambiar = false;
   conflicto = false;
+  banderadia = false;
+  banderatarde = false;
+  bandera = false;
   itemsigualito: any = [];
   larespuesta: any;
   larespuestaitem: any;
@@ -119,7 +207,6 @@ export class Subproceso2de2Component implements OnInit {
     private reservaService: CitaService,
     private horarioService: HorarioService,
     private activatedRoute: ActivatedRoute,
-    private especialistaService: EspecialistaService,
     ) { }
 
   // tslint:disable-next-line: typedef
@@ -147,83 +234,89 @@ export class Subproceso2de2Component implements OnInit {
     );
     // tslint:disable-next-line: radix
     const codigo = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.codigoespecialista = codigo.toString();
-    // tslint:disable-next-line: radix
-    const codiguillo = parseInt(this.activatedRoute.snapshot.paramMap.get('reserva'));
-    this.codigoreserva = codiguillo.toString();
+    this.codigoreserva = codigo.toString();
     console.log(`codigo de la reserva: ${this.codigoreserva}`);
-
-    // tslint:disable-next-line: radix
-    const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
+    const fechita = this.activatedRoute.snapshot.paramMap.get('fecha');
     const lafecha = new Date(fechita);
-    const array =
-          [
-            'domingo',
-            'lunes',
-            'martes',
-            'miercoles',
-            'jueves',
-            'viernes'
-          ];
-    const fechasa = lafecha.setDate(lafecha.getDate() + 1);
-    const fechaselect = new Date(fechasa);
-    const numerodia = fechaselect.getUTCDay() - 1;
-    let nombredia = array[numerodia];
-    if (numerodia === -1) {
-      nombredia = 'sabado';
-    }
-    this.dia = nombredia;
-    const fecha = fechita;
-    console.log(this.dia);
-    console.log(this.codigoespecialista);
-    // tslint:disable-next-line: deprecation
+    // const lafechita = new Date(fechita);
+    const diasemanal = lafecha.getDay();
+    const dias =
+    [
+      'lunes',
+      'martes',
+      'miercoles',
+      'jueves',
+      'viernes',
+      'sabado',
+      'domingo'
+    ];
+    const namedia = dias[diasemanal];
+    // const parametro = codigo;
+    const lafechita = fechita;
+    console.log(namedia);
     this.reservaService.getCita(this.codigoreserva).subscribe(
-      res => {
-        this.reserva1 = res;
-        this.sepago = +this.reserva1.Pay;
-      }
-    );
-    // tslint:disable-next-line: deprecation
-    this.reservaService.getCitasFiltro(this.dia, this.codigoespecialista).subscribe(
-      res => {
-        this.reservas = res;
-        const arrayreservas = this.reservas;
-        const reservasfecha = [];
-        for (const obj1 of arrayreservas) {
-          const numfecha = new Date(obj1.reserva.FechaReserva).getTime();
-          if (numfecha === fecha) {
-            reservasfecha.push(obj1);
-            this.reservasdia = reservasfecha;
-          }
-        }
-        // tslint:disable-next-line: deprecation
-        this.horarioService.getHorarioEspecialidaddDia(this.dia, this.codigoespecialista).subscribe(
-          // tslint:disable-next-line: no-shadowed-variable
-          rest => {
-            this.horario = rest;
-            if (Object.entries(this.reservasdia).length > 0) {
-              const array1 = this.reservasdia;
-              const array2 = this.horario;
-              const filtrado: any = [];
-              for (const filtro1 of array2) {
-                const codigohorario = filtro1.id;
-                for (const filtro2 of array1) {
-                  const codigofiltrar = filtro2.HorarioId;
-                  if (codigohorario === codigofiltrar) {
-                    filtrado.push(filtro1);
-                    this.filtrada = filtrado;
+      rescita => {
+        this.reserva1 = rescita;
+        this.ticket = rescita;
+        const parametro = this.ticket.horario.EspecialistaId;
+        this.reservaService.getDisponibilidad(lafechita, parametro).subscribe(
+          reservas1 => {
+            this.reservasdia = reservas1;
+            console.log(this.reservasdia);
+            this.horarioService.getHorarioEspecialidaddDia(namedia, parametro).subscribe(
+              disponibilidad => {
+                this.horario = disponibilidad;
+                if (Object.entries(this.reservasdia).length > 0) {
+                  const array1 = this.reservasdia;
+                  const array2 = this.horario;
+                  const filtrado: any = [];
+                  for (const item of array2) {
+                    const codigohorario = item.id;
+                    for (const obj of array1) {
+                      const codigofiltrar = obj.HorarioId;
+                      if (codigohorario === codigofiltrar) {
+                        filtrado.push(item);
+                        this.filtrada = filtrado;
+                      }
+                    }
+                  }
+                  const array3 = this.filtrada;
+                  // eliminamos la coincidencia entre los array
+                  const respuesta = array2.filter(alv => !array3.includes(alv));
+                  this.horariofiltrado = respuesta;
+                } else if (Object.entries(this.reservasdia).length === 0) {
+                  this.horariofiltrado = this.horario;
+                }
+                console.log(this.horariofiltrado);
+                // aca filtramos los turnos
+                const arraycito = this.horariofiltrado;
+                const filtro1: any = [];
+                const filtro2: any = [];
+                const parametro1 = 'mañana';
+                const parametro2 = 'tarde';
+                for (const obj of arraycito) {
+                  const par = obj.hora.Turn;
+                  if (par === parametro1) {
+                    filtro1.push(obj);
+                    this.filtro1horario = filtro1;
+                  } else if (par === parametro2) {
+                    filtro2.push(obj);
+                    this.filtro2horario = filtro2;
                   }
                 }
+                if (Object.entries(this.filtro1horario).length > 0) {
+                  this.banderadia = true;
+                }
+                if (Object.entries(this.filtro2horario).length > 0) {
+                  this.banderatarde = true;
+                }
+                this.bandera = true;
+                this.toastr.info('Horario del especialista Elegido');
+              },
+              err => {
+                console.log(err);
               }
-              const array3 = this.filtrada;
-              const respuesta = array2.filter(alv => !array3.includes(alv));
-              this.horariofiltrado = respuesta;
-            } else if (Object.entries(this.reservasdia).length === 0) {
-              this.horariofiltrado = this.horario;
-            }
-          },
-          err => {
-            console.log(err);
+            );
           }
         );
       }
@@ -234,162 +327,112 @@ export class Subproceso2de2Component implements OnInit {
   igual() {
     this.lomismo = true;
     this.botones = false;
-    // tslint:disable-next-line: radix
-    const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
-    // tslint:disable-next-line: deprecation
-    this.reservaService.getCita(this.codigoreserva).subscribe(
-      // tslint:disable-next-line: no-shadowed-variable
-      res => {
-        this.reserva = res;
-        this.reserva.Condition = 'postergado';
-        this.reserva.Appointment = new Date(fechita);
-        // tslint:disable-next-line: deprecation
-        this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
-          // tslint:disable-next-line: no-shadowed-variable
-          res => {
-            this.larespuesta = res;
-            console.log('se actualizo la reserva');
-            // tslint:disable-next-line: deprecation
-            this.reservaService.getSendpostpone(this.codigoreserva).subscribe(
-              // tslint:disable-next-line: no-shadowed-variable
-              res => {
-                this.elmensaje = res;
-                const parametro =  this.codigoreserva;
-                console.log('se envio el correo');
-                this.router.navigate(
-                  [
-                    'admin',
-                    'procesos',
-                    'proceso2',
-                    'subproceso3',
-                    parametro
-                  ]
-                );
-              }
-            );
-          }
-        );
-      }
-    );
-    // tslint:disable-next-line: deprecation
-    // this.itemService.getHome(this.codigoreserva).subscribe(
-    //   res => {
-    //     const lalista: any = res;
-    //     const numero1 = Object.entries(lalista).length;
-    //     const array1 = this.horariofiltrado;
-    //     console.log(lalista);
-    //     console.log(array1);
-    //     console.log(numero1);
-    //     const nuevos: any = [];
-    //     for (const elitem of array1) {
-    //       for (const otroitem of lalista) {
-    //         const parametro = elitem.hora.Horainicio;
-    //         const parametro1 = otroitem.horario.hora.Horainicio;
-    //         if (parametro === parametro1) {
-    //           nuevos.push(elitem);
-    //           this.itemsigualito = nuevos;
-    //         }
-    //       }
-    //     }
-    //     console.log(nuevos);
-    //     const numero2 = Object.entries(this.itemsigualito).length;
-    //     if (numero1 === numero2) {
-    //       const array2: any = this.itemsigualito;
-    //       for (const par1 of array2) {
-    //         // for (const iterator of lalista) {
-    //         //   this.item.id = iterator.id;
-    //         //   this.item.Estado = 'postergado';
-    //         //   this.item.ReservaId = this.codigoreserva;
-    //         //   this.item.HorarioId = par1.id;
-    //         //   // tslint:disable-next-line: deprecation
-    //         //   this.itemService.updateItem(this.item.id.toString(), this.item).subscribe(
-    //         //     // tslint:disable-next-line: no-shadowed-variable
-    //         //     res => {
-    //         //       console.log('se actualizo');
-    //         //       this.larespuestaitem = res;
-    //         //     }
-    //         //   );
-    //         // }
-    //       }
-
-    //     } else if (numero1 > numero2) {
-    //       this.toastr.info('hay un conflicto, en el cual no ya esta tomado una de las horas');
-    //       this.conflicto = true;
-    //     } else if (numero1 < numero2) {
-    //       this.toastr.error('error garrafal en el filtro');
-    //     }
-    //   }
-    // );
-  }
-
-  // tslint:disable-next-line: typedef
-  postergar() {
-    delete this.reserva.id;
-    this.reserva.Pay = this.pago.toString();
-    this.reserva.Condition = 'postergado';
+    let filtro = 0;
     // tslint:disable-next-line: radix
     const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
     this.reserva.Appointment = new Date(fechita);
-    // tslint:disable-next-line: deprecation
-    // tslint:disable-next-line: deprecation
-    // this.itemService.getHome(this.codigoreserva).subscribe(
-    //   res => {
-    //     const lalista: any = res;
-    //     for (const par1 of rangosdehora) {
-    //       for (const par2 of lalista) {
-    //         this.item.id = par2.id;
-    //         this.item.Estado = 'postergado';
-    //         this.item.ReservaId = this.codigoreserva;
-    //         this.item.HorarioId = par1.id;
-    //         // tslint:disable-next-line: deprecation
-    //         this.itemService.updateItem(this.item.id.toString(), this.item).subscribe(
-    //           // tslint:disable-next-line: no-shadowed-variable
-    //           res => {
-    //             console.log('se actualizo');
-    //             this.larespuestaitem = res;
-    //           }
-    //         );
-    //       }
-    //     }
-    //   }
-    // );
-    // tslint:disable-next-line: deprecation
-    this.reservaService.getCita(this.codigoreserva).subscribe(
+    const array1: any = this.horariofiltrado;
+    const igual1 = this.ticket.horario.hora.Start;
+    const igual2 = this.ticket.horario.hora.End;
+    const igual3 = this.ticket.horario.hora.Interval;
+    const igual4 = this.ticket.horario.hora.Turn;
+    for (const item of array1) {
+      const parametro1 = item.hora.Start;
+      const parametro2 = item.hora.End;
+      const parametro3 = item.hora.Interval;
+      const parametro4 = item.hora.Turn;
+      if (igual1 === parametro1 && igual2 === parametro2 && igual3 === parametro3 && igual4 === parametro4) {
+        this.reserva.HorarioId = item.id;
+        filtro = item.id;
+      }
+    }
+    if (filtro !== 0) {
+      this.conflicto = false;
+      this.reserva.Condition = 'postergado';
+      this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
+        // tslint:disable-next-line: no-shadowed-variable
+        resupcita => {
+          this.larespuesta = resupcita;
+          console.log(this.larespuesta);
+          console.log('se actualizo la reserva');
+          const parametro =  this.codigoreserva;
+          this.router.navigate(
+            [
+              'admin',
+              'procesos',
+              'proceso2',
+              'subproceso3',
+              parametro
+            ]
+          );
+          // this.reservaService.getSendpostpone(this.codigoreserva).subscribe(
+          //   // tslint:disable-next-line: no-shadowed-variable
+          //   ressendpost => {
+          //     this.elmensaje = ressendpost;
+          //     console.log('se envio el correo');
+          //     this.router.navigate(
+          //       [
+          //         'admin',
+          //         'procesos',
+          //         'proceso2',
+          //         'subproceso3',
+          //         parametro
+          //       ]
+          //     );
+          //   }
+          // );
+        }
+      );
+    } else {
+      this.conflicto = true;
+      this.toastr.info('El mismo horario se encuentra ocupado');
+    }
+  }
+
+  // tslint:disable-next-line: typedef
+  postergar(codigo) {
+    this.reserva.Pay = this.pago.toString();
+    this.reserva.Condition = 'postergado';
+    this.reserva.HorarioId = codigo;
+    // tslint:disable-next-line: radix
+    const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
+    this.reserva.Appointment = new Date(fechita);
+    this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
       // tslint:disable-next-line: no-shadowed-variable
-      res => {
-        this.reserva1 = res;
-        this.reserva.Condition = 'postergado';
-        this.reserva.Appointment = new Date(fechita);
-        // tslint:disable-next-line: deprecation
-        this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
-          // tslint:disable-next-line: no-shadowed-variable
-          res => {
-            if (res) {
-              this.larespuesta = res;
-              console.log('se actualizo la reserva');
-              // tslint:disable-next-line: deprecation
-              this.reservaService.getSendpostpone(this.codigoreserva).subscribe(
-                // tslint:disable-next-line: no-shadowed-variable
-                res => {
-                  this.elmensaje = res;
-                  const parametro =  this.codigoreserva;
-                  console.log('se envio el correo');
-                  this.router.navigate(
-                    [
-                      'admin',
-                      'procesos',
-                      'proceso2',
-                      'subproceso3',
-                      parametro
-                    ]
-                  );
-                }
-              );
-            } else {
-              this.toastr.error('no se pudo crear la reserva');
-            }
-          }
-        );
+      resupcita => {
+        if (resupcita) {
+          this.larespuesta = resupcita;
+          console.log('se actualizo la reserva');
+          const parametro =  this.codigoreserva;
+          this.router.navigate(
+            [
+              'admin',
+              'procesos',
+              'proceso2',
+              'subproceso3',
+              parametro
+            ]
+          );
+          // tslint:disable-next-line: deprecation
+          // this.reservaService.getSendpostpone(this.codigoreserva).subscribe(
+          //   // tslint:disable-next-line: no-shadowed-variable
+          //   ressendpost => {
+          //     this.elmensaje = ressendpost;
+          //     console.log('se envio el correo');
+          //     this.router.navigate(
+          //       [
+          //         'admin',
+          //         'procesos',
+          //         'proceso2',
+          //         'subproceso3',
+          //         parametro
+          //       ]
+          //     );
+          //   }
+          // );
+        } else {
+          this.toastr.error('no se pudo crear la reserva');
+        }
       }
     );
   }

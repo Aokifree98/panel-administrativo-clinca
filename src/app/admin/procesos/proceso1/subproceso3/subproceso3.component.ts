@@ -96,6 +96,7 @@ export class Subproceso3Component implements OnInit {
   };
   ticket: any = this.reserva;
   elcodigo;
+  lafecha;
   constructor(
     private toastr: ToastrService,
     private reservaService: CitaService,
@@ -109,6 +110,8 @@ export class Subproceso3Component implements OnInit {
         res => {
           this.ticket = res;
           const codigo = this.ticket.id;
+          const fecha: Date = new Date(this.ticket.Appointment);
+          this.lafecha = fecha.toISOString().split('T')[0];
           if (codigo < 10) {
             this.elcodigo = '00000' + codigo.toString();
           } else if (codigo < 100) {

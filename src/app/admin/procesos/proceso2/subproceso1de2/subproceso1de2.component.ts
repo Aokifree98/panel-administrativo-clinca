@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Cita } from 'src/app/models/Cita';
 import { Component, OnInit } from '@angular/core';
 import { CitaService } from 'src/app/services/cita.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-subproceso1de2',
@@ -99,12 +100,19 @@ export class Subproceso1de2Component implements OnInit {
   boleta = false;
   datito = new Date();
   codigoreserva;
-  numerofecha;
+  fechita;
   fechaActual: any;
   items: any = [];
   codigocancha;
   elcodigo;
+  lafecha;
+  sebusco = false;
+  fechamin: Date;
+  fechamax: Date;
+  stringmax;
+  stringmin;
   constructor(
+    private pd: DatePipe,
     private router: Router,
     private toastr: ToastrService,
     // private itemService: ItemService,
@@ -116,6 +124,7 @@ export class Subproceso1de2Component implements OnInit {
     this.reservaService.getCita(id).subscribe(
       res => {
         this.ticket = res;
+        this.sebusco = true;
         this.boleta = true;
         this.codigoreserva = this.ticket.id;
         this.toastr.success('Reserva Encontrada');
@@ -132,13 +141,6 @@ export class Subproceso1de2Component implements OnInit {
         } else {
           this.elcodigo = codigo.toString();
         }
-        // this.itemService.getHome(this.codigoreserva).subscribe(
-        //   // tslint:disable-next-line: no-shadowed-variable
-        //   res => {
-        //     this.items = res;
-        //     this.codigocancha = this.items[0].horario.FieldId;
-        //   }
-        // );
       },
       err => {
         this.toastr.error('Reserva no Encontrada');
@@ -147,20 +149,18 @@ export class Subproceso1de2Component implements OnInit {
   }
   // tslint:disable-next-line: typedef
   postergar(fecha) {
-    const estado = this.ticket.Estado;
+    const estado = this.ticket.Condition;
     if (estado === 'reservado' || estado === 'no vino') {
-      this.numerofecha = new Date(fecha).getTime();
-      const parametro0 = this.codigocancha;
+      this.fechita = new Date(fecha);
       const parametro1 = this.codigoreserva;
-      const parametro2 = this.numerofecha;
-      // this.toastr.info('Proseguir con la postergacion');
+      const parametro2 = this.fechita.toISOString().split('T')[0];
+      this.toastr.info('Proseguir con la postergacion');
       this.router.navigate(
         [
           'admin',
           'procesos',
           'proceso2',
           'subproceso2',
-          parametro0,
           parametro1,
           parametro2
         ]
@@ -201,6 +201,10 @@ export class Subproceso1de2Component implements OnInit {
     return this.sumarDias(d, 1);
   }
   ngOnInit(): void {
+    this.fechamin = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1);
+    this.fechamax = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
+    this.stringmin = this.pd.transform(this.fechamin, 'yyyy-MM-dd');
+    this.stringmax = this.pd.transform(this.fechamax, 'yyyy-MM-dd');
     this.fechaActual = this.getNowDate();
   }
 

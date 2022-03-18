@@ -69,75 +69,78 @@
               </section>
             </div>
           </div>
-          <div class="col-lg-6 col-12">
+          <div class="col-12 col-lg-6">
             <button type="submit"
               (click)="enableatender()"
               data-toggle="modal"
               data-target="#ModalSigVital"
-              class="btn btn-primary btn-pill">
+              class="btn btn-primary btn-block">
               Signos Vitales
             </button>
-            <!-- <button type="submit"
-              class="btn btn-outline-success btn-lg btn-block btn-pill"
-              (click)="enableatender()"
-              data-toggle="modal"
-              data-target="#ModalSigVital">
-              Atender
-            </button> -->
           </div>
-          <!-- <div class="col-12 col-lg-6" *ngIf="atencion">
-            <div class="card">
-              <div class="card-header">
-                <button type="button"
-                  (click)="completado()"
-                  class="btn btn-pill btn-block btn-info"
-                  data-toggle="modal"
-                  data-target="#ModalSigVital">
-                  Atender
-                </button>
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="col-12 col-lg-6" *ngIf="postergacion">
-            <div class="card">
-              <div class="card-header card-header-primary">
-                <h3 class="text-center">
-                  Postergar
-                </h3>
-              </div>
-              <div class="card-body">
-                <form id="formPostpone" class="was-validated" name="formPostpone">
-                  <div class="form-group">
-                    <label class="form-col-form-label" for="datito">
-                        Fecha de Postergacion
-                    </label>
-                    <input type="date" class="form-control" id="datito" name="datito" [min]="fechaActual" [(ngModel)]="datito" required>
-                    <div class="valid-feedback">
-                      Campo rellenado.
-                    </div>
-                    <div class="invalid-feedback">
-                      Por favor rellene el campo.
-                    </div>
-                  </div>
-                  <div>
-                    <button type="submit"
-                      class="btn btn-outline-success btn-lg btn-block btn-pill"
-                      (click)="seguirpostergando(datito)"
-                      [disabled]="(datito === fechaActual)? true:false">
-                      Postergar
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div> -->
+          <div class="col-12 col-lg-6">
+            <button type="submit"
+              (click)="enablepostergar()"
+              data-toggle="modal"
+              data-target="#ModalPost"
+              class="btn btn-primary btn-block">
+              Postergar
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="ModalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Fecha de Postergacion
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="postergacion">
+        <form id="formPostpone" class="was-validated" name="formPostpone">
+          <div class="form-group">
+            <label class="form-col-form-label" for="datito">
+                Fecha de Postergacion
+            </label>
+            <input type="date" class="form-control" id="datito" name="datito" [min]="stringmin" [max]="stringmax" [(ngModel)]="datito" required>
+            <div class="valid-feedback">
+              Campo rellenado.
+            </div>
+            <div class="invalid-feedback">
+              Por favor rellene el campo.
+            </div>
+          </div>
+          <div>
+            <button type="submit"
+              class="btn btn-outline-success btn-lg btn-block btn-pill"
+              (click)="seguirpostergando(datito)"
+              [disabled]="(datito === fechaActual)? true:false">
+              Postergar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Elegir Horario
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="ModalSigVital" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

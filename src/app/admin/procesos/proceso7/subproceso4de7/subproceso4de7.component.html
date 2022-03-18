@@ -2,12 +2,9 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h6>
-          Posible descarga
+        <h6 class="text-center">
+          Ticket de confirmacion
         </h6>
-        <button (click)="descargar()" type="button" class="btn btn-pill btn-block btn-success">
-          Descargar en PDF
-        </button>
       </div>
       <div class="card-body">
         <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
@@ -59,18 +56,19 @@
                       </h6>
                     </div>
                     <br>
-                    <button type="submit"
-                      data-toggle="modal"
-                      data-target="#ModalSigVital"
-                      class="btn btn-primary btn-pill">
-                      Signos Vitales
-                    </button>
                   </section>
                 </article>
               </div>
             </section>
           </div>
         </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit"
+        (click)="descargar()"
+          class="btn btn-primary btn-pill">
+          Generar PDF
+        </button>
       </div>
     </div>
   </div>

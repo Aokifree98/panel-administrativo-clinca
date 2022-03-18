@@ -151,21 +151,7 @@ export class Subproceso1de4Component implements OnInit {
         this.toastr.success('su ticket');
         this.sebusco = true;
         const fecha: Date = new Date(this.ticket.Appointment);
-        this.dia = new Date(fecha).getDate() + 1;
-        this.mes = new Date(fecha).getMonth() + 1;
-        this.anio = new Date(fecha).getFullYear().toString();
-        if (this.dia < 10) {
-          this.stringdia = '0' + this.dia.toString();
-        } else {
-          this.stringdia = this.dia.toString();
-        }
-        if (this.mes < 10) {
-          this.stringmes = '0' + this.mes.toString();
-        } else {
-          this.stringmes = this.mes.toString();
-        }
-        const fechastring = this.stringdia + '/' + this.stringmes + '/' + this.anio;
-        this.lafecha = fechastring;
+        this.lafecha = fecha.toISOString().split('T')[0];
       },
       err => {
         console.log(err);

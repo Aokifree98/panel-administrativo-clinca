@@ -125,11 +125,7 @@ export class Subproceso4de7Component implements OnInit {
             this.elcodigo = codigo.toString();
           }
           const fecha: Date = new Date(this.ticket.Appointment);
-          const dia = new Date(fecha).getDate() + 1;
-          const mes = new Date(fecha).getMonth() + 1;
-          const anio = new Date(fecha).getFullYear().toString();
-          const fechastring = dia.toString() + '/' + mes.toString() + '/' + anio;
-          this.lafecha = fechastring;
+          this.lafecha = fecha.toISOString().split('T')[0];
           this.toastr.success('Su Comprobante');
         },
         err => {

@@ -120,21 +120,13 @@
               Por favor rellene el campo.
             </div>
           </div>
-          <div>
-            <button type="submit"
-              class="btn btn-outline-success btn-lg btn-block btn-pill"
-              (click)="seguirpostergando(datito)"
-              [disabled]="(datito === fechaActual)? true:false">
-              Postergar
-            </button>
-          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Cancelar
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="seguirpostergando(datito)">
           Elegir Horario
         </button>
       </div>

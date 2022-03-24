@@ -256,7 +256,7 @@ export class Subproceso2de2Component implements OnInit {
     console.log(namedia);
     this.reservaService.getCita(this.codigoreserva).subscribe(
       rescita => {
-        this.reserva1 = rescita;
+        this.reserva = rescita;
         this.ticket = rescita;
         const parametro = this.ticket.horario.EspecialistaId;
         this.reservaService.getDisponibilidad(lafechita, parametro).subscribe(
@@ -329,40 +329,43 @@ export class Subproceso2de2Component implements OnInit {
     this.botones = false;
     let filtro = 0;
     // tslint:disable-next-line: radix
-    const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
-    this.reserva.Appointment = new Date(fechita);
+    const fecha = this.activatedRoute.snapshot.paramMap.get('fecha').toString();
+    this.reserva.Appointment =  new Date(fecha);
+    // this.reserva.Appointment = new Date(fechita + 'T00:00:00.000Z');
     const array1: any = this.horariofiltrado;
-    const igual1 = this.ticket.horario.hora.Start;
-    const igual2 = this.ticket.horario.hora.End;
-    const igual3 = this.ticket.horario.hora.Interval;
-    const igual4 = this.ticket.horario.hora.Turn;
+    console.log(array1);
+    // console.log(this.ticket);
+    console.log(this.reserva);
+    const parametro =  this.ticket.horario.HoraId;
     for (const item of array1) {
-      const parametro1 = item.hora.Start;
-      const parametro2 = item.hora.End;
-      const parametro3 = item.hora.Interval;
-      const parametro4 = item.hora.Turn;
-      if (igual1 === parametro1 && igual2 === parametro2 && igual3 === parametro3 && igual4 === parametro4) {
+      const filtrado = item.HoraId;
+      console.log(parametro);
+      console.log(filtrado);
+      if (parametro === filtrado) {
         this.reserva.HorarioId = item.id;
-        filtro = item.id;
+        console.log('hay coincidencia');
+        filtro = 1;
       }
     }
-    if (filtro !== 0) {
+    if (filtro > 0) {
+      console.log('entro en la condicion');
       this.conflicto = false;
       this.reserva.Condition = 'postergado';
+      console.log(this.reserva);
       this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
         // tslint:disable-next-line: no-shadowed-variable
         resupcita => {
           this.larespuesta = resupcita;
           console.log(this.larespuesta);
           console.log('se actualizo la reserva');
-          const parametro =  this.codigoreserva;
+          const parametrito =  this.codigoreserva;
           this.router.navigate(
             [
               'admin',
               'procesos',
               'proceso2',
               'subproceso3',
-              parametro
+              parametrito
             ]
           );
           // this.reservaService.getSendpostpone(this.codigoreserva).subscribe(
@@ -381,9 +384,11 @@ export class Subproceso2de2Component implements OnInit {
           //     );
           //   }
           // );
+        }, err => {
+          this.toastr.error('Error Api Postergacion');
         }
       );
-    } else {
+    } else if (filtro === 0) {
       this.conflicto = true;
       this.toastr.info('El mismo horario se encuentra ocupado');
     }
@@ -395,8 +400,8 @@ export class Subproceso2de2Component implements OnInit {
     this.reserva.Condition = 'postergado';
     this.reserva.HorarioId = codigo;
     // tslint:disable-next-line: radix
-    const fechita = parseInt(this.activatedRoute.snapshot.paramMap.get('fecha'));
-    this.reserva.Appointment = new Date(fechita);
+    const fecha = this.activatedRoute.snapshot.paramMap.get('fecha').toString();
+    this.reserva.Appointment =  new Date(fecha);
     this.reservaService.updateCita(this.codigoreserva, this.reserva).subscribe(
       // tslint:disable-next-line: no-shadowed-variable
       resupcita => {
@@ -431,8 +436,10 @@ export class Subproceso2de2Component implements OnInit {
           //   }
           // );
         } else {
-          this.toastr.error('no se pudo crear la reserva');
+          this.toastr.error('no se pudo postergar');
         }
+      }, err => {
+        this.toastr.error('Error Api Postergacion');
       }
     );
   }

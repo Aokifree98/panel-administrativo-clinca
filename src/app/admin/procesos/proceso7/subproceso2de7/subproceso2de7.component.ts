@@ -352,11 +352,12 @@ export class Subproceso2de7Component implements OnInit {
     // tslint:disable-next-line: radix
     this.reserva.Pay = this.total;
     this.reserva.ClienteId = this.codigocliente;
-    const filtro = this.total;
-    const parametro = this.pago;
-    if (filtro > parametro) {
-      this.reserva.Condition = 'por pagar';
-    }
+    this.reserva.Pay = this.detailhorario.especialista.especialidad.Price;
+    // const filtro = this.total;
+    // const parametro = this.pago;
+    // if (filtro > parametro) {
+    //   this.reserva.Condition = 'por pagar';
+    // }
     const fecha = this.activatedRoute.snapshot.paramMap.get('fecha').toString();
     this.reserva.Appointment =  new Date(fecha);
     this.reserva.Pay = this.pago.toString();
@@ -368,7 +369,7 @@ export class Subproceso2de7Component implements OnInit {
         this.reserva1 = res;
         const codigoreserva = this.reserva1.id;
         const bandera = this.reserva1.Condition;
-        if (bandera === 'reservado' || bandera === 'por pagar' ) {
+        if (bandera === 'reservado') {
           this.router.navigate(
             [
               'admin',

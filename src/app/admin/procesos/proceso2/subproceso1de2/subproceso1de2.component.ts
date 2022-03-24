@@ -141,6 +141,8 @@ export class Subproceso1de2Component implements OnInit {
         } else {
           this.elcodigo = codigo.toString();
         }
+        const fecha: Date = new Date(this.ticket.Appointment);
+        this.lafecha = fecha.toISOString().split('T')[0];
       },
       err => {
         this.toastr.error('Reserva no Encontrada');

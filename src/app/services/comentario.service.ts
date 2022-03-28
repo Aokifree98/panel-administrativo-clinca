@@ -21,12 +21,12 @@ export class ComentarioService {
     return this.http.get(`${this.apiUrl}/byblog/${codigo}`);
   }
 
-  getComentario(id: string) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getComentariosbyCliente(codigo: string) {
+    return this.http.get(`${this.apiUrl}/bycliente/${codigo}`);
   }
 
-  deleteComentario(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  getComentario(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   // tslint:disable-next-line: no-shadowed-variable
@@ -38,6 +38,12 @@ export class ComentarioService {
     return this.http.put(`${this.apiUrl}/update/${id}`, updatedcomentario);
   }
 
+  deleteComentario(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 
+  deleteComentarioCliente(id: string) {
+    return this.http.delete(`${this.apiUrl}/clientedelete/${id}`);
+  }
 
 }

@@ -2,94 +2,18 @@
   <div class="col-12 col-lg-6 p-1">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 *ngIf="bandera == 'crear'" class="card-title">
-          Crear Tipo
-        </h4>
-        <h4 *ngIf="bandera == 'elegir'" class="card-title">
-          Elegir Tipo
-        </h4>
-        <h4 *ngIf="bandera == 'elegido'" class="card-title">
+        <h4 class="card-title">
           Tipo
         </h4>
       </div>
       <div class="card-body">
         <div class="row">
-          <div *ngIf="bandera == 'elegir'" class="col-12 p-1">
-            <form>
-              <div class="row">
-                <div class="col-12 p-1">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">
-                      Tipo
-                    </label>
-                    <select (change)='onOptionsSelectedTipe($event)' id="select-type-basic"
-                      [(ngModel)]="laboratorio.TipoId" name="laboratorio.TipoId" required autofocus tabindex="1">
-                      <option selected>
-                        Seleccione su Tipo
-                      </option>
-                      <option [value]="obj.id" *ngFor="let obj of tipos">
-                      {{obj.Name}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-12 p-1">
-                  <button (click)="crear()" type="submit" class="btn btn-primary pull-right">
-                    Crear Tipo
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div *ngIf="bandera == 'crear'" class="col-12 p-1">
-            <form>
-              <div class="row">
-                <div class="col-12 p-1">
-                  <div class="form-group">
-                    <label class="bmd-label-floating">
-                      Nombre
-                    </label>
-                    <input name="tipo.Name"
-                      [(ngModel)]="tipo.Name"
-                      type="text" class="form-control"
-                      required minlength="3"
-                      autofocus tabindex="1"
-                      placeholder=".........">
-                  </div>
-                </div>
-                <div class="col-12 p-1">
-                  <button (click)="saveTipo()" type="submit"
-                    class="btn btn-primary pull-right"
-                    [disabled]="(tipo.Name === '')? true:false">
-                    Crear
-                  </button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-            </form>
-          </div>
-          <div *ngIf="bandera == 'elegido'" class="col-12 p-1">
+          <div class="col-12 p-1">
             <h2>
               Tipo:
               <br>
               {{ladata.tipo.Name}}
             </h2>
-            <div class="row">
-              <div class="col-12 col-lg-6 p-1">
-                <div class="col-12 p-1">
-                  <button (click)="crear()" type="submit" class="btn btn-primary pull-right">
-                    Crear Tipo
-                  </button>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6 p-1">
-                <div class="col-12 p-1">
-                  <button (click)="elegir()" type="submit" class="btn btn-primary pull-right">
-                    Seleccione Tipo
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -99,17 +23,18 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">
-          Crear Examen Laboratorio
+          Editar Examen Laboratorio
         </h4>
       </div>
       <div class="card-body">
         <form>
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-12">
               <div class="form-group">
                 <label class="bmd-label-floating">
                   Nombre
                 </label>
+                <br>
                 <input name="laboratorio.Name"
                   [(ngModel)]="laboratorio.Name"
                   type="text" class="form-control"
@@ -118,35 +43,41 @@
                   placeholder=".........">
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="bmd-label-floating">
-                  Detalle
-                </label>
-                <textarea name="laboratorio.Detail"
-                  [(ngModel)]="laboratorio.Detail"
-                  class="form-control"
-                  required minlength="20"
-                  tabindex="2"
-                  placeholder="........."
-                  cols="30" rows="10"></textarea>
-              </div>
-            </div>
-            <div class="col-lg-6">
+            <br>
+            <div class="col-12">
               <div class="form-group">
                 <label class="bmd-label-floating">
                   Precio
                 </label>
+                <br>
                 <input name="laboratorio.Price"
                 [(ngModel)]="laboratorio.Price"
                 type="text" class="form-control"
+                required minlength="2"
+                tabindex="2"
                 placeholder="Precio ....">
+              </div>
+            </div>
+            <br>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Detalle
+                </label>
+                <br>
+                <textarea name="laboratorio.Detail"
+                  [(ngModel)]="laboratorio.Detail"
+                  class="form-control"
+                  required minlength="10"
+                  tabindex="3"
+                  placeholder="........."
+                  cols="30" rows="10"></textarea>
               </div>
             </div>
           </div>
           <div class="col-12 p-1">
             <button (click)="updateLaboratorio()" type="submit" class="btn btn-primary pull-right"
-              [disabled]="(laboratorio.Name === '' ||  laboratorio.Detail === '' ||  laboratorio.Price === 0 ||  laboratorio.TipoId === 0)? true:false">
+              [disabled]="(laboratorio.Name === '' ||  laboratorio.Detail === '' ||  laboratorio.Price === 0)? true:false">
               Actualizar
             </button>
           </div>
@@ -154,11 +85,5 @@
         </form>
       </div>
     </div>
-  </div>
-  <div class="col-12 p-1">
-    <button (click)="finish()" type="submit" class="btn btn-primary pull-right"
-      [disabled]="(laboratorio.id === 0)? true:false">
-      Terminar
-    </button>
   </div>
 </div>

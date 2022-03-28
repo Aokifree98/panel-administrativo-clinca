@@ -9,6 +9,7 @@ import { GlobalService } from './variable.service';
 })
 export class TipoService {
   apiUrl = this.wasa.apiUrlGlobal + '/tipo';
+  apiUrlLaboratorio = this.wasa.apiUrlGlobal + '/laboratorio';
   constructor(
     private http: HttpClient,
     private wasa: GlobalService
@@ -21,10 +22,6 @@ export class TipoService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  deleteTipo(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
-  }
-
   // tslint:disable-next-line: no-shadowed-variable
   saveTipo( Tipo: Tipo) {
     return this.http.post(`${this.apiUrl}/create`, Tipo);
@@ -32,5 +29,13 @@ export class TipoService {
 
   updateTipo(id: string|number, updatedTipo: Tipo): Observable<Tipo> {
     return this.http.put(`${this.apiUrl}/update/${id}`, updatedTipo);
+  }
+
+  deleteLaboratorioTipo(id: string) {
+    return this.http.delete(`${this.apiUrlLaboratorio}/tipodelete/${id}`);
+  }
+
+  deleteTipo(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

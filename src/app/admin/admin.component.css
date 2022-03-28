@@ -15,6 +15,10 @@ body app-root app-admin app-header .d-md-block {
   display: none;
 }
 
+/*
+label {
+  color: #913f9e;
+} */
 /* ::-webkit-scrollbar {
   width: 12px;
 }

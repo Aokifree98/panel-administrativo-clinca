@@ -79,7 +79,9 @@ export class CitaService {
     return this.http.delete(`${this.apiUrlcita}/${id}`);
   }
 
-
+  deleteCitaCliente(id: string) {
+    return this.http.delete(`${this.apiUrlcita}/clientedelete/${id}`);
+  }
 
 
 }

@@ -17,12 +17,12 @@ export class TestimonioService {
     return this.http.get(`${this.apiUrl}`);
   }
 
-  getTestimonio(id: string) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getTestimoniosbyCLiente(id: string | number) {
+    return this.http.get(`${this.apiUrl}/bycliente/${id}`);
   }
 
-  deleteTestimonio(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  getTestimonio(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   // tslint:disable-next-line: no-shadowed-variable
@@ -33,4 +33,13 @@ export class TestimonioService {
   updateTestimonio(id: string|number, updatedTestimonio: ListTestimonio): Observable<ListTestimonio> {
     return this.http.put(`${this.apiUrl}/update/${id}`, updatedTestimonio);
   }
+
+  deleteTestimonio(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  deleteTestimonioCliente(id: string) {
+    return this.http.delete(`${this.apiUrl}/clientedelete/${id}`);
+  }
+
 }

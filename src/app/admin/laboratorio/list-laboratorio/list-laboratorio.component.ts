@@ -19,14 +19,15 @@ export class ListLaboratorioComponent implements OnInit {
     Name: ''
   };
   mensaje;
+  mensaje1;
   codigotipo;
+  parametrito;
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private tipoService: TipoService,
     private laboratorioService: LaboratorioService
   ) { }
-
   ngOnInit(): void {
     // this.getlaboratorios();
     this.gettipos();
@@ -42,11 +43,14 @@ export class ListLaboratorioComponent implements OnInit {
   }
   ver(codigo) {
     const parametro = codigo;
+    this.codigotipo = codigo;
     this.laboratorioService.getLaboratorioTipo(parametro).subscribe(
       res => {
         this.laboratorios = res;
       },
-      err => console.error(err)
+      err => {
+        this.toastr.error('Error Api List Laboratorios del Tipo');
+      }
     );
   }
   updateTipo() {
@@ -100,38 +104,72 @@ export class ListLaboratorioComponent implements OnInit {
     );
   }
   delete(codigo) {
-    this.tipoService.deleteTipo(codigo).subscribe(
-      res => {
-        this.mensaje = res;
-        console.log(res);
-        window.location.reload();
-        // this.router.navigate(
-        //   [
-        //     'admin',
-        //     'laboratorio',
-        //     'list'
-        //   ]
-        // );
+    this.parametrito = codigo;
+    this.laboratorioService.getLaboratorioTipo(this.parametrito).subscribe(
+      reslist => {
+        this.laboratorios = reslist;
+        console.log(this.laboratorios);
+        const numero = Object.entries(this.laboratorios).length;
+        console.log(numero);
+        if (numero > 0) {
+          this.laboratorioService.getLaboratorioTipo(this.parametrito).subscribe(
+            resdeletelabs => {
+              this.mensaje = resdeletelabs;
+              this.toastr.info('Laboratorios de Tipo Eliminados');
+              this.tipoService.deleteTipo(this.parametrito).subscribe(
+                resdeletetipo => {
+                  this.mensaje1 = resdeletetipo;
+                  this.toastr.info('Tipo Eliminado');
+                  window.location.reload();
+                }, err => {
+                  this.toastr.error('Error Api Delete Tipo');
+                }
+              );
+            }, err => {
+              this.toastr.error('Error Api Delete Laboratorios Tipo');
+            }
+          );
+        } else if (numero === 0) {
+          this.tipoService.deleteTipo(this.parametrito).subscribe(
+            resdeletetipo => {
+              this.mensaje1 = resdeletetipo;
+              this.toastr.info('Tipo Eliminado');
+              window.location.reload();
+            }, err => {
+              this.toastr.error('Error Api Delete Tipo');
+            }
+          );
+        }
+      },
+      err => {
+        this.toastr.error('Error Api List Laboratorios del Tipo');
       }
     );
-    // window.location.reload();
+  }
+  agregar(codigo) {
+    console.log(codigo);
+    const codigotipo = codigo;
+    this.toastr.info('Agregar nuevo Examen');
+    this.router.navigate(
+      [
+        'admin',
+        'laboratorio',
+        'add',
+        codigotipo
+      ]
+    );
   }
   deletelab(codigo) {
     this.laboratorioService.deleteLaboratorio(codigo).subscribe(
-      res => {
-        this.mensaje = res;
-        console.log(res);
+      resdeletelab => {
+        this.mensaje = resdeletelab;
+        console.log(resdeletelab);
         window.location.reload();
-        // this.router.navigate(
-        //   [
-        //     'admin',
-        //     'laboratorio',
-        //     'list'
-        //   ]
-        // );
       }
     );
-
+  }
+  cancelar() {
+    window.location.reload();
   }
 
 }

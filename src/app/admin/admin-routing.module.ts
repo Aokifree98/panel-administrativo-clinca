@@ -130,6 +130,7 @@ import { Subproceso1de7Component } from './procesos/proceso7/subproceso1de7/subp
 import { Subproceso2de7Component } from './procesos/proceso7/subproceso2de7/subproceso2de7.component';
 import { Subproceso3de7Component } from './procesos/proceso7/subproceso3de7/subproceso3de7.component';
 import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subproceso4de7.component';
+import { AddLaboratorioComponent } from './laboratorio/add-laboratorio/add-laboratorio.component';
 
 
 const routes: Routes = [
@@ -363,6 +364,10 @@ const routes: Routes = [
           {
             path: 'update/:id',
             component: UpdateLaboratorioComponent
+          },
+          {
+            path: 'add/:id',
+            component: AddLaboratorioComponent
           }
         ]
       },

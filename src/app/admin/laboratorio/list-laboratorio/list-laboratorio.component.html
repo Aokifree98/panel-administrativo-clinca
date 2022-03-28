@@ -16,7 +16,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div *ngIf="!bandera" class="col-12 p-1">
+          <div *ngIf="!bandera" class="col-12 p-4">
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
@@ -63,7 +63,7 @@
               </table>
             </div>
           </div>
-          <div *ngIf="bandera" class="col-12 p-1">
+          <div *ngIf="bandera" class="col-12 p-4">
             <form>
               <div class="row">
                 <div class="col-12 p-1">
@@ -79,7 +79,13 @@
                       placeholder=".........">
                   </div>
                 </div>
-                <div class="col-12 p-1">
+                <div class="col-12 col-md-6 p-1">
+                  <button (click)="cancelar()" type="submit"
+                    class="btn btn-primary pull-left">
+                    Cancelar
+                  </button>
+                </div>
+                <div class="col-12 col-md-6 p-1">
                   <button (click)="updateTipo()" type="submit"
                     class="btn btn-primary pull-right"
                     [disabled]="(tipo.Name === '')? true:false">
@@ -161,7 +167,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Cancelar
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crear()">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregar(codigotipo)">
           Agregar
         </button>
       </div>

@@ -13229,7 +13229,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 
 .bmd-form-group:not(.has-success):not(.has-danger) [class^='bmd-label'].bmd-label-floating,
 .bmd-form-group:not(.has-success):not(.has-danger) [class*=' bmd-label'].bmd-label-floating {
-  color: #AAAAAA;
+  color: #913f9e !important;
 }
 
 .bmd-form-group [class^='bmd-label'],
@@ -20770,7 +20770,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .bmd-form-group:not(.has-success):not(.has-danger) [class^='bmd-label'].bmd-label-floating,
 .dark-edition .bmd-form-group:not(.has-success):not(.has-danger) [class*=' bmd-label'].bmd-label-floating {
-  color: #913f9e;
+  color: #913f9e !important;
 }
 
 .dark-edition .form-group label {

@@ -153,8 +153,8 @@ export class UpdateLaboratorioComponent implements OnInit {
     this.laboratorioService.updateLaboratorio(params.id, this.laboratorio).subscribe(
       res => {
         console.log(res);
-
         this.toastr.success('Laboratorio actualizado');
+        this.finish();
       },
       err => {
         console.error(err);

@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from 'src/app/models/admin';
+import { Genero } from 'src/app/models/genero.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { ProfileUploadService } from 'src/app/services/imagepriv.service';
@@ -14,6 +15,18 @@ export class CreateAdminComponent implements OnInit {
   @ViewChild('file1') fileimagen;
   laurlimagen;
   datosimagen: any = [];
+  usuario: Admin = {
+    id: 0,
+    Name: '',
+    LastName: '',
+    Phone: '',
+    Email: '',
+    Password: '',
+    Condition: '',
+    ConditionMin: '',
+    Photo: '',
+    Code: ''
+  };
   // declarando los datos del admin
   admin: Admin = {
     id: 0,
@@ -27,13 +40,27 @@ export class CreateAdminComponent implements OnInit {
     Photo: 'https://st.depositphotos.com/2704315/3185/v/600/depositphotos_31854223-stock-illustration-vector-user-profile-avatar-man.jpg',
     Code: '9999999'
   };
+  estado: Genero [] = [
+    {
+      id: 1,
+      name: 'admin'
+    },
+    {
+      id: 2,
+      name: 'secretaria'
+    }
+  ];
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private adminService: AdminService,
     private photoService: ProfileUploadService,
   ) { }
-
+  onOptionsSelected(event) {
+    const value = event.target.value;
+    this.admin.Condition = value;
+    console.log(value);
+  }
   // tslint:disable-next-line: typedef
   changeImg() {
     this.fileimagen.nativeElement.click();
@@ -81,6 +108,7 @@ export class CreateAdminComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.usuario = JSON.parse(localStorage.getItem('admin'));
   }
 
 }

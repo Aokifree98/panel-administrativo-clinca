@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-md-6 col-lg-4">
               <div class="form-group">
-                <label class="bmd-label-floating" for="Name">
+                <label class="bmd-label-floating">
                   Nombres
                 </label>
                 <input name="admin.Name"
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="form-group">
-                <label class="bmd-label-floating" for="LastName">
+                <label class="bmd-label-floating">
                   Apellidos
                 </label>
                 <input name="admin.LastName"
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="form-group">
-                <label class="bmd-label-floating" for="Phone">
+                <label class="bmd-label-floating">
                   Celular
                 </label>
                 <input name="admin.Phone"
@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="form-group">
-                <label class="bmd-label-floating" for="Email">
+                <label class="bmd-label-floating">
                   Correo
                 </label>
                 <input name="admin.Email"
@@ -58,6 +58,26 @@
                 required minlength="5" tabindex="4"
                 type="email" class="form-control"
                 placeholder=".........">
+              </div>
+            </div>
+            <div *ngIf="usuario.Condition === 'admin'" class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Rol
+                </label>
+                <select (change)='onOptionsSelected($event)'
+                  id="select-type-basic"
+                  class="form-control"
+                  [(ngModel)]="admin.Condition"
+                  name="admin.Condition"
+                  required tabindex="5">
+                  <option selected>
+                    Seleccione su Rol
+                  </option>
+                  <option [value]="obj.name" *ngFor="let obj of estado">
+                  {{obj.name}}
+                  </option>
+                </select>
               </div>
             </div>
           </div>

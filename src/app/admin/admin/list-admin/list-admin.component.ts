@@ -56,18 +56,21 @@ export class ListAdminComponent implements OnInit {
     );
   }
   eliminar(codigo) {
-    this.adminService.deleteAdmin(codigo).subscribe(
-      res => {
-        this.mensaje = res;
-        this.router.navigate(
-          [
-            'admin',
-            'admin',
-            'list'
-          ]
-        );
-      }
-    );
+    if (confirm('¿Estas seguro de eliminar usuario? - eliminaras tambien sus citas registradas y por ende tambien las historias'))
+    {
+      console.log('Desidio eliminar usuario');
+      this.adminService.deleteAdmin(codigo).subscribe(
+        res => {
+          this.mensaje = res;
+          this.toastr.info('Usuario y sus citas registradas elimiadas');
+          window.location.reload();
+        }, err => {
+          this.toastr.error('Error Api eliminacion de Admin');
+        }
+      );
+    } else {
+      console.log('Desidio no eliminar usuario');
+    }
   }
 
 }

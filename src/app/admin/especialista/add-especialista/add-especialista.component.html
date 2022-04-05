@@ -3,41 +3,37 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">
-          Crear Especialista
+          Agregar Especialidad al Doctor
         </h4>
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-6 p-1">
-            <div class="row">
-              <div class="col-12 p-1">
-                <div class="card">
-                  <div class="card-header card-header-primary">
-                    <h4 class="card-title">
-                      Doctor
-                    </h4>
+          <div class="col-12 col-lg-6 p-3">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">
+                  Doctor
+                </h4>
+              </div>
+              <div class="card-body">
+                <div class="row p-4">
+                  <div class="col-12 col-md-4 p-1">
+                    <img [src]="doctor.Photo" id="foto" alt="foto doctor">
                   </div>
-                  <div class="card-body">
+                  <div class="col-12 col-md-8 p-1">
                     <div class="row">
-                      <div class="col-12 col-md-4 p-1">
-                        <img [src]="doctor.Photo" class="w-100" alt="foto doctor">
+                      <div class="col-12 p-1 text-center">
+                        Nombres y Apellidos:
+                        <br>
+                        {{doctor.Name + ' ' + doctor.LastName}}
                       </div>
-                      <div class="col-12 col-md-8 p-1">
-                        <div class="row">
-                          <div class="col-12 p-1 text-center">
-                            Nombres y Apellidos:
-                            <br>
-                            {{doctor.Name + ' ' + doctor.LastName}}
-                          </div>
-                          <div class="col-12 col-lg-6 p-1 text-center">
-                            Colegiatura:
-                            {{doctor.MedicalSchoolNumber}}
-                          </div>
-                          <div class="col-12 col-lg-6 p-1 text-center">
-                            Correo:
-                            {{doctor.Email}}
-                          </div>
-                        </div>
+                      <div class="col-12 col-lg-6 p-1 text-center">
+                        Colegiatura:
+                        {{doctor.MedicalSchoolNumber}}
+                      </div>
+                      <div class="col-12 col-lg-6 p-1 text-center">
+                        Correo:
+                        {{doctor.Email}}
                       </div>
                     </div>
                   </div>
@@ -45,7 +41,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-6 p-1">
+          <div class="col-12 col-lg-6 p-3">
             <div class="row">
               <div *ngIf="resultadoespecialidad" class="col-12 p-1">
                 <div class="card">
@@ -55,7 +51,7 @@
                     </h4>
                   </div>
                   <div class="card-body">
-                    <div class="row">
+                    <div class="row p-4">
                       <div class="col-12 col-md-4 p-1">
                         <img [src]="especialidad1.Image" class="w-100" alt="foto doctor">
                       </div>
@@ -86,7 +82,7 @@
                   <div class="card-body">
                     <form>
                       <div class="row">
-                        <div class="col-12 p-1">
+                        <div class="col-12 p-4">
                           <div class="form-group">
                             <label class="bmd-label-floating" for="codigodoctor">
                               Especialidad
@@ -108,15 +104,15 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <button (click)="crear2()"
+                      <button (click)="crear2()"
                         type="submit" class="btn btn-primary pull-right">
                         Crear
-                      </button> -->
+                      </button>
                     </form>
                   </div>
                 </div>
               </div>
-              <!-- <div *ngIf="especialidadcreate" class="col-12 p-1">
+              <div *ngIf="especialidadcreate" class="col-12 p-1">
                 <div class="card">
                   <div class="card-header card-header-primary">
                     <h4 class="card-title">
@@ -125,8 +121,8 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <div class="row">
-                        <div class="col-lg-6">
+                      <div class="row p-4">
+                        <div class="col-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">
                               Nombre
@@ -139,7 +135,19 @@
                               placeholder=".........">
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Precio
+                            </label>
+                              <input name="especialidad.Price"
+                              [(ngModel)]="especialidad.Price"
+                              type="text" class="form-control"
+                              required minlength="2"
+                              tabindex="2" placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">
                               Resumen
@@ -149,20 +157,8 @@
                               class="form-control"
                               cols="30" rows="10"
                               required minlength="20"
-                              tabindex="2"
+                              tabindex="3"
                               placeholder="........."></textarea>
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label class="bmd-label-floating">
-                              Precio
-                            </label>
-                              <input name="especialidad.Price"
-                              [(ngModel)]="especialidad.Price"
-                              type="text" class="form-control"
-                              required minlength="2"
-                              tabindex="3" placeholder=".........">
                           </div>
                         </div>
                       </div>
@@ -176,7 +172,7 @@
                             <button (click)="changeImg2()" type="button" class="btn btn-primary">
                               <input type="file"
                                   name="avatar"
-                                  #file1
+                                  #file2
                                   (change)="changeImagen2()"
                                   accept=".png,.jpg,.jpeg">
                                   Subir Imagen
@@ -189,7 +185,7 @@
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <img class="rounded-circle" [src]="especialidad.Image">
+                          <img id="imagen" class="w-100" [src]="especialidad.Image">
                         </div>
                       </div>
                       <div class="row">
@@ -202,9 +198,9 @@
                             <button (click)="changeIco()" type="button" class="btn btn-primary">
                               <input type="file"
                                   name="avatar"
-                                  #file1
+                                  #file3
                                   (change)="changeIcono()"
-                                  accept=".png,.jpg,.jpeg">
+                                  accept=".png,.jpg,.jpeg">fg
                                   Subir Icono
                             </button>
                             <br>
@@ -215,7 +211,7 @@
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <img class="rounded-circle" [src]="especialidad.Icon">
+                          <img id="imagen" class="w-100" [src]="especialidad.Icon">
                         </div>
                       </div>
                       <button (click)="saveEspecialidad()" type="submit" class="btn btn-primary pull-right"
@@ -226,7 +222,7 @@
                     </form>
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -234,7 +230,7 @@
           <div class="col-12 p-1">
             <form>
               <div class="row">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-md-9 col-lg-8">
                   <div class="form-group">
                     <label class="bmd-label-floating">
                       Turno
@@ -246,7 +242,7 @@
                       tabindex="1" placeholder=".........">
                   </div>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-3 col-lg-4">
                   <button (click)="saveEspecialista()" type="submit" class="btn btn-primary"
                     [disabled]="(codigodoctor === 0 || codigoespecialidad === 0 ||  especialista.Turn === '')? true:false">
                     Asignar Nueva Especialidad

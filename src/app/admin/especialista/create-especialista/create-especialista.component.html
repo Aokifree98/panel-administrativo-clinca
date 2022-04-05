@@ -8,7 +8,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-6 p-1">
+          <div class="col-12 col-lg-6 p-3">
             <div class="row">
               <div *ngIf="resultadodoctor" class="col-12 p-1">
                 <div class="card">
@@ -18,7 +18,7 @@
                     </h4>
                   </div>
                   <div class="card-body">
-                    <div class="row">
+                    <div class="row p-4">
                       <div class="col-12 col-md-4 p-1">
                         <img [src]="doctor1.Photo" class="w-100" alt="foto doctor">
                       </div>
@@ -52,10 +52,10 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <div class="row">
+                      <div class="row p-4">
                         <div class="col-12 p-1">
                           <div class="form-group">
-                            <label class="bmd-label-floating" for="codigodoctor">
+                            <label class="bmd-label-floating">
                               Doctor
                             </label>
                             <select
@@ -91,7 +91,7 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <div class="row">
+                      <div class="row p-4">
                         <div class="col-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">
@@ -183,7 +183,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-6 p-1">
+          <div class="col-12 col-lg-6 p-3">
             <div class="row">
               <div *ngIf="resultadoespecialidad" class="col-12 p-1">
                 <div class="card">
@@ -193,7 +193,7 @@
                     </h4>
                   </div>
                   <div class="card-body">
-                    <div class="row">
+                    <div class="row p-4">
                       <div class="col-12 col-md-4 p-1">
                         <img [src]="especialidad1.Image" class="w-100" alt="foto doctor">
                       </div>
@@ -223,10 +223,10 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <div class="row">
+                      <div class="row p-4">
                         <div class="col-12 p-1">
                           <div class="form-group">
-                            <label class="bmd-label-floating" for="codigodoctor">
+                            <label class="bmd-label-floating">
                               Especialidad
                             </label>
                             <select
@@ -263,8 +263,8 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <div class="row">
-                        <div class="col-lg-6">
+                      <div class="row p-4">
+                        <div class="col-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">
                               Nombre
@@ -277,7 +277,19 @@
                               placeholder=".........">
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Precio
+                            </label>
+                              <input name="especialidad.Price"
+                              [(ngModel)]="especialidad.Price"
+                              type="text" class="form-control"
+                              required minlength="2"
+                              tabindex="2" placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-126">
                           <div class="form-group">
                             <label class="bmd-label-floating">
                               Resumen
@@ -287,22 +299,11 @@
                               class="form-control"
                               cols="30" rows="10"
                               required minlength="20"
-                              tabindex="2"
+                              tabindex="3"
                               placeholder="........."></textarea>
                           </div>
                         </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label class="bmd-label-floating">
-                              Precio
-                            </label>
-                              <input name="especialidad.Price"
-                              [(ngModel)]="especialidad.Price"
-                              type="text" class="form-control"
-                              required minlength="2"
-                              tabindex="3" placeholder=".........">
-                          </div>
-                        </div>
+
                       </div>
                       <div class="row">
                         <div class="col-md-8">
@@ -311,11 +312,11 @@
                               Imagen
                             </label>
                             <br>
-                            <button (click)="changeImg()" type="button" class="btn btn-primary">
+                            <button (click)="changeImg2()" type="button" class="btn btn-primary">
                               <input type="file"
                                   name="avatar"
                                   #file1
-                                  (change)="changeImagen()"
+                                  (change)="changeImagen2()"
                                   accept=".png,.jpg,.jpeg">
                                   Subir Imagen
                             </button>
@@ -372,7 +373,7 @@
           <div class="col-12 p-1">
             <form>
               <div class="row">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-md-9 col-lg-8">
                   <div class="form-group">
                     <label class="bmd-label-floating">
                       Turno
@@ -384,7 +385,7 @@
                       tabindex="1" placeholder=".........">
                   </div>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-3 col-lg-4">
                   <button (click)="saveEspecialista()" type="submit" class="btn btn-primary"
                     [disabled]="(codigodoctor === 0 || codigoespecialidad === 0 ||  especialista.Turn === '')? true:false">
                     Crear Especialista

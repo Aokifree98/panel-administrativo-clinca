@@ -124,7 +124,7 @@
                   [(ngModel)]="cliente.Gender"
                   name="cliente.Gender"
                   required tabindex="9">
-                  <option selected>
+                  <option value=""  selected>
                     Seleccione su Genero
                   </option>
                   <option [value]="obj.name" *ngFor="let obj of genero">
@@ -144,7 +144,7 @@
                   [(ngModel)]="cliente.CivilStatus"
                   name="cliente.CivilStatus"
                   required tabindex="10">
-                  <option selected>
+                  <option value="" selected>
                     Seleccione su Estado Civil
                   </option>
                   <option [value]="obj.name" *ngFor="let obj of estadocivil">
@@ -152,6 +152,32 @@
                   </option>
                 </select>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Foto
+                </label>
+                <br>
+                <button (click)="changeImg()"
+                type="button" class="btn btn-primary">
+                  <input type="file"
+                    name="avatar"
+                    #file1 required tabindex="11"
+                    (change)="changeImagen()"
+                    accept=".png,.jpg,.jpeg">
+                    Subir Imagen
+                </button>
+                <br>
+                <input name="cliente.Photo"
+                [(ngModel)]="cliente.Photo"
+                type="text" class="form-control text-primary" readonly required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle img-fluid" [src]="cliente.Photo">
             </div>
           </div>
           <button (click)="saveCliente()" type="submit" class="btn btn-primary pull-right"

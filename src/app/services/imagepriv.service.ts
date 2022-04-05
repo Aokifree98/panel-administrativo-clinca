@@ -9,6 +9,8 @@ export class ProfileUploadService {
   URLlogosmall = this.urlgeneral + '/smalllogo';
   URLlogolarge = this.urlgeneral + '/largelogo';
   URLfoto = this.urlgeneral + '/foto';
+  urlimagen = this.urlgeneral + '/upload-images';
+  urlicono = this.urlgeneral + '/upload-icono';
   urlbannercito = this.urlgeneral + '/banner';
   urlnumero = this.urlgeneral + '/numero';
   urlobjetivo = this.urlgeneral + '/objetivo';
@@ -20,6 +22,21 @@ export class ProfileUploadService {
 
   constructor(private http: HttpClient) { }
 
+  uploadimage(file: File, name: string) {
+    // create a new multipart-form for every file
+    const formData: FormData = new FormData();
+    formData.append(name, file, file.name);
+    // retornamos la data del servidor
+    return this.http.post(`${this.urlimagen}`, formData);
+  }
+
+  uploadicono(file: File, name: string) {
+    // create a new multipart-form for every file
+    const formData: FormData = new FormData();
+    formData.append(name, file, file.name);
+    // retornamos la data del servidor
+    return this.http.post(`${this.urlicono}`, formData);
+  }
   // tslint:disable-next-line: typedef
   uploadfoto(file: File, name: string) {
     // create a new multipart-form for every file

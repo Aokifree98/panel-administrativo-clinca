@@ -43,7 +43,7 @@
                     alt="foto">
                 </td>
                 <td>
-                  {{item.Name + '' + item.LastName}}
+                  {{item.Name + ' ' + item.LastName}}
                 </td>
                 <td>
                   {{item.MedicalSchoolNumber}}
@@ -101,7 +101,7 @@
                   {{item.especialidad.Name}}
                 </td>
                 <td class="text-primary">
-                  <button (click)="editar(item.id)" type="button" class="btn btn-info">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
                     <span class="material-icons">
                       edit
                     </span>

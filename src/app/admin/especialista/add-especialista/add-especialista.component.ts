@@ -86,6 +86,17 @@ export class AddEspecialistaComponent implements OnInit {
   onOptionsSelectedEspecialidad(event) {
     const value = event.target.value;
     this.codigoespecialidad = value;
+    this.especialidadService.getEspecialidad(this.codigoespecialidad.toString()).subscribe(
+      resespecialidad => {
+        this.especialidad1 = resespecialidad;
+        this.toastr.info('Especialidad elegida');
+        this.resultadoespecialidad = true;
+        this.especialidadbuscar = false;
+        this.especialidadcreate = false;
+      }, err => {
+        this.toastr.error('Error Api get especialidad');
+      }
+    );
     console.log(value);
   }
   changeImg2() {
@@ -100,12 +111,10 @@ export class AddEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileimagen2.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Imagen').subscribe(
+    this.photoService.uploadimage(files[0], 'image').subscribe(
       (resimage) => {
-        console.log(resimage);
         this.datosimagen2 = resimage;
         this.laurlimagen2 = this.datosimagen2.data.url;
-        console.log(this.laurlimagen2);
         this.especialidad.Image = this.laurlimagen2;
         this.cargoimagen2 = true;
       },
@@ -118,7 +127,7 @@ export class AddEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileicono.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Icono').subscribe(
+    this.photoService.uploadicono(files[0], 'icono').subscribe(
       (resico) => {
         console.log(resico);
         this.datosiconon = resico;
@@ -173,8 +182,8 @@ export class AddEspecialistaComponent implements OnInit {
     this.especialistaService.saveEspecialista(this.especialista).subscribe(
       res => {
         console.log(res);
-
         this.toastr.success('Nuevo especialista creado');
+        // window.location.reload();
       },
       err => {
         console.error(err);

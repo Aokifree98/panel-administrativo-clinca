@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from 'src/app/models/cliente';
-import { Component, OnInit } from '@angular/core';
 import { Genero } from 'src/app/models/genero.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ProfileUploadService } from 'src/app/services/imagepriv.service';
 
 @Component({
   selector: 'app-update-cliente',
@@ -12,6 +13,9 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./update-cliente.component.css']
 })
 export class UpdateClienteComponent implements OnInit {
+  @ViewChild('file1') fileimagen;
+  laurlimagen;
+  datosimagen: any = [];
   cliente: Cliente = {
     id: 0,
     Name: '',
@@ -83,6 +87,7 @@ export class UpdateClienteComponent implements OnInit {
     private toastr: ToastrService,
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
+    private photoService: ProfileUploadService,
   ) { }
   cambio(event) {
     console.log(event);
@@ -100,6 +105,28 @@ export class UpdateClienteComponent implements OnInit {
     this.cliente.CivilStatus = value;
     console.log(value);
   }
+
+  changeImg() {
+    this.fileimagen.nativeElement.click();
+  }
+  // tslint:disable-next-line: typedef
+  changeImagen() {
+    // this.showAvatarUpload = true;
+    const files: { [key: string]: File } = this.fileimagen.nativeElement.files;
+    console.log(files);
+    // let progress = this.uploadService.upload(images);
+    this.photoService.uploadfoto(files[0], 'foto').subscribe(
+      (resimage) => {
+        console.log(resimage);
+        this.datosimagen = resimage;
+        this.laurlimagen = this.datosimagen.data.url;
+        console.log(this.laurlimagen);
+        this.cliente.Photo = this.laurlimagen;
+      },
+      console.error,
+    );
+  }
+
   updateCliente() {
     const params = this.activatedRoute.snapshot.params;
     this.clienteService.updateCliente(params.id, this.cliente).subscribe(

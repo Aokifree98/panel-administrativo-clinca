@@ -108,12 +108,35 @@ export class CreateEspecialistaComponent implements OnInit {
   onOptionsSelectedEspecialidad(event) {
     const value = event.target.value;
     this.codigoespecialidad = value;
+    this.especialidadService.getEspecialidad(this.codigoespecialidad.toString()).subscribe(
+      resespecialidad => {
+        this.especialidad1 = resespecialidad;
+        this.toastr.info('Especialidad elegida');
+        this.resultadoespecialidad = true;
+        this.especialidadbuscar = false;
+        this.especialidadcreate = false;
+      }, err => {
+        this.toastr.error('Error Api get especialidad');
+      }
+    );
     console.log(value);
   }
   // tslint:disable-next-line: typedef
   onOptionsSelecteDoctor(event) {
     const value = event.target.value;
     this.codigodoctor = value;
+    this.doctorService.getDoctor(this.codigodoctor.toString()).subscribe(
+      resdoctor => {
+        this.doctor1 = resdoctor;
+        this.toastr.info('Doctor elegido');
+        this.resultadodoctor = true;
+        this.doctorbuscar = false;
+        this.doctorcreate = false;
+      }, err => {
+        this.toastr.error('Error Api get Doctor');
+      }
+    );
+
     console.log(value);
   }
   // tslint:disable-next-line: typedef
@@ -151,7 +174,7 @@ export class CreateEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileimagen2.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Imagen').subscribe(
+    this.photoService.uploadimage(files[0], 'image').subscribe(
       (resimage) => {
         console.log(resimage);
         this.datosimagen2 = resimage;
@@ -169,7 +192,7 @@ export class CreateEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileicono.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Icono').subscribe(
+    this.photoService.uploadicono(files[0], 'icono').subscribe(
       (resico) => {
         console.log(resico);
         this.datosiconon = resico;

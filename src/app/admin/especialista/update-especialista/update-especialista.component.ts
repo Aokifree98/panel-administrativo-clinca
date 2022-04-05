@@ -142,7 +142,7 @@ export class UpdateEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileimagen2.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Imagen').subscribe(
+    this.photoService.uploadimage(files[0], 'image').subscribe(
       (resimage) => {
         console.log(resimage);
         this.datosimagen2 = resimage;
@@ -160,7 +160,7 @@ export class UpdateEspecialistaComponent implements OnInit {
     const files: { [key: string]: File } = this.fileimagen.nativeElement.files;
     console.log(files);
     // let progress = this.uploadService.upload(images);
-    this.photoService.uploadservicio(files[0], 'Icono').subscribe(
+    this.photoService.uploadicono(files[0], 'icono').subscribe(
       (resico) => {
         console.log(resico);
         this.datosiconon = resico;

@@ -7,28 +7,28 @@ import { GlobalService } from './variable.service';
   providedIn: 'root'
 })
 export class ReportesService {
-  apiUrl = this.wasa.apiUrlGlobal + '/live/sport/report';
+  apiUrl = this.wasa.apiUrlGlobal + '/live';
   constructor(
     private http: HttpClient,
     private wasa: GlobalService
   ) { }
   // reporte numero 1
-  getfield(fecha1: string, fecha2: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/reporte1/${fecha1}/${fecha2}`);
+  getconsolidado(fechastart: string, fechaend: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/report/consolidado/${fechastart}/${fechaend}`);
   }
   // reporte numero 2
-  getcustomer(fecha1: string, fecha2: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/reporte2/${fecha1}/${fecha2}`);
-  }
+  // getcustomer(fecha1: string, fecha2: string): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/reporte2/${fecha1}/${fecha2}`);
+  // }
 
   // reporte numero 3
-  getadmin(fecha1: string, fecha2: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/reporte3/${fecha1}/${fecha2}`);
-  }
+  // getadmin(fecha1: string, fecha2: string): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/reporte3/${fecha1}/${fecha2}`);
+  // }
 
   // reporte numero 3
-  getgratis(fecha1: string, fecha2: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/reporte4/${fecha1}/${fecha2}`);
-  }
+  // getgratis(fecha1: string, fecha2: string): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/reporte4/${fecha1}/${fecha2}`);
+  // }
   // los demas reportes ...
 }

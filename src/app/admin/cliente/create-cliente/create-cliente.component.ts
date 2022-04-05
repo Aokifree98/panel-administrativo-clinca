@@ -2,9 +2,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { Cliente } from 'src/app/models/cliente';
-import { Component, OnInit } from '@angular/core';
 import { Genero } from 'src/app/models/genero.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ProfileUploadService } from 'src/app/services/imagepriv.service';
 
 @Component({
   selector: 'app-create-cliente',
@@ -12,6 +13,9 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./create-cliente.component.css']
 })
 export class CreateClienteComponent implements OnInit {
+  @ViewChild('file1') fileimagen;
+  laurlimagen;
+  datosimagen: any = [];
   cliente: Cliente = {
     id: 0,
     Name: '',
@@ -80,7 +84,8 @@ export class CreateClienteComponent implements OnInit {
     private pd: DatePipe,
     private router: Router,
     private toastr: ToastrService,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private photoService: ProfileUploadService,
   ) { }
   // tslint:disable-next-line: typedef
   onOptionsSelected(event) {
@@ -93,6 +98,26 @@ export class CreateClienteComponent implements OnInit {
     const value = event.target.value;
     this.cliente.CivilStatus = value;
     console.log(value);
+  }
+  changeImg() {
+    this.fileimagen.nativeElement.click();
+  }
+  // tslint:disable-next-line: typedef
+  changeImagen() {
+    // this.showAvatarUpload = true;
+    const files: { [key: string]: File } = this.fileimagen.nativeElement.files;
+    console.log(files);
+    // let progress = this.uploadService.upload(images);
+    this.photoService.uploadfoto(files[0], 'foto').subscribe(
+      (resimage) => {
+        console.log(resimage);
+        this.datosimagen = resimage;
+        this.laurlimagen = this.datosimagen.data.url;
+        console.log(this.laurlimagen);
+        this.cliente.Photo = this.laurlimagen;
+      },
+      console.error,
+    );
   }
   // tslint:disable-next-line: typedef
   saveCliente() {

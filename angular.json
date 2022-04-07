@@ -25,7 +25,6 @@
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/css/material-dashboard.css",
@@ -108,7 +107,6 @@
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/css/material-dashboard.css",

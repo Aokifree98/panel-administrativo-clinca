@@ -131,7 +131,7 @@ export class Reporte1Component implements OnInit {
         const pdf = new jspdf('p', 'mm', 'a4');
         const position = 0;
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, heightleft);
-        pdf.save('boleta.pdf');
+        pdf.save('reporteconsolidadocitas.pdf');
       }
     );
   }

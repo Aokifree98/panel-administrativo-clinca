@@ -6,6 +6,10 @@ import { CitaService } from 'src/app/services/cita.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { HorarioService } from 'src/app/services/horario.service';
 import { EspecialistaService } from 'src/app/services/especialista.service';
+import { Tipo } from 'src/app/models/tipo';
+import { TipoService } from 'src/app/services/tipo.service';
+import { LaboratorioService } from 'src/app/services/laboratorio.service';
+
 
 @Component({
   selector: 'app-subproceso1de7',
@@ -13,6 +17,14 @@ import { EspecialistaService } from 'src/app/services/especialista.service';
   styleUrls: ['./subproceso1de7.component.css']
 })
 export class Subproceso1de7Component implements OnInit {
+  laboratorios: any = [];
+  tipos: any = [];
+  tipo: Tipo = {
+    id: 0,
+    Name: ''
+  };
+  tiposlab: any = [];
+  codigotipo;
   especialistas: any = [];
   doctores: any = [];
   reservasdia: any = [];
@@ -39,6 +51,8 @@ export class Subproceso1de7Component implements OnInit {
     private doctorService: DoctorService,
     private horarioService: HorarioService,
     private especialistaService: EspecialistaService,
+    private tipoService: TipoService,
+    private laboratorioService: LaboratorioService,
   ) { }
   ver(codigo) {
     this.codigodoctor = codigo;
@@ -63,6 +77,7 @@ export class Subproceso1de7Component implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.gettiposlab();
     this.getdoctores();
     this.fechamin = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1);
     this.fechamax = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
@@ -163,5 +178,33 @@ export class Subproceso1de7Component implements OnInit {
     );
     this.toastr.success('Registrar al paciente y pago');
   }
-
+  gettiposlab() {
+    this.tipoService.getTipos().subscribe(
+      res => {
+        this.tiposlab = res;
+        console.log(res);
+      }, err => {
+        this.toastr.error('Error Api tipo');
+      }
+    );
+    
+  }
+  verLab(codigo) {
+    const parametro = codigo;
+    this.codigotipo = codigo;
+    this.laboratorioService.getLaboratorioTipo(parametro).subscribe(
+      res => {
+        this.laboratorios = res;
+        console.log(res);
+      },
+      err => {
+        this.toastr.error('Error Api List Laboratorios del Tipo');
+      }
+    );
+  }
+  onOptionsSelected(event) {
+    const value = event.target.value;
+    this.tipo.Name = value;
+    console.log(value);
+  }
 }

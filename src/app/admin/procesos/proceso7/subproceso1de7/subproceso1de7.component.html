@@ -225,6 +225,7 @@
   </div>
 </div>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Laboratorio</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,16 +262,160 @@
                     </span>
                   </button>
                 </td>
+                
               </tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">
+        <button type="button" class="btn btn-info" data-target=".bd-example-modal-xl" data-dismiss="modal">
           Cerrar
         </button>
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <h5 class="modal-title lb-primary" id="exampleModalLabel">
+          Examenes de Laboratorio
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4">
+            <!-- Aca iria el *ngif con la bandera para le primer tipo de examenes-->
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <button class="btn btn-secondary">
+                  Tipo Análisis:
+                </button>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <div *ngFor="let item of tiposlab">
+                  <button (click)="verLab(item.id)" class="btn btn-primary col">
+                    {{item.Name}}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!---->
+            <!-- Aca iria el *ngif con la bandera para le segundo tipo de examenes-->
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <button class="btn btn-secondary">
+                  Tipo RayosX/TEM/RM:
+                </button>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <div *ngFor="let item of tiposlab">
+                  <button (click)="verLab(item.id)" class="btn btn-primary col">
+                    {{item.Name}}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+          <div class="col-lg-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <h4>Examenes:</h4>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <div *ngFor="let item of laboratorios" class="m-2">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="">
+                        {{item.Name}}
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-lg-6">
+                <button class="btn btn-primary">
+                  Añadir
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <h4>Carrito:</h4>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                <!--Aca iria el ngFor para los examenes añadidos-->
+                <div class="form-check">
+                  <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value="">
+                      Examen 1
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                  </label>
+                </div>
+                <!---->
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-lg-8">
+                <button class="btn btn-primary">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-target=".bd-example-modal-xl" data-dismiss="modal">
+          Aceptar
+        </button>
+        <button type="button" class="btn btn-info" data-target=".bd-example-modal-xl" data-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  <div *ngFor="let item of tiposlab">
+              <button (click)="verLab(item.id)" class="btn btn-primary col">
+                {{item.Name}}
+              </button>
+              <div *ngFor="let item of laboratorios" class="m-2">
+                <div class="form-check">
+                  <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value="">
+                      {{item.Name}}
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+-->

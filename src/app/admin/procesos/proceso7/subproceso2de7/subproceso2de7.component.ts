@@ -4,6 +4,7 @@ import { Horario } from 'src/app/models/horario';
 import { Cliente } from 'src/app/models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { ListCita } from 'src/app/models/listcita';
+import { Analisis } from 'src/app/models/analisis';
 import { Genero } from 'src/app/models/genero.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListHorario } from 'src/app/models/listhorario';
@@ -11,11 +12,16 @@ import { CitaService } from 'src/app/services/cita.service';
 import { ListDetalleCita } from 'src/app/models/Listdetallecita';
 import { HorarioService } from 'src/app/services/horario.service';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { AnalisisService } from 'src/app/services/analisis.service';
+import { LaboratorioService } from 'src/app/services/laboratorio.service';
 import { ListDermatomaFrontal } from 'src/app/models/listdermatomafrontal';
+import { ListLaboratoriocita } from 'src/app/models/listlaboratoriodoscita';
 import { ListDermatomaPosterior } from 'src/app/models/listdermatomaposterior';
+import { LaboratoriodosService } from 'src/app/services/laboratoriodos.service';
 import { DetallecitacitaService } from 'src/app/services/detallecitacita.service';
 import { DermatomafrontalService } from 'src/app/services/dermatomafrontal.service';
 import { DermatomaposteriorService } from 'src/app/services/dermatomaposterior.service';
+import { LaboratoriodoscitaService } from 'src/app/services/laboratoriodoscita.service';
 
 @Component({
   selector: 'app-subproceso2de7',
@@ -384,6 +390,12 @@ export class Subproceso2de7Component implements OnInit {
   resultado: any;
   resultado2: any;
   resultado3: any;
+  cantidadanalisis;
+  cantidadrxtmrm;
+  laboratorios: any = [];
+  laboratoriosdos: any = [];
+  laboratorioscita: any = [];
+  laboratoriosdoscita: any = [];
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -391,10 +403,32 @@ export class Subproceso2de7Component implements OnInit {
     private activatedRoute: ActivatedRoute,
     private clienteService: ClienteService,
     private horarioService: HorarioService,
+    private analisisService: AnalisisService,
+    private laboratorioService: LaboratorioService,
     private detallecitaService: DetallecitacitaService,
+    private laboratoriodosService: LaboratoriodosService,
     private dermatomafrontalService: DermatomafrontalService,
+    private laboratoriodoscitaService: LaboratoriodoscitaService,
     private dermatomaposteriorService: DermatomaposteriorService,
   ) { }
+  getcantidad1() {
+    this.laboratorioService.getLaboratorios().subscribe(
+      res => {
+        this.laboratorios = res;
+        this.cantidadanalisis = Object.entries(this.laboratorios).length;
+      }, err => {
+        this.toastr.error('Error get laboratorios');
+      }
+    );
+    this.laboratoriodosService.getLaboratorios().subscribe(
+      res => {
+        this.laboratoriosdos = res;
+        this.cantidadrxtmrm = Object.entries(this.laboratoriosdos).length;
+      }, err => {
+        this.toastr.error('Error get laboratoriosdos');
+      }
+    );
+  }
   onOptionsSelected(event) {
     const value = event.target.value;
     this.cliente.Gender = value;
@@ -522,6 +556,49 @@ export class Subproceso2de7Component implements OnInit {
         const codigoreserva = this.reserva1.id;
         const bandera = this.reserva1.Condition;
         const parametrito = this.reserva1.Type;
+        // creando los laboratorios
+        let analisis : Analisis = {
+          Value: false,
+          Condition: 'asignado',
+          CitaId: codigoreserva,
+          LaboratorioId: 0
+        }
+        let rxtmrm: ListLaboratoriocita = {
+          Value: false,
+          Location: '',
+          Amount: '',
+          Condition: 'asignado',
+          CitaId: codigoreserva,
+          LaboratoriodosId: 0
+        }
+        const arraylabsave: any = [];
+        const arraylab2save: any = [];
+        const limite1 = this.cantidadanalisis + 1;
+        const limite2 = this.cantidadrxtmrm + 1;
+        for (let i = 0; i < limite1; i++) {
+          analisis.LaboratorioId = i;
+          this.analisisService.saveAnalisis(analisis).subscribe(
+            res => {
+              arraylabsave.push(res);
+              this.laboratorioscita = arraylabsave;
+            }, err => {
+              this.toastr.error('Error unir analisis con cita');
+            }
+          );
+        }
+        for (let j = 0; j < limite2; j++) {
+          rxtmrm.LaboratoriodosId = j;
+          this.laboratoriodoscitaService.saveLaboratoriocita(rxtmrm).subscribe(
+            res => {
+              arraylab2save.push(res);
+              this.laboratoriosdoscita = arraylab2save;
+            }, err => {
+              this.toastr.error('Error unir rxtmrm con cita');
+            }
+          );
+        }
+        console.log(this.laboratorioscita);
+        console.log(this.laboratoriosdoscita);
         if (parametrito === 'medicina del dolor') {
           this.detallecita.CitaId = codigoreserva;
           this.frontbody.CitaId = codigoreserva;

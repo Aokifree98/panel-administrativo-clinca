@@ -12,7 +12,7 @@
             <h2>
               Tipo:
               <br>
-              {{ladata.tipo.Name}}
+              {{tipo.Name}}
             </h2>
           </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">
-          Editar Examen Laboratorio
+          Crear Examen Laboratorio
         </h4>
       </div>
       <div class="card-body">
@@ -62,21 +62,6 @@
             <div class="col-12">
               <div class="form-group">
                 <label class="bmd-label-floating">
-                  Placa o Placas
-                </label>
-                <br>
-                <input name="laboratorio.Plurality"
-                [(ngModel)]="laboratorio.Plurality"
-                type="text" class="form-control"
-                required minlength="5"
-                tabindex="3"
-                placeholder="placa o placas">
-              </div>
-            </div>
-            <br>
-            <div class="col-12">
-              <div class="form-group">
-                <label class="bmd-label-floating">
                   Detalle
                 </label>
                 <br>
@@ -84,16 +69,16 @@
                   [(ngModel)]="laboratorio.Detail"
                   class="form-control"
                   required minlength="10"
-                  tabindex="4"
+                  tabindex="3"
                   placeholder="........."
                   cols="30" rows="10"></textarea>
               </div>
             </div>
           </div>
           <div class="col-12 p-1">
-            <button (click)="updateLaboratorio()" type="submit" class="btn btn-primary pull-right"
-              [disabled]="(laboratorio.Name === '' ||  laboratorio.Detail === '' ||  laboratorio.Price === 0)? true:false">
-              Actualizar
+            <button (click)="saveLaboratorio()" type="submit" class="btn btn-primary pull-right"
+              [disabled]="(laboratorio.Name === '' ||  laboratorio.Detail === '' ||  laboratorio.Price === 0 ||  laboratorio.TipoId === 0)? true:false">
+              Crear
             </button>
           </div>
           <div class="clearfix"></div>
@@ -101,4 +86,10 @@
       </div>
     </div>
   </div>
+  <!-- <div class="col-12 p-1">
+    <button (click)="finish()" type="submit" class="btn btn-primary pull-right"
+      [disabled]="(laboratorio1.id === 0)? true:false">
+      Terminar
+    </button>
+  </div> -->
 </div>

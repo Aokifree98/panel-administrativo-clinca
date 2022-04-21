@@ -79,7 +79,13 @@ import { UpdateHorarioComponent } from './horario/update-horario/update-horario.
 import { ListEpisodioComponent } from './episodio/list-episodio/list-episodio.component';
 import { UpdateEpisodioComponent } from './episodio/update-episodio/update-episodio.component';
 import { CreateEpisodioComponent } from './episodio/create-episodio/create-episodio.component';
+// analisis
+import { AddAnalisisComponent } from './analisis/add-analisis/add-analisis.component';
+import { ListAnalisisComponent } from './analisis/list-analisis/list-analisis.component';
+import { CreateAnalisisComponent } from './analisis/create-analisis/create-analisis.component';
+import { UpdateAnalisisComponent } from './analisis/update-analisis/update-analisis.component';
 // laboratorio
+import { AddLaboratorioComponent } from './laboratorio/add-laboratorio/add-laboratorio.component';
 import { ListLaboratorioComponent } from './laboratorio/list-laboratorio/list-laboratorio.component';
 import { CreateLaboratorioComponent } from './laboratorio/create-laboratorio/create-laboratorio.component';
 import { UpdateLaboratorioComponent } from './laboratorio/update-laboratorio/update-laboratorio.component';
@@ -130,7 +136,7 @@ import { Subproceso1de7Component } from './procesos/proceso7/subproceso1de7/subp
 import { Subproceso2de7Component } from './procesos/proceso7/subproceso2de7/subproceso2de7.component';
 import { Subproceso3de7Component } from './procesos/proceso7/subproceso3de7/subproceso3de7.component';
 import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subproceso4de7.component';
-import { AddLaboratorioComponent } from './laboratorio/add-laboratorio/add-laboratorio.component';
+
 
 
 const routes: Routes = [
@@ -351,7 +357,28 @@ const routes: Routes = [
       //   ]
       // },
       {
-        path: 'laboratorio',
+        path: 'analisis',
+        children: [
+          {
+            path: 'list',
+            component: ListAnalisisComponent
+          },
+          {
+            path: 'create',
+            component: CreateAnalisisComponent
+          },
+          {
+            path: 'update/:id',
+            component: UpdateAnalisisComponent
+          },
+          {
+            path: 'add/:id',
+            component: AddAnalisisComponent
+          }
+        ]
+      },
+      {
+        path: 'rx-tm-rm',
         children: [
           {
             path: 'list',

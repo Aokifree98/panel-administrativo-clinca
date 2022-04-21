@@ -1,13 +1,10 @@
 import { Title } from '@angular/platform-browser';
 
-export interface Laboratorio {
+export interface ListLaboratoriodos {
   id?: number,
   Name?: string,
   Detail?: string,
+  Plurality?: string,
   Price?: number,
-  TipoId?: number,
-  tipo?: {
-    id?: number,
-    Name?: string,
-  }
+  TipoId?: number
 }

@@ -92,7 +92,7 @@
             </p>
           </a>
         </li>
-        <!-- <li *ngIf="admin.Condition !== 'secretaria'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+        <li *ngIf="admin.Condition !== 'secretaria'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/horario/list']">
             <i class="material-icons">
               access_time
@@ -101,7 +101,7 @@
               Horario
             </p>
           </a>
-        </li> -->
+        </li>
         <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
           <a class="nav-link" [routerLink]="['/admin/antecedente/list']">
             <i class="material-icons">
@@ -123,12 +123,22 @@
           </a>
         </li> -->
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
-          <a class="nav-link" [routerLink]="['/admin/laboratorio/list']">
+          <a class="nav-link" [routerLink]="['/admin/analisis/list']">
             <i class="material-icons">
               assignment_ind
             </i>
             <p>
-              Laboratorio
+              Analisis
+            </p>
+          </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item ">
+          <a class="nav-link" [routerLink]="['/admin/rx-tm-rm/list']">
+            <i class="material-icons">
+              assignment_ind
+            </i>
+            <p>
+              Rx-Tm-RM
             </p>
           </a>
         </li>

@@ -1,18 +1,18 @@
 import { ToastrService } from 'ngx-toastr';
 import { Tipo } from 'src/app/models/tipo';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Laboratoriodos } from 'src/app/models/laboratoriodos';
-import { TipodosService } from 'src/app/services/tipodos.service';
-import { ListLaboratoriodos } from 'src/app/models/listlaboratoriodos';
-import { LaboratoriodosService } from 'src/app/services/laboratoriodos.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Laboratorio } from 'src/app/models/laboratorio';
+import { TipoService } from 'src/app/services/tipo.service';
+import { ListLaboratorio } from 'src/app/models/listlaboratorio';
+import { LaboratorioService } from 'src/app/services/laboratorio.service';
 
 @Component({
-  selector: 'app-update-laboratorio',
-  templateUrl: './update-laboratorio.component.html',
-  styleUrls: ['./update-laboratorio.component.css']
+  selector: 'app-update-analisis',
+  templateUrl: './update-analisis.component.html',
+  styleUrls: ['./update-analisis.component.css']
 })
-export class UpdateLaboratorioComponent implements OnInit {
+export class UpdateAnalisisComponent implements OnInit {
   tipo: Tipo = {
     id: 0,
     Name: ''
@@ -21,27 +21,24 @@ export class UpdateLaboratorioComponent implements OnInit {
     id: 0,
     Name: ''
   };
-  laboratorio: ListLaboratoriodos = {
+  laboratorio: ListLaboratorio = {
     id: 0,
     Name: '',
     Detail: '',
-    Plurality: '',
     Price: 0,
     TipoId: 0
   };
-  laboratorio1: ListLaboratoriodos = {
+  laboratorio1: ListLaboratorio = {
     id: 0,
     Name: '',
     Detail: '',
-    Plurality: '',
     Price: 0,
     TipoId: 0
   };
-  laboratoriodetail: Laboratoriodos = {
+  laboratoriodetail: Laboratorio = {
     id: 0,
     Name: '',
     Detail: '',
-    Plurality: '',
     Price: 0,
     TipoId: 0,
     tipo: {
@@ -55,12 +52,12 @@ export class UpdateLaboratorioComponent implements OnInit {
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private tipoService: TipodosService,
+    private tipoService: TipoService,
     private activatedRoute: ActivatedRoute,
-    private laboratorioService: LaboratoriodosService,
+    private laboratorioService: LaboratorioService,
   ) { }
   gettipos() {
-    this.tipoService.getTipodoss().subscribe(
+    this.tipoService.getTipos().subscribe(
       res => {
         this.tipos = res;
       },
@@ -73,7 +70,7 @@ export class UpdateLaboratorioComponent implements OnInit {
     const value = event.target.value;
     this.laboratorio.TipoId = value;
     console.log(value);
-    this.tipoService.getTipodos(value).subscribe(
+    this.tipoService.getTipo(value).subscribe(
       res => {
         this.tipo1 = res;
         this.bandera = 'elegido';
@@ -90,7 +87,7 @@ export class UpdateLaboratorioComponent implements OnInit {
   }
   saveTipo() {
     delete this.tipo.id;
-    this.tipoService.saveTipodos(this.tipo).subscribe(
+    this.tipoService.saveTipo(this.tipo).subscribe(
       res => {
         this.tipo1 = res;
       }, err => {
@@ -116,11 +113,11 @@ export class UpdateLaboratorioComponent implements OnInit {
         //     'list'
         //   ]
         // );
-        this.toastr.success('Nuevo laboratorio creado');
+        this.toastr.success('Nuevo analisis creado');
       },
       err => {
         console.error(err);
-        this.toastr.error('no se pudo crear un nuevo laboratorio');
+        this.toastr.error('no se pudo crear un nuevo analisis');
       }
     );
   }
@@ -144,7 +141,7 @@ export class UpdateLaboratorioComponent implements OnInit {
     this.router.navigate(
       [
         'admin',
-        'laboratorio',
+        'analisis',
         'list'
       ]
     );
@@ -156,14 +153,13 @@ export class UpdateLaboratorioComponent implements OnInit {
     this.laboratorioService.updateLaboratorio(params.id, this.laboratorio).subscribe(
       res => {
         console.log(res);
-        this.toastr.success('Laboratorio actualizado');
+        this.toastr.success('analisis actualizado');
         this.finish();
       },
       err => {
         console.error(err);
-        this.toastr.error('no se pudo actualizar laboratorio');
+        this.toastr.error('no se pudo actualizar analisis');
       }
     );
   }
-
 }

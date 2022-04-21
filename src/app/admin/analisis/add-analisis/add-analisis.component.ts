@@ -2,42 +2,40 @@ import { ToastrService } from 'ngx-toastr';
 import { Tipo } from 'src/app/models/tipo';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TipodosService } from 'src/app/services/tipodos.service';
-import { ListLaboratoriodos } from 'src/app/models/listlaboratoriodos';
-import { LaboratoriodosService } from 'src/app/services/laboratoriodos.service';
+import { TipoService } from 'src/app/services/tipo.service';
+import { ListLaboratorio } from 'src/app/models/listlaboratorio';
+import { LaboratorioService } from 'src/app/services/laboratorio.service';
 
 @Component({
-  selector: 'app-add-laboratorio',
-  templateUrl: './add-laboratorio.component.html',
-  styleUrls: ['./add-laboratorio.component.css']
+  selector: 'app-add-analisis',
+  templateUrl: './add-analisis.component.html',
+  styleUrls: ['./add-analisis.component.css']
 })
-export class AddLaboratorioComponent implements OnInit {
+export class AddAnalisisComponent implements OnInit {
   tipo: Tipo = {
     id: 0,
     Name: ''
   };
-  laboratorio: ListLaboratoriodos = {
+  laboratorio: ListLaboratorio = {
     id: 0,
     Name: '',
     Detail: '',
-    Plurality: '',
     Price: 0,
     TipoId: 0
   };
-  laboratorio1: ListLaboratoriodos = {
+  laboratorio1: ListLaboratorio = {
     id: 0,
     Name: '',
     Detail: '',
-    Plurality: '',
     Price: 0,
     TipoId: 0
   };
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private tipoService: TipodosService,
+    private tipoService: TipoService,
     private activatedRoute: ActivatedRoute,
-    private laboratorioService: LaboratoriodosService,
+    private laboratorioService: LaboratorioService,
   ) { }
   saveLaboratorio() {
     delete this.laboratorio.id;
@@ -46,19 +44,19 @@ export class AddLaboratorioComponent implements OnInit {
       res => {
         this.laboratorio1 = res;
         console.log(res);
-        this.toastr.success('Nuevo laboratorio creado');
+        this.toastr.success('Nuevo analisis creado');
         this.finish();
       },
       err => {
         console.error(err);
-        this.toastr.error('no se pudo crear un nuevo laboratorio');
+        this.toastr.error('no se pudo crear un nuevo analisis');
       }
     );
   }
   ngOnInit(): void {
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
-      this.tipoService.getTipodos(params.id).subscribe(
+      this.tipoService.getTipo(params.id).subscribe(
         res => {
           console.log(res);
           this.tipo = res;
@@ -74,7 +72,7 @@ export class AddLaboratorioComponent implements OnInit {
     this.router.navigate(
       [
         'admin',
-        'laboratorio',
+        'analisis',
         'list'
       ]
     );

@@ -2,15 +2,15 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Tipo } from 'src/app/models/tipo';
 import { Component, OnInit } from '@angular/core';
-import { TipodosService } from 'src/app/services/tipodos.service';
-import { LaboratoriodosService } from 'src/app/services/laboratoriodos.service';
+import { TipoService } from 'src/app/services/tipo.service';
+import { LaboratorioService } from 'src/app/services/laboratorio.service';
 
 @Component({
-  selector: 'app-list-laboratorio',
-  templateUrl: './list-laboratorio.component.html',
-  styleUrls: ['./list-laboratorio.component.css']
+  selector: 'app-list-analisis',
+  templateUrl: './list-analisis.component.html',
+  styleUrls: ['./list-analisis.component.css']
 })
-export class ListLaboratorioComponent implements OnInit {
+export class ListAnalisisComponent implements OnInit {
   laboratorios: any = [];
   tipos: any = [];
   bandera = false;
@@ -25,15 +25,15 @@ export class ListLaboratorioComponent implements OnInit {
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private tipoService: TipodosService,
-    private laboratorioService: LaboratoriodosService
+    private tipoService: TipoService,
+    private laboratorioService: LaboratorioService
   ) { }
   ngOnInit(): void {
     // this.getlaboratorios();
     this.gettipos();
   }
   gettipos() {
-    this.tipoService.getTipodoss().subscribe(
+    this.tipoService.getTipos().subscribe(
       res => {
         this.tipos = res;
       }, err => {
@@ -49,13 +49,13 @@ export class ListLaboratorioComponent implements OnInit {
         this.laboratorios = res;
       },
       err => {
-        this.toastr.error('Error Api List Laboratorios del Tipo');
+        this.toastr.error('Error Api List analisis del Tipo');
       }
     );
   }
   updateTipo() {
     // llamando a laboratorio de creacion que esta enlazada con el api
-    this.tipoService.updateTipodos(this.codigotipo, this.tipo).subscribe(
+    this.tipoService.updateTipo(this.codigotipo, this.tipo).subscribe(
       res => {
         console.log(res);
         this.mensaje = res;
@@ -73,7 +73,7 @@ export class ListLaboratorioComponent implements OnInit {
     this.router.navigate(
       [
         'admin',
-        'laboratorio',
+        'analisis',
         'create'
       ]
     );
@@ -81,7 +81,7 @@ export class ListLaboratorioComponent implements OnInit {
   edit(codigo) {
     this.bandera = true;
     this.codigotipo = codigo;
-    this.tipoService.getTipodos(codigo).subscribe(
+    this.tipoService.getTipo(codigo).subscribe(
       res => {
         this.tipo = res;
       }, err => {
@@ -97,7 +97,7 @@ export class ListLaboratorioComponent implements OnInit {
     this.router.navigate(
       [
         'admin',
-        'laboratorio',
+        'analisis',
         'update',
         codigoaeditar
       ]
@@ -112,11 +112,11 @@ export class ListLaboratorioComponent implements OnInit {
         const numero = Object.entries(this.laboratorios).length;
         console.log(numero);
         if (numero > 0) {
-          this.laboratorioService.deleteLaboratorio(this.parametrito).subscribe(
+          this.laboratorioService.getLaboratorioTipo(this.parametrito).subscribe(
             resdeletelabs => {
               this.mensaje = resdeletelabs;
-              this.toastr.info('Laboratorios de Tipo Eliminados');
-              this.tipoService.deleteTipodos(this.parametrito).subscribe(
+              this.toastr.info('analisis de Tipo Eliminados');
+              this.tipoService.deleteTipo(this.parametrito).subscribe(
                 resdeletetipo => {
                   this.mensaje1 = resdeletetipo;
                   this.toastr.info('Tipo Eliminado');
@@ -126,11 +126,11 @@ export class ListLaboratorioComponent implements OnInit {
                 }
               );
             }, err => {
-              this.toastr.error('Error Api Delete Laboratorios Tipo');
+              this.toastr.error('Error Api Delete analisis Tipo');
             }
           );
         } else if (numero === 0) {
-          this.tipoService.deleteTipodos(this.parametrito).subscribe(
+          this.tipoService.deleteTipo(this.parametrito).subscribe(
             resdeletetipo => {
               this.mensaje1 = resdeletetipo;
               this.toastr.info('Tipo Eliminado');
@@ -142,7 +142,7 @@ export class ListLaboratorioComponent implements OnInit {
         }
       },
       err => {
-        this.toastr.error('Error Api List Laboratorios del Tipo');
+        this.toastr.error('Error Api List analisis del Tipo');
       }
     );
   }
@@ -153,7 +153,7 @@ export class ListLaboratorioComponent implements OnInit {
     this.router.navigate(
       [
         'admin',
-        'laboratorio',
+        'analisis',
         'add',
         codigotipo
       ]
@@ -171,5 +171,4 @@ export class ListLaboratorioComponent implements OnInit {
   cancelar() {
     window.location.reload();
   }
-
 }

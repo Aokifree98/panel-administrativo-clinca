@@ -163,6 +163,10 @@ import { Subproceso2de7Component } from './procesos/proceso7/subproceso2de7/subp
 import { Subproceso3de7Component } from './procesos/proceso7/subproceso3de7/subproceso3de7.component';
 import { Subproceso4de7Component } from './procesos/proceso7/subproceso4de7/subproceso4de7.component';
 import { AddLaboratorioComponent } from './laboratorio/add-laboratorio/add-laboratorio.component';
+import { AddAnalisisComponent } from './analisis/add-analisis/add-analisis.component';
+import { CreateAnalisisComponent } from './analisis/create-analisis/create-analisis.component';
+import { ListAnalisisComponent } from './analisis/list-analisis/list-analisis.component';
+import { UpdateAnalisisComponent } from './analisis/update-analisis/update-analisis.component';
 
 
 @NgModule(
@@ -265,6 +269,10 @@ import { AddLaboratorioComponent } from './laboratorio/add-laboratorio/add-labor
       Subproceso3de7Component,
       Subproceso4de7Component,
       AddLaboratorioComponent,
+      AddAnalisisComponent,
+      CreateAnalisisComponent,
+      ListAnalisisComponent,
+      UpdateAnalisisComponent,
     ],
     imports: [
       CommonModule,

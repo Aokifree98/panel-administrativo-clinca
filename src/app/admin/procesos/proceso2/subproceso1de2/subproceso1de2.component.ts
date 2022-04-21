@@ -1,11 +1,11 @@
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Cita } from 'src/app/models/Cita';
 import { Component, OnInit } from '@angular/core';
 import { CitaService } from 'src/app/services/cita.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-subproceso1de2',
@@ -38,6 +38,10 @@ export class Subproceso1de2Component implements OnInit {
     PhysicalExam: '',
     Diagnosis: '',
     LaboratoryExam: '',
+    Creatininevalue: '',
+    Urea: '',
+    ETS: false,
+    Specifyothers: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0,

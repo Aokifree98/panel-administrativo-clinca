@@ -312,6 +312,10 @@ export class Subproceso2de7Component implements OnInit {
     PhysicalExam: '',
     Diagnosis: '',
     LaboratoryExam: '',
+    Creatininevalue: '',
+    Urea: '',
+    ETS: false,
+    Specifyothers: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -341,6 +345,10 @@ export class Subproceso2de7Component implements OnInit {
     PhysicalExam: '',
     Diagnosis: '',
     LaboratoryExam: '',
+    Creatininevalue: '',
+    Urea: '',
+    ETS: false,
+    Specifyothers: '',
     AdminId: 0,
     ClienteId: 0,
     HorarioId: 0
@@ -557,20 +565,20 @@ export class Subproceso2de7Component implements OnInit {
         const bandera = this.reserva1.Condition;
         const parametrito = this.reserva1.Type;
         // creando los laboratorios
-        let analisis : Analisis = {
+        const analisis : Analisis = {
           Value: false,
           Condition: 'asignado',
           CitaId: codigoreserva,
           LaboratorioId: 0
-        }
-        let rxtmrm: ListLaboratoriocita = {
+        };
+        const rxtmrm: ListLaboratoriocita = {
           Value: false,
           Location: '',
           Amount: '',
           Condition: 'asignado',
           CitaId: codigoreserva,
           LaboratoriodosId: 0
-        }
+        };
         const arraylabsave: any = [];
         const arraylab2save: any = [];
         const limite1 = this.cantidadanalisis + 1;
@@ -578,8 +586,8 @@ export class Subproceso2de7Component implements OnInit {
         for (let i = 0; i < limite1; i++) {
           analisis.LaboratorioId = i;
           this.analisisService.saveAnalisis(analisis).subscribe(
-            res => {
-              arraylabsave.push(res);
+            resdata => {
+              arraylabsave.push(resdata);
               this.laboratorioscita = arraylabsave;
             }, err => {
               this.toastr.error('Error unir analisis con cita');
@@ -589,8 +597,8 @@ export class Subproceso2de7Component implements OnInit {
         for (let j = 0; j < limite2; j++) {
           rxtmrm.LaboratoriodosId = j;
           this.laboratoriodoscitaService.saveLaboratoriocita(rxtmrm).subscribe(
-            res => {
-              arraylab2save.push(res);
+            resdata1 => {
+              arraylab2save.push(resdata1);
               this.laboratoriosdoscita = arraylab2save;
             }, err => {
               this.toastr.error('Error unir rxtmrm con cita');

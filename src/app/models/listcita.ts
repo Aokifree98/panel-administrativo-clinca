@@ -25,6 +25,10 @@ export interface ListCita {
   PhysicalExam?: string,
   Diagnosis?: string,
   LaboratoryExam?: string,
+  Creatininevalue?: string,
+  Urea?: string,
+  ETS?: boolean,
+  Specifyothers?: string,
   AdminId?: number,
   ClienteId?: number,
   HorarioId?: number
